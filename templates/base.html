@@ -1,4 +1,4 @@
-{% load bootstrap5 %}
+{% load django_bootstrap5 %}
 {% load static %}
 
 <!DOCTYPE html>
@@ -9,15 +9,14 @@
         <title>
             {% block title %}Ristorante Ramos{% endblock %}
         </title>
-        {% bootstrap_css %}
-        {% bootstrap_javascript %}
+        {% load django_bootstrap5 %}
     
         <link href="https://fonts.googleapis.com/css2?family=Italianno&display=swap" rel="stylesheet">
-        <link rel="stylesheet" href="{% static 'css/global.css' %}">
+        <link rel="stylesheet" href="{% static 'css/general.css' %}">
     </head>
     <body>
         <h1>hola</h1>
     
-        {% include 'footer.html' %}
+        {% include "footer.html" %}
     </body>
 </html>
