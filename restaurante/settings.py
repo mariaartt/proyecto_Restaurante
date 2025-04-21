@@ -39,7 +39,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django_bootstrap5',
     'django_bootstrap_icons',
-master
     'ristoranteramos',
 ]
 
