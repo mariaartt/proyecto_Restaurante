@@ -1,5 +1,7 @@
 *{
     background-color: white;
+    color: black;
+    font-family: "Source Sans Pro", sans-serif;
     margin:1%;
     margin-left: 2%;
     margin-right: 2%;
@@ -24,4 +26,15 @@
     text-align: end;
     font-size: 20px;
     width: 30%;
+}
+.conceptos{
+    display: grid;
+    grid-template-columns: 3fr 1fr 1fr 1fr;
+    align-items: center;
+    border-bottom: 2px solid black;
+    text-align: center;
+    font-weight: bold;
+}
+.desc{
+    text-align: start;
 }
