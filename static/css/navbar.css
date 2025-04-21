@@ -113,5 +113,42 @@ a.btn.btn-danger:hover {
 }
 
 @media (max-width: 767px) {
+    .navbar>.container-fluid {
+        display: grid;
+        grid-template-columns: 1fr;
+        justify-items: center;
+        padding: 0;
+        row-gap: 30px;
+    }
 
+    .d-flex {
+        display: flex!important;
+        justify-content: center;
+    }
+
+    .presentacion {
+        width: initial !important;
+        margin: 5%;
+        padding: 10px;
+    }
+
+    .d-flex {
+    width: 100%;
+    }
+
+    a.btn {
+    width: 40%;
+    }
+
+    .presentacion h1 {
+    font-size: 70px;
+    }
+
+    .presentacion h2 {
+    font-size: 35px;
+    }
+
+    .presentacion p {
+    font-size: 20px;
+    }
 }

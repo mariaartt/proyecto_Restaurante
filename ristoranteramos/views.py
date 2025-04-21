@@ -5,3 +5,5 @@ from django.shortcuts import render
 def go_inicio(request):
     return render(request, 'base.html')
 
+def log_in(request):
+    return render(request, 'log-in.html')
