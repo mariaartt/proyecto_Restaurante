@@ -9,14 +9,24 @@
         <title>
             {% block title %}Ristorante Ramos{% endblock %}
         </title>
-        {% load django_bootstrap5 %}
+        {% bootstrap_css %}
     
         <link href="https://fonts.googleapis.com/css2?family=Italianno&display=swap" rel="stylesheet">
-        <link rel="stylesheet" href="{% static 'css/general.css' %}">
-    </head>
-    <body>
-        <h1>hola</h1>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">    
     
-        {% include "footer.html" %}
+        <link rel="stylesheet" href="{% static 'css/general.css' %}">
+        
+        
+    </head>
+    
+    <header>
+        
+    </header>
+    <body>
+    
+    {% include 'factura.html' %}
+        
     </body>
 </html>
