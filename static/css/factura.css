@@ -46,3 +46,6 @@
 .text_start{
     text-align: start;
 }
+.num_cuenta{
+    border-bottom: 4px solid black;
+}
