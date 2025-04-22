@@ -1,0 +1,69 @@
+{% load static %}
+<link rel="stylesheet" href="../static/css/carrousel.css">
+
+{% block content %}
+
+    <!--Títulos-->
+    <div class="text-center mb-4">
+        <h1 class="subtitulo">Clientes</h1>
+        <h1 class="titulo display-4 fw-bold m-0">Opiniones</h1>
+    </div>
+
+    <!--Columna de la izquierda con el carrusel-->
+    <div class="col-lg-6 order-2 order-lg-1">
+        <!--Carrusel-->
+        <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel" aria-label="Opiniones de clientes">
+            <div class="carousel-inner">
+                <!--Primer slide-->
+                <div class="carousel-item active">
+                    <article class="card">
+                        <p class="d-block w-100 d-flex justify-content-center align-items-center min-vh-50 text-center px-4">Magnífica sorpresa en pleno centro. Pedí los tagliatelle al pesto y todavía estoy soñando con esa salsa cremosa
+                          y perfumada de albahaca fresca. El camarero nos recomendó acompañarlos con un lambrusco bien frío y fue un
+                          acierto total. De postre, la pannacotta venía con coulis de frutos rojos casero: suave, nada empalagosa.
+                          Precios honestos para la calidad y el local es pequeño pero acogedor; conviene reservar.
+                        </p>
+                        <div class="cliente">
+                            
+                        </div>
+                    </article>
+                </div>
+                <!--Segundo slide-->
+                <div class="carousel-item">
+                  <p class="d-block w-100 d-flex justify-content-center align-items-center min-vh-50 text-center px-4">Auténtico sabor napolitano. Compartimos una pizza Diavola + burrata y la masa era fina en el centro y
+                      crujiente en los bordes, con ese toque ahumado del horno de leña. El provolone al horno con orégano llegó burbujeante
+                      y con pan casero para ‘rebañar’. Por poner un pero, el servicio fue algo lento porque el local estaba a tope,
+                      pero la espera mereció la pena. ¡Repetiremos seguro!</p>
+                </div>
+                <!--Tercer slide-->
+                <div class="carousel-item">
+                  <p class="d-block w-100 d-flex justify-content-center align-items-center min-vh-50 text-center px-4">Ideal para una cena romántica. Iluminación tenue, música italiana de fondo y un risotto ai funghi que llegó al
+                      punto perfecto, mantecoso pero sin pasarse. Mi pareja probó los cannelloni de rabo de toro (fusión sevillana‑italiana)
+                      y estaban espectaculares. Pedimos un tiramisú para compartir y esta vez el equilibrio café‑mascarpone fue clavado.
+                      El chef salió a saludar a las mesas: detalle de diez.</p>
+                </div>
+                <!--Cuarto slide-->
+                <div class="carousel-item">
+                  <p class="d-block w-100 d-flex justify-content-center align-items-center min-vh-50 text-center px-4">Buenísimo, aunque algo ruidoso. Fuimos en grupo y nos colocaron en la mesa larga del fondo. Las bruschette de tomate
+                      y albahaca volaron en segundos y los ravioli rellenos de ricotta y espinacas con salsa de mantequilla y salvia nos
+                      conquistaron. El único inconveniente fue el nivel de ruido porque el local es muy concurrido, pero la comida compensa con creces.</p>
+                </div>
+                <!--Quinto slide-->
+                <div class="carousel-item">
+                  <p class="d-block w-100 d-flex justify-content-center align-items-center min-vh-50 text-center px-4">Domingo familiar perfecto. Reservamos para ocho personas con niños y nos prepararon sin problema tronas y menús pequeños.
+                      La lasaña clásica salió humeante, con capas generosas de ragú y bechamel casera. Mis hijos devoraron la pizza Margherita y
+                      nos invitaron a limoncello al final. Relación calidad‑precio excelente para estar a dos pasos de la Giralda. Volveremos en
+                      la próxima visita a Sevilla.
+                  </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--Columna de la derecha con imagen-->
+    <div class="col-lg-6 order-1 order-lg-2 text-center">
+      <img src="{% static 'images/interior_restaurante.jpg' %}"
+           alt="Interior del restaurante"
+           class="img-fluid rounded-4 shadow-lg w-100 object-fit-cover imagen-restaurante">
+    </div>
+
+{% endblock %}
