@@ -10,13 +10,20 @@
             {% block title %}Ristorante Ramos{% endblock %}
         </title>
         {% load django_bootstrap5 %}
+        {% bootstrap_css %}
     
+        <link rel="icon" href="{% static 'images/logo.ico' %}">
         <link href="https://fonts.googleapis.com/css2?family=Italianno&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="{% static 'css/general.css' %}">
+        <link rel="stylesheet" href="{% static 'css/reporteVentas.css' %}">
+        <link rel="stylesheet" href="{% static 'css/anadirAdministrador.css' %}">
+        <link rel="stylesheet" href="{% static 'css/navbarAdministrador.css' %}">
+        <link rel="stylesheet" href="{% static 'css/home1.css' %}">
     </head>
     <body>
-        <h1>hola</h1>
     
-        {% include "footer.html" %}
+    {% include "home1.html" %}
+    
+     {% bootstrap_javascript %}
     </body>
 </html>

@@ -1,0 +1,60 @@
+.parte-roja{
+    margin-top: 5%;
+    margin-bottom: 5%;
+    display: flex;
+    flex-wrap: nowrap;
+    background-color: #feefd4;
+}
+
+.fondo-rojo{
+    width: 125%;
+    height: 500px;
+    background-color: rgba(192, 0, 0, 1);
+    display: flex;
+}
+
+.contenedor_home{
+    background-color: #feefd4;
+    margin-top: 2.5%;
+    margin-left: -15%;
+    margin-bottom: 5%;
+    margin-right: 10%;
+    padding: 3%;
+    border-radius: 20px;
+    box-shadow: 1px 15px 20px rgba(0, 0, 0, 0.2);
+    display: flex;
+}
+
+.contenedor_texto h6{
+    color: rgba(3, 67, 55, 1);
+    font-size: 20px;
+    font-family: "Instrument Serif", serif;
+}
+
+.contenedor_texto h3{
+    color: #D4A373;
+    font-size: 50px;
+    font-family: 'Italianno', cursive;
+    margin-bottom: 2%;
+}
+
+.contenedor_texto p{
+    width: 75%;
+    color: rgba(92, 92, 92, 1);
+    font-family: "Instrument Serif", serif;
+}
+
+.contenedor_fotos{
+    display: flex;
+}
+
+.contenedor_fotos img{
+    width: 200px;
+    height: 250px;
+}
+
+.foto_manualidades{
+    position: relative;
+    bottom: 100px;
+    left: 75px;
+}
