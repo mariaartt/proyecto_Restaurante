@@ -152,3 +152,24 @@ a.btn.btn-danger:hover {
     font-size: 20px;
     }
 }
+
+@media (min-width: 1024px) and (max-width: 1439px) {
+    a.btn {
+        font-size: 18px;
+        width: 100%;
+    }
+}
+
+@media (max-width: 400px) {
+    a.btn {
+        font-size: 19px;
+    }
+}
+
+@media (min-width: 570px) and (max-width: 767px) {
+    .d-flex {
+        display: flex!important;
+        width: 70%;
+        justify-content: center;
+    }
+}
