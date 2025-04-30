@@ -1,0 +1,60 @@
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/contacto.css' %}">
+
+{% block content %}
+
+    <div class="main-content">
+    <!--Información con el horario y el contacto del restaurante-->
+        <section class="box-info">
+            <div class="info">
+                <h2 class="titulo">Dirección</h2>
+                <p>C. Esperanza de Triana, 36</p>
+                <p>41010, Sevilla</p>
+                <p>(+34) 954 16 32 48</p>
+            </div>
+            <div class="info">
+                <h2 class="titulo">Horario</h2>
+                <p>De Lunes a Domingos:</p>
+                <p>13:00h - 16:00h</p>
+                <p>20:00h - 23:30h</p>
+            </div>
+        </section>
+        
+        <!--Mapa interactivo-->
+        <section class="map">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2869.090878856353!2d-6.006322024669216!3d37.379221434847814!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd126c3ff0273ca1%3A0xb89871641fa1f441!2sC.%20Esperanza%20de%20Triana%2C%2036%2C%2041010%20Sevilla!5e1!3m2!1ses!2ses!4v1744392825150!5m2!1ses!2ses" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </section>
+    
+        <!--Formulario-->
+        <section class="formulario">
+            <h2 class="titulo">Contacta con Nosotros</h2>
+            <p>En nombre de nuestro restaurante, queremos agradecerte por tu interés en contactarnos. Estamos encantados de responder a tus preguntas y recibir tus comentarios.</p>
+            <form action="" method="post">
+                <div class="form-floating mb-3">
+                    <input class="form-control" id="floatingNombre" type="text" name="nombre" placeholder="Introduce tu nombre" required>
+                    <label for="floating">Nombre</label>
+                </div>
+                <div class="form-floating mb-3">
+                    <input class="form-control" id="floatingEmail" type="email" name="correo" placeholder="Introduce tu correo" required>
+                    <label for="floating">Email</label>
+                </div>
+                <div class="form-floating mb-3">
+                    <input class="form-control" id="floatingTelefono" type="text" name="teléfono" placeholder="Introduce tu teléfono" required>
+                    <label for="floating">Teléfono</label>
+                </div>
+                <div class="form-floating mb-3">
+                    <textarea class="form-control" id="floatingAsunto" name="asunto" placeholder="Añade la información que consideres" required style="height: 150px;"></textarea>
+                    <label for="floating">Asunto</label>
+                </div>
+            </form>
+
+            
+            <!--Botón enviar-->
+            <div class="boton_enviar">
+                <button>Enviar</button>
+            </div>
+            
+        </section>
+    </div>
+    
+{% endblock %}
