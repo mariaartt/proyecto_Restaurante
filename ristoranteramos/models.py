@@ -13,7 +13,6 @@ class Rol(models.TextChoices):
 
 # Create your models here.
 class Articulo(models.Model):
-    id = models.AutoField(primary_key=True)
     nombre = models.CharField(max_length=150)
     descripcion = models.TextField()
     precio = IntegerField()
@@ -21,16 +20,13 @@ class Articulo(models.Model):
 
     def __str__(self):
         return self.nombre
-
-
-
+#
 class Empleado(models.Model):
-    id = models.AutoField(primary_key=True)
     nombre = models.CharField(max_length=150)
     rol = models.CharField(
         max_length=50,
         choices = Rol.choices,
-        default = empty
+        default = ''
     )
 
     def __str__(self):
@@ -38,14 +34,13 @@ class Empleado(models.Model):
 
 # Pedido hecho por cliente o camarero
 class Pedido(models.Model):
-    id = models.AutoField(primary_key=True)
     fecha = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return f"Pedido {self.id}"
 
-    def total(self):
-        return sum(linea.subtotal() for linea in self.lineapedido_set.all())
+    # def total(self):
+    #     return sum(linea.subtotal() for linea in self.lineapedido_set.all())
 
 # Tabla intermedia para asociar artículos a un pedido con cantidad
 class LineaPedido(models.Model):

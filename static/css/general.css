@@ -25,7 +25,6 @@
 .cajas{
     border: 1px solid white;
     border-radius: 25px;
-    width: 200px;
     padding-left: 10%;
     padding-right: 10%;
     margin-bottom: 1%;
@@ -48,11 +47,16 @@
     padding-top: 5%;
     margin-right: 20%;
     margin-left: 20%;
+    padding-bottom: 2%;
 }
 
 .imagenes_footer img{
     width: 40px;
     cursor: pointer;
+}
+
+.imagenes_footer img:hover {
+    filter: brightness(0) invert(1);
 }
 
 .encabezado_footer{
@@ -77,16 +81,9 @@
     height: 100%;
 }
 
-
-@media (max-width: 1250px){
-    .cajas{
-     width: 150px;
-    }
-}
-
 @media (max-width: 950px){
     .cajas{
-     width: 125px;
+     width: 200px;
     }
 
     .info p{
@@ -107,6 +104,10 @@
 
     .parte-izq{
         width: 100%;
+    }
+
+    .cajas{
+        width: 300px;
     }
 
     .mapa{

@@ -1,60 +1,488 @@
-.parte-roja{
-    margin-top: 5%;
-    margin-bottom: 5%;
+.parte-roja-verde{
+    padding-top: 5%;
+    padding-bottom: 5%;
     display: flex;
     flex-wrap: nowrap;
     background-color: #feefd4;
+
 }
 
 .fondo-rojo{
-    width: 125%;
+    width: 150%;
     height: 500px;
     background-color: rgba(192, 0, 0, 1);
-    display: flex;
 }
 
-.contenedor_home{
+.fondo-verde{
+    width: 150%;
+    height: 500px;
+    background-color: rgba(3, 67, 55, 1);
+    position: relative;
+    z-index: 300;
+}
+
+.contenedor_home, .contenedor_home2{
+    height: 425px;
     background-color: #feefd4;
-    margin-top: 2.5%;
-    margin-left: -15%;
-    margin-bottom: 5%;
-    margin-right: 10%;
+    margin-top: 2%;
+    margin-bottom: 2%;
     padding: 3%;
     border-radius: 20px;
     box-shadow: 1px 15px 20px rgba(0, 0, 0, 0.2);
     display: flex;
 }
 
-.contenedor_texto h6{
+.contenedor_home{
+    margin-left: -18%;
+    margin-right: 18%;
+}
+
+.contenedor_home2{
+    margin-left: 22.5%;
+    margin-right: -22.5%;
+    position: relative;
+    z-index: 10000;
+}
+
+.contenedor_texto h6, .contenedor_texto2 h6{
     color: rgba(3, 67, 55, 1);
-    font-size: 20px;
+    font-size: 30px;
     font-family: "Instrument Serif", serif;
 }
 
-.contenedor_texto h3{
+.contenedor_texto h3, .contenedor_texto2 h3{
     color: #D4A373;
-    font-size: 50px;
+    font-size: 60px;
     font-family: 'Italianno', cursive;
     margin-bottom: 2%;
 }
 
-.contenedor_texto p{
-    width: 75%;
+.contenedor_texto p, .contenedor_texto2 p{
     color: rgba(92, 92, 92, 1);
     font-family: "Instrument Serif", serif;
 }
 
+.boton_inicio_home, .boton_inicio_home2{
+    text-align: center;
+    width: 150px;
+    border: 2px solid rgba(212, 163, 115, 1);
+    padding: 3%;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background-color 0.5s;
+}
+
+.boton_inicio_home{
+    margin-left: 125%;
+}
+
+.boton_inicio_home2{
+    margin-left: -75%;
+}
+
+.boton_inicio_home:hover,
+.boton_inicio_home2:hover{
+    background-color: #D4A373;
+}
+
 .contenedor_fotos{
     display: flex;
+    height: 100px;
+}
+
+.contenedor_fotos2{
+    display: flex;
+    height: 100px;
 }
 
 .contenedor_fotos img{
-    width: 200px;
+    width: 175px;
     height: 250px;
+    border-radius: 20px;
+    box-shadow: 1px 15px 20px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease;
+}
+
+.contenedor_fotos img:hover, .contenedor_fotos2 img:hover{
+    transform: translateY(-15px);
+}
+
+
+.contenedor_fotos2 img{
+    width: 175px;
+    height: 250px;
+    border-radius: 20px;
+    box-shadow: 1px 15px 20px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease;
+}
+
+.foto_pasta{
+    position: relative;
+    top: 25px;
+    left: 45px;
 }
 
 .foto_manualidades{
     position: relative;
     bottom: 100px;
     left: 75px;
+}
+
+.foto_pizza1{
+    position: relative;
+    top: 25px;
+    right: 45px;
+}
+
+.foto_pizza2{
+    position: relative;
+    bottom: 100px;
+    right: 75px;
+}
+
+@media (min-width: 1364px) {
+    .boton_inicio_home, .boton_inicio_home2 {
+        margin-top: 5%;
+    }
+}
+
+@media (max-width: 1364px) {
+    .boton_inicio_home, .boton_inicio_home2{
+        margin-top: -4%;
+    }
+
+    .foto_manualidades, .foto_pizza2{
+        bottom: 90px;
+    }
+}
+
+@media (max-width: 1190px) {
+    .contenedor_home2 {
+        margin-left: 19%;
+        margin-right: -19%;
+    }
+
+    .boton_inicio_home{
+        margin-top: -5%;
+    }
+
+    .boton_inicio_home2{
+        margin-top: -8%;
+    }
+}
+
+@media (max-width: 1145px) {
+    .boton_inicio_home, .boton_inicio_home2{
+        margin-top: -10%;
+    }
+    .foto_manualidades, .foto_pizza2{
+        bottom: 80px;
+    }
+}
+
+@media (max-width: 1100px) {
+    .boton_inicio_home{
+        margin-top: -15%;
+    }
+}
+
+@media (max-width: 1069px) {
+
+    .boton_inicio_home{
+        margin-top: -20%;
+    }
+
+    .boton_inicio_home2{
+        margin-top: -20%;
+    }
+
+    .contenedor_texto2 h3{
+        font-size: 55px;
+    }
+
+    .foto_manualidades, .foto_pizza2{
+        bottom: 70px;
+    }
+
+    .contenedor_home2 {
+        margin-left: 17%;
+        margin-right: -17%;
+    }
+}
+
+@media (max-width: 1007px){
+    .contenedor_texto2 h3{
+        font-size: 50px;
+    }
+}
+
+@media (max-width: 980px) {
+    .boton_inicio_home{
+        margin-top: -35%;
+    }
+
+    .boton_inicio_home2{
+        margin-top: -30%;
+    }
+
+    .foto_manualidades, .foto_pizza2{
+        bottom: 60px;
+    }
+
+    .contenedor_home2 {
+        margin-left: 10%;
+        margin-right: -10%;
+    }
+}
+
+@media (max-width: 971px) {
+    .parte-roja-verde{
+        flex-direction: column;
+    }
+
+    .fondo-rojo, .fondo-verde{
+        display: none;
+    }
+
+    .contenedor_home, .contenedor_home2{
+        margin: 0;
+        padding: 5%;
+        box-shadow: none;
+        height: 300px;
+    }
+
+    .contenedor_fotos img, .contenedor_fotos2 img{
+        width: 150px;
+        height: 200px;
+    }
+
+    .foto_pasta{
+        top: 0px;
+        left: 10px;
+    }
+
+    .foto_pizza1{
+        top: 0px;
+        right: 10px;
+    }
+
+    .foto_manualidades{
+        bottom: 50px;
+        left: 25px;
+    }
+
+    .foto_pizza2{
+        bottom: 50px;
+        right: 25px;
+    }
+
+    .boton_inicio_home{
+        margin-left: 105%;
+        margin-top: -5%;
+        font-size: 15px;
+        width: 100px;
+    }
+
+    .boton_inicio_home2{
+        margin-left: -50%;
+        margin-top: -10%;
+        font-size: 15px;
+        width: 100px;
+    }
+}
+
+@media (max-width: 828px){
+    .boton_inicio_home{
+        margin-top: -20%;
+    }
+
+    .boton_inicio_home2{
+        margin-top: -15%;
+    }
+}
+
+@media (max-width: 745px){
+    .contenedor_fotos img, .contenedor_fotos2 img{
+        width: 125px;
+        height: 175px;
+    }
+
+    .boton_inicio_home, .boton_inicio_home2{
+        margin-top: -12.5%;
+    }
+
+    .contenedor_texto p, .contenedor_texto2 p{
+        font-size: 12.5px;
+    }
+
+}
+
+@media (max-width: 690px){
+    .contenedor_fotos img, .contenedor_fotos2 img{
+        width: 100px;
+        height: 150px;
+    }
+
+    .foto_pasta{
+        top: 20px;
+        left: 5px;
+    }
+
+    .foto_pizza1{
+        top: 20px;
+        right: 5px;
+    }
+
+    .foto_manualidades{
+        bottom: 20px;
+        left: 15px;
+    }
+
+    .foto_pizza2{
+        bottom: 20px;
+        right: 15px;
+    }
+
+    .boton_inicio_home, .boton_inicio_home2{
+        margin-top: -12.5%;
+    }
+}
+
+@media (max-width: 634px){
+    .boton_inicio_home, .boton_inicio_home2{
+        margin-top: -20%;
+    }
+}
+
+@media (max-width: 598px){
+    .contenedor_home{
+        height: 200px;
+    }
+
+    .contenedor_home2{
+        height: 200px;
+    }
+
+    .contenedor_fotos2{
+        width: 175px;
+    }
+
+    .contenedor_texto2{
+        width: 350px;
+    }
+
+    .contenedor_texto h6, .contenedor_texto2 h6{
+        font-size: 20px;
+    }
+
+    .contenedor_texto h3, .contenedor_texto2 h3{
+        font-size: 40px;
+    }
+
+    .contenedor_texto p, .contenedor_texto2 p{
+        font-size: 10px;
+    }
+
+    .contenedor_fotos img, .contenedor_fotos2 img{
+        width: 75px;
+        height: 100px;
+    }
+
+    .boton_inicio_home{
+        margin-top: -12.5%;
+        width: 75px;
+    }
+
+    .boton_inicio_home2{
+        margin-top: -17.5%;
+        width: 75px;
+    }
+}
+
+@media (max-width: 526px) {
+    .boton_inicio_home{
+        margin-top: -17.5%;
+    }
+
+     .boton_inicio_home2{
+         margin-top: -30%;
+     }
+
+    .contenedor_fotos2{
+        width: 175px;
+    }
+
+    .contenedor_texto2{
+        width: 250px;
+    }
+}
+
+@media (max-width: 476px) {
+    .contenedor_home,
+    .contenedor_home2{
+        height: 225px;
+    }
+
+    .boton_inicio_home{
+        margin-top: -25%;
+    }
+
+    .boton_inicio_home2{
+        margin-top: -30%;
+    }
+}
+
+@media (max-width: 400px) {
+    .contenedor_home{
+        height: 200px;
+    }
+
+    .boton_inicio_home, .boton_inicio_home2{
+        margin-top: -5%;
+    }
+
+    .foto_pasta{
+        top: 35px;
+    }
+
+    .foto_pizza1{
+        top: 35px;
+    }
+
+    .foto_manualidades{
+        bottom: 10px;
+        left: 10px;
+    }
+
+    .foto_pizza2{
+        bottom: 10px;
+        right: 10px;
+    }
+
+    .contenedor_texto h6, .contenedor_texto2 h6{
+        font-size: 15px;
+    }
+
+    .contenedor_texto h3, .contenedor_texto2 h3{
+        font-size: 30px;
+    }
+
+    .contenedor_texto p, .contenedor_texto2 p{
+        font-size: 7.5px;
+    }
+
+    .contenedor_fotos img, .contenedor_fotos2 img{
+        width: 50px;
+        height: 75px;
+    }
+}
+
+@media (max-width: 350px) {
+    .boton_inicio_home{
+        margin-top: -10%;
+    }
+
+    .boton_inicio_home2{
+        margin-top: -15%;
+    }
 }

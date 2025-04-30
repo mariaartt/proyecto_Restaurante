@@ -3,7 +3,7 @@
 {% block content %}
 
 <div class="parte1">
-    <div class="parte-roja">
+    <div class="parte-roja-verde">
         <div class="fondo-rojo"></div>
         
         <div class="contenedor_home">
@@ -11,19 +11,34 @@
                 <h6>Nuestro Obrador</h6>
                 <h3>Pasta Fresca</h3>
                 <p>En nuestro restaurante en Sevilla, elaboramos pasta fresca cada día de forma artesanal, utilizando ingredientes de la más alta calidad. Respetamos las recetas tradicionales y los métodos auténticos para garantizar una textura perfecta y un sabor inigualable. Cada plato refleja nuestra pasión por la cocina, combinando tradición y creatividad para ofrecer una experiencia única a nuestros comensales.</p>
+                <p class="boton_inicio_home">Ver Carta</p>
             </div>
             
             <div class="contenedor_fotos">
                 <img class="foto_pasta" src="{% static 'images/pasta_inicio.png' %}">
                 <img class="foto_manualidades" src="{% static 'images/manualidades.png' %}">
-                    
             </div>
         </div>
             
     </div>
 
-    <div class="parte-verde">
+    <div class="parte-roja-verde">
         
+        <div class="contenedor_home2">
+            <div class="contenedor_fotos2">
+                <img class="foto_pizza2" src="{% static 'images/pizza2_inicio.png' %}">
+                <img class="foto_pizza1" src="{% static 'images/pizza1_inicio.png' %}">
+            </div>
+            
+            <div class="contenedor_texto2">
+                <h6 style="color: rgba(192, 0, 0, 1)">Auténtica</h6>
+                <h3>Pizza Napolitana</h3>
+                <p>Siguiendo la tradición de la auténtica pizza napolitana, hemos perfeccionado nuestra receta para lograr una masa más ligera y digestiva, manteniendo su esencia artesanal. Utilizamos un proceso de fermentación lenta con masa madre y una hidratación óptima, logrando una textura esponjosa, un borde aireado y un equilibrio perfecto de sabores. ¡No te quedes sin probarla!</p>
+                <p class="boton_inicio_home2">Ver Carta</p>
+            </div>
+        </div>
+        
+        <div class="fondo-verde"></div>
         
     </div>
 </div>
