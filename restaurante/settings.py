@@ -9,8 +9,13 @@ https://docs.djangoproject.com/en/5.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.2/ref/settings/
 """
-
 from pathlib import Path
+import os
+import platform
+import cx_Oracle
+
+if platform.system() == "Windows":
+    cx_Oracle.init_oracle_client(lib_dir=r"C:\instantclient_21_17")
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -78,11 +83,14 @@ WSGI_APPLICATION = 'restaurante.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.oracle',
+        'NAME': 'XE',
+        'USER': 'C##RAMOS',
+        'PASSWORD': '1234',
+        'HOST': 'localhost',
+        'PORT': '1521',
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/5.2/ref/settings/#auth-password-validators

@@ -1,0 +1,32 @@
+{% load static %}
+
+{% block content %}
+	<div class="anadir_producto">
+        <div class="mod_art">
+            <p>Añadir/Modificar Empleado</p>
+        </div>
+
+        <div class="formulario_anadir">
+
+            <div class="form-floating campo">
+                <input type="text" class="form-control" id="floatingInput" placeholder="name@example.com">
+                <label for="floatingInput">Nº empleado (Id)</label>
+            </div>
+
+            <div class="form-floating campo">
+                <input type="text" class="form-control" id="floatingPassword" placeholder="Password">
+                <label for="floatingPassword">Nombre</label>
+            </div>
+
+            <div class="form-floating campo">
+                <input type="text" class="form-control" id="floatingPassword" placeholder="Password">
+                <label for="floatingPassword">Rol</label>
+            </div>
+
+            <div class="boton_conf">
+                <p>CONFIRMAR</p>
+            </div>
+            
+        </div>
+    </div>
+{% endblock %}
