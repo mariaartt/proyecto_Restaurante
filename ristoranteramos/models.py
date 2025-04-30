@@ -25,10 +25,6 @@ class Articulo(models.Model):
         return self.nombre
 
 class Empleado(models.Model):
-    id = models.AutoField(primary_key=True)
-
-#
-class Empleado(models.Model):
 
     nombre = models.CharField(max_length=150)
     rol = models.CharField(
