@@ -1,0 +1,43 @@
+{% load static %}
+{% block content %}
+    
+	<div class="anadir_producto">
+        <div class="mod_art">
+            <p>Añadir/Modificar Artículo</p>
+        </div>
+
+        <div class="formulario_anadir">
+
+            <div class="form-floating campo">
+                <input type="text" class="form-control" id="floatingInput" placeholder="name@example.com">
+                <label for="floatingInput">Nº articulo (Id)</label>
+            </div>
+
+            <div class="form-floating campo">
+                <input type="text" class="form-control" id="floatingPassword" placeholder="Password">
+                <label for="floatingPassword">Artículo</label>
+            </div>
+        
+            <div class="form-floating campo">
+                <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px"></textarea>
+                <label for="floatingTextarea2">Ingredientes</label>
+            </div>
+
+            <div class="form-floating campo">
+                <input type="text" class="form-control" id="floatingPassword" placeholder="Password">
+                <label for="floatingPassword">Categoría</label>
+            </div>
+
+            <div class="form-floating campo">
+                <input type="text" class="form-control" id="floatingPassword" placeholder="Password">
+                <label for="floatingPassword">Precio</label>
+            </div>
+
+            <div class="boton_conf">
+                <p>CONFIRMAR</p>
+            </div>
+
+        </div>
+    </div>
+    
+{% endblock %}
