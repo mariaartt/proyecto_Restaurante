@@ -4,8 +4,7 @@ from django.urls import path
 from ristoranteramos.views import *
 
 urlpatterns = [
-    path('', go_inicio, name='inicio'),
-    path('inicio/', go_inicio, name='inicio_page'),
-    path('contacto/', go_contacto, name='contacto_page'),
-    path('log-in/', log_in, name='log_in_page'),
+    path('', go_home, name='inicio'),
+    path('home/', go_home, name='home'),
+    path('contacto/', go_contacto, name='contacto'),
 ]

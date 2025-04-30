@@ -1,7 +1,4 @@
 /* Estilos generales */
-*{
-    background-color: rgb(254,250,224);
-}
 
 /* Estilos para el div de información horario-contacto */
 .info{
@@ -70,7 +67,7 @@
 }
 
 /* Estilos para el botón de enviar */
-button{
+.boton_enviar button{
     border-radius: 20px;
     padding: 10px;
     width: 25%;
@@ -82,7 +79,7 @@ button{
     margin-top: 5%;
     transition: all 0.3s ease;
 }
-button:hover{
+.boton_enviar button:hover{
     background-color: rgb(150, 0, 0);
     cursor: pointer;
     transform: scale(1.05);
