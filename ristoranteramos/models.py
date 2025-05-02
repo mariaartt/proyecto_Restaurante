@@ -21,16 +21,10 @@ class Usuario(AbstractUser):
 
     REQUIRED_FIELDS = ['email']
 
-    class Meta:
-        db_table = 'usuarios'
-
 class HistorialInicioSesion(models.Model):
     usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE)
     fecha_hora = models.DateTimeField(auto_now_add=True)
     ip = models.GenericIPAddressField()
-
-    class Meta:
-        db_table = 'historial_inicios'
 
 # ----------------------
 # MODELOS DEL RESTAURANTE
@@ -38,9 +32,6 @@ class HistorialInicioSesion(models.Model):
 
 class Categoria(models.Model):
     nombre = models.CharField(max_length=50, unique=True)
-
-    class Meta:
-        db_table = 'categorias'
 
     def __str__(self):
         return self.nombre
@@ -54,15 +45,9 @@ class ArticuloCarta(models.Model):
     receta = models.TextField()
     tiempo_estimado = models.PositiveIntegerField(help_text="Tiempo en minutos")
 
-    class Meta:
-        db_table = 'articulos_carta'
-
 class Mesa(models.Model):
     numero = models.PositiveIntegerField(unique=True)
     disponible = models.BooleanField(default=True)
-
-    class Meta:
-        db_table = 'mesas'
 
     def __str__(self):
         return f"Mesa {self.numero}"
@@ -84,17 +69,11 @@ class Pedido(models.Model):
     estado = models.CharField(max_length=20, choices=ESTADO_PEDIDO, default='pendiente')
     fecha_hora = models.DateTimeField(auto_now_add=True)
 
-    class Meta:
-        db_table = 'pedidos'
-
 class LineaPedido(models.Model):
     pedido = models.ForeignKey(Pedido, on_delete=models.CASCADE, related_name='lineas')
     articulo = models.ForeignKey(ArticuloCarta, on_delete=models.CASCADE)
     cantidad = models.PositiveIntegerField()
     estado = models.CharField(max_length=20, choices=[('pendiente', 'Pendiente'), ('preparado', 'Preparado')], default='pendiente')
-
-    class Meta:
-        db_table = 'lineas_pedido'
 
 # ----------------------
 # MODELOS DE FACTURACIÓN
@@ -104,6 +83,3 @@ class Factura(models.Model):
     pedido = models.OneToOneField(Pedido, on_delete=models.CASCADE)
     total = models.DecimalField(max_digits=8, decimal_places=2)
     fecha = models.DateTimeField(auto_now_add=True)
-
-    class Meta:
-        db_table = 'facturas'
