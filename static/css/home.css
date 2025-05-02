@@ -431,12 +431,12 @@ a.btn.btn-danger:hover {
     }
 
     .foto_pasta{
-        top: 0px;
+        top: 0;
         left: 10px;
     }
 
     .foto_pizza1{
-        top: 0px;
+        top: 0;
         right: 10px;
     }
 
