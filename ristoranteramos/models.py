@@ -1,62 +1,109 @@
-from random import choices
-
+from django.contrib.auth.models import AbstractUser
 from django.db import models
-from django.forms import IntegerField
-from django.utils.functional import empty
 
+# ----------------------
+# MODELOS DE USUARIOS
+# ----------------------
 
-class Rol(models.TextChoices):
-    CAMARERO = 'CAMARERO', 'Camarero'
-    COCINERO = 'COCINERO', 'Cocinero'
-    ADMINISTRADOR = 'ADMINISTRADOR', 'Administrador'
+ROLES = (
+    ('administrador', 'Administrador'),
+    ('camarero', 'Camarero/a'),
+    ('cocinero', 'Cocinero/a'),
+    ('cliente', 'Cliente'),
+)
 
+class Usuario(AbstractUser):
+    email = models.EmailField(unique=True)
+    rol = models.CharField(max_length=20, choices=ROLES, default='cliente')
+    foto = models.ImageField(upload_to='perfiles/', blank=True, null=True)
+    telefono = models.CharField(max_length=15, blank=True)
+    direccion = models.CharField(max_length=255, blank=True)
 
-# Create your models here.
-class Articulo(models.Model):
-    id = models.AutoField(primary_key=True)
+    REQUIRED_FIELDS = ['email']
 
+    class Meta:
+        db_table = 'usuarios'
 
-    nombre = models.CharField(max_length=150)
-    descripcion = models.TextField()
-    precio = IntegerField()
-    categoria = models.CharField(max_length=100)
+class HistorialInicioSesion(models.Model):
+    usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE)
+    fecha_hora = models.DateTimeField(auto_now_add=True)
+    ip = models.GenericIPAddressField()
+
+    class Meta:
+        db_table = 'historial_inicios'
+
+# ----------------------
+# MODELOS DEL RESTAURANTE
+# ----------------------
+
+class Categoria(models.Model):
+    nombre = models.CharField(max_length=50, unique=True)
+
+    class Meta:
+        db_table = 'categorias'
 
     def __str__(self):
         return self.nombre
 
-class Empleado(models.Model):
+class ArticuloCarta(models.Model):
+    nombre = models.CharField(max_length=100)
+    ingredientes = models.TextField()
+    precio = models.DecimalField(max_digits=6, decimal_places=2)
+    categoria = models.ForeignKey(Categoria, on_delete=models.CASCADE)
+    foto = models.ImageField(upload_to='carta/', null=True, blank=True)
+    receta = models.TextField()
+    tiempo_estimado = models.PositiveIntegerField(help_text="Tiempo en minutos")
 
-    nombre = models.CharField(max_length=150)
-    rol = models.CharField(
-        max_length=50,
-        choices = Rol.choices,
+    class Meta:
+        db_table = 'articulos_carta'
 
-        default = ''
-    )
+class Mesa(models.Model):
+    numero = models.PositiveIntegerField(unique=True)
+    disponible = models.BooleanField(default=True)
+
+    class Meta:
+        db_table = 'mesas'
 
     def __str__(self):
-        return self.nombre
+        return f"Mesa {self.numero}"
 
-# Pedido hecho por cliente o camarero
+# ----------------------
+# MODELOS DE PEDIDOS
+# ----------------------
+
+ESTADO_PEDIDO = (
+    ('pendiente', 'Pendiente'),
+    ('preparado', 'Preparado'),
+    ('servido', 'Servido'),
+    ('pagado', 'Pagado'),
+)
+
 class Pedido(models.Model):
+    cliente = models.ForeignKey(Usuario, on_delete=models.SET_NULL, null=True, blank=True, limit_choices_to={'rol': 'cliente'})
+    mesa = models.ForeignKey(Mesa, on_delete=models.SET_NULL, null=True, blank=True)
+    estado = models.CharField(max_length=20, choices=ESTADO_PEDIDO, default='pendiente')
+    fecha_hora = models.DateTimeField(auto_now_add=True)
 
+    class Meta:
+        db_table = 'pedidos'
+
+class LineaPedido(models.Model):
+    pedido = models.ForeignKey(Pedido, on_delete=models.CASCADE, related_name='lineas')
+    articulo = models.ForeignKey(ArticuloCarta, on_delete=models.CASCADE)
+    cantidad = models.PositiveIntegerField()
+    estado = models.CharField(max_length=20, choices=[('pendiente', 'Pendiente'), ('preparado', 'Preparado')], default='pendiente')
+
+    class Meta:
+        db_table = 'lineas_pedido'
+
+# ----------------------
+# MODELOS DE FACTURACIÓN
+# ----------------------
+
+class Factura(models.Model):
+    pedido = models.OneToOneField(Pedido, on_delete=models.CASCADE)
+    total = models.DecimalField(max_digits=8, decimal_places=2)
     fecha = models.DateTimeField(auto_now_add=True)
 
-    def __str__(self):
-        return f"Pedido {self.id}"
-
-    # def total(self):
-    #     return sum(linea.subtotal() for linea in self.lineapedido_set.all())
-
-
-# Tabla intermedia para asociar artículos a un pedido con cantidad
-class LineaPedido(models.Model):
-    pedido = models.ForeignKey(Pedido, on_delete=models.CASCADE)
-    articulo = models.ForeignKey(Articulo, on_delete=models.CASCADE)
-    cantidad = models.PositiveIntegerField(default=1)
-
-    def subtotal(self):
-        return self.articulo.precio * self.cantidad
-
-    def __str__(self):
-        return f"{self.cantidad} x {self.articulo.nombre} en Pedido {self.pedido.id}"
+    class Meta:
+        db_table = 'facturas'
