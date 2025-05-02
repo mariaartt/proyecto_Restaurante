@@ -926,10 +926,9 @@ body {
 .bloques_parte4{
     display: flex;
     justify-content: space-around;
-    background-color: #feefd4;
     text-align: center;
     align-items: center;
-    padding-bottom: 10%;
+    margin-bottom: 5%;
 }
 
 .bloque_parte4{

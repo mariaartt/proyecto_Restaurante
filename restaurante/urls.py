@@ -23,4 +23,5 @@ urlpatterns = [
     path('', include('ristoranteramos.urls')),
     path('home/', go_home, name='home'),
     path('contacto/', go_contacto, name='contacto'),
+    path('administrador/', new_empleado, name='administrador')
 ]
