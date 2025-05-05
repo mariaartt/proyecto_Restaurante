@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 
-from ristoranteramos.forms import FormularioEmpleado
+from ristoranteramos.forms import *
 from ristoranteramos.models import *
 
 # Create your views here.
@@ -10,30 +10,33 @@ def go_home(request):
 def go_contacto(request):
     return render(request, 'contacto.html')
 
-def go_administrador(request):
-    return render(request, 'anadirEmpleado.html')
+def go_login(request):
+    return render(request, 'log-in.html')
+
+def go_empleados(request):
+    return render(request, 'verEmpleados.html')
+
+def go_articulos(request):
+    return render(request, 'verArticulo.html')
 
 def new_empleado(request):
-
-    # if request.method == 'POST':
-    #     Id = request.POSTget('Id', '')
-    #     Nombre = request.POST.get('Nombre', '')
-    #     Rol = request.POST.get('Rol', '')
-    #
-    #     nuevo_empleado = Empleado()
-    #     nuevo_empleado.Id = Id
-    #     nuevo_empleado.Nombre = Nombre
-    #     nuevo_empleado.Rol = Rol
-    #
-    #     # nuevo_empleado.save()
-    #     "Insert into empleados (Id,Nombre,Rol) values (%s,%s,%s)"
-
     if request.method == 'POST':
-        form = FormularioEmpleado(request.POST)
+        form = FormularioUsuario(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('home')
+            return redirect('empleados')
     else:
-            form = FormularioEmpleado()
+            form = FormularioUsuario()
 
     return render(request, 'anadirEmpleado.html',{'form':form})
+
+def new_articulo(request):
+    if request.method == 'POST':
+        form = FormularioArticulo(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('articulos')
+    else:
+            form = FormularioArticulo()
+
+    return render(request, 'anadirArticulo.html',{'form':form})

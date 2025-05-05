@@ -6,7 +6,7 @@
 {% include 'navbarAdministrador.html' %}
 <div class="anadir_producto">
     <div class="mod_art">
-        <p>Añadir Empleado</p>
+        <p>Añadir/Modificar Empleado</p>
     </div>
 
     <div class="formulario_anadir">
@@ -16,6 +16,16 @@
             <div class="form-floating campo">
                 {{ form.nombre }}
                 <label>Nombre</label>
+            </div>
+            
+            <div class="form-floating campo">
+                {{ form.email }}
+                <label>Email</label>
+            </div>
+            
+            <div class="form-floating campo">
+                {{ form.telefono }}
+                <label>Teléfono</label>
             </div>
 
             <div class="form-floating campo">

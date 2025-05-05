@@ -13,6 +13,7 @@ ROLES = (
 )
 
 class Usuario(AbstractUser):
+    nombre = models.CharField(max_length=100)
     email = models.EmailField(unique=True)
     rol = models.CharField(max_length=20, choices=ROLES, default='cliente')
     foto = models.ImageField(upload_to='perfiles/', blank=True, null=True)
@@ -38,7 +39,7 @@ class Categoria(models.Model):
 
 class ArticuloCarta(models.Model):
     nombre = models.CharField(max_length=100)
-    ingredientes = models.TextField()
+    ingredientes = models.CharField(max_length=1000)
     precio = models.DecimalField(max_digits=6, decimal_places=2)
     categoria = models.ForeignKey(Categoria, on_delete=models.CASCADE)
     foto = models.ImageField(upload_to='carta/', null=True, blank=True)

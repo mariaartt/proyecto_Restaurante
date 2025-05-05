@@ -1,0 +1,100 @@
+.ver_empleados{
+    text-align: center;
+    font-family: "Instrument Serif", serif;
+}
+
+.ver_empleados h1{
+    text-align: center;
+    font-size: 70px;
+    color: #D4A373;
+    font-family: 'Italianno', cursive;
+    padding: 3%;
+}
+
+.ver_empleados_tabla{
+    text-align: center;
+    margin-left: 5%;
+    margin-right: 5%;
+    border: 2px solid #D4A373;
+    border-radius: 20px;
+    padding: 1%;
+}
+
+.ver_empleados_titulo, .custom_row{
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-around;
+}
+
+.ver_empleados_titulo{
+    margin-right: 33.5%;
+}
+
+.ver_empleados_titulo h3{
+    font-size: 40px;
+    color: #D4A373;
+    font-family: 'Italianno', cursive;
+}
+
+.ver_empleados_nombre{
+    color: #7A7979;
+}
+
+.editar_empleado_btn, .eliminar_empleado_btn{
+    background-color: #960000;
+    border: none;
+    border-radius: 50px;
+    height: 50px;
+    width: 75px;
+    cursor: pointer;
+}
+
+.editar_empleado_btn img, .eliminar_empleado_btn img{
+    width: 25px;
+}
+
+.crear_empleado_btn{
+    background-color: #960000;
+    color: #FEFAE0;
+    border: none;
+    border-radius: 20px;
+    font-size: 20px;
+    padding: 12px 24px;
+    width: 200px;
+    cursor: pointer;
+    transition: background-color 0.5s;
+    font-family: 'Instrument Serif', serif;
+    margin-top: 2%;
+    margin-bottom: 10%;
+}
+
+.crear_empleado_btn:hover {
+    background-color: rgb(202, 48, 48);
+}
+
+@media (max-width: 768px){
+    .ver_empleados_titulo{
+        margin-right: 35%;
+    }
+
+    .ver_empleados_titulo h3{
+        font-size: 20px;
+    }
+
+    .custom_row p{
+        font-size: 10px;
+    }
+
+    .editar_empleado_btn img, .eliminar_empleado_btn img{
+        width: 15px;
+    }
+
+    .editar_empleado_btn, .eliminar_empleado_btn{
+        height: 30px;
+        width: 50px;
+    }
+}
+
+@media (max-width: 555px){
+
+}
