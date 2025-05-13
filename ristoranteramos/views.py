@@ -8,8 +8,9 @@ def go_home(request):
 def go_contacto(request):
     return render(request, 'contacto.html')
 
-def go_carta(request):
-    return render(request, 'carta.html')
+def cargar_listado_articulos(request):
+    lista_articulos = Articulo.objects.all()
+    return render(request,'carta.html',{'articulos':lista_articulos})
 
 def go_login(request):
     return render(request, 'log-in.html')

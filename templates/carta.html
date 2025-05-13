@@ -68,21 +68,25 @@
         <p>Prueba estos platos perfectos para compartir</p>
     </div>
 
-    <div class="row m-4">
-        <div class="col-5">
-            <div class="nombre_articulo">
-                <h3>Insalata César</h3>
-                <h6>12,00€</h6>
+    {% for a in articulos %}
+        
+        <div class="row m-4">
+            <div class="col-5">
+                <div class="nombre_articulo">
+                    <h3></h3>
+                    <h6>12,00€</h6>
+                </div>
+                <p>Lechuga, pollo frito, picatostes, escamas de partisano y nuestra salsa César</p>
             </div>
-            <p>Lechuga, pollo frito, picatostes, escamas de partisano y nuestra salsa César</p>
-        </div>
-        <div class="col-5">
-            <div class="nombre_articulo">
-                <h3>Insalata Capresse</h3>
-                <h6>11,00€</h6>
+            <div class="col-5">
+                <div class="nombre_articulo">
+                    <h3>Insalata Capresse</h3>
+                    <h6>11,00€</h6>
+                </div>
+                <p>Rodajas de tomate, aceite de oliva virgen, flor de sal, albahaca y reducción de balsámico</p>
             </div>
-            <p>Rodajas de tomate, aceite de oliva virgen, flor de sal, albahaca y reducción de balsámico</p>
         </div>
-    </div>
+    
+    {% endfor %}
     
 {% endblock %}
