@@ -20,6 +20,7 @@ urlpatterns = [
     path('carta/', go_carta, name='carta'),
     path('login/', go_login, name='login'),
     path('reporte/', go_reporte_ventas, name='reporte'),
+    path('acerca_de/', go_acerca_de, name='acerca_de'),
 ]
 
 

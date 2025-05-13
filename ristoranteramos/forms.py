@@ -1,6 +1,8 @@
 from django import forms
-from .models import Usuario
-from .models import ArticuloCarta
+from .models import *
+from django.contrib.auth.forms import AuthenticationForm
+
+
 
 class FormularioUsuario(forms.ModelForm):
     class Meta:
@@ -27,13 +29,18 @@ class FormularioUsuario(forms.ModelForm):
 class FormularioArticulo(forms.ModelForm):
     class Meta:
         model = ArticuloCarta
-        fields = ['nombre','ingredientes','categoria','precio','foto','receta','tiempo_estimado']
-        widgets={
+        fields = [
+            'nombre', 'descripcion', 'categoria', 'precio',
+            'foto', 'receta', 'tiempo_preparacion'
+        ]
+        exclude = ['fecha_creacion', 'fecha_modificacion']
+
+        widgets = {
             'nombre': forms.TextInput(attrs={
                 'class': 'form-control',
                 'autofocus': True
             }),
-            'ingredientes': forms.TextInput(attrs={
+            'descripcion': forms.Textarea(attrs={
                 'class': 'form-control',
             }),
             'precio': forms.NumberInput(attrs={
@@ -49,18 +56,11 @@ class FormularioArticulo(forms.ModelForm):
             'receta': forms.Textarea(attrs={
                 'class': 'form-control',
             }),
-            'tiempo_estimado': forms.NumberInput(attrs={
+            'tiempo_preparacion': forms.NumberInput(attrs={
                 'class': 'form-control',
                 'min': '1'
-            })
+            }),
         }
-from django.contrib.auth.forms import AuthenticationForm
-from .models import Usuario
-
-
-from django import forms
-from django.contrib.auth.forms import AuthenticationForm
-from .models import Usuario
 
 class RegistroFormulario(forms.ModelForm):
     password = forms.CharField(
@@ -70,7 +70,6 @@ class RegistroFormulario(forms.ModelForm):
             'required': 'required'
         })
     )
-
     class Meta:
         model = Usuario
         fields = ['email', 'nombre', 'rol', 'password']

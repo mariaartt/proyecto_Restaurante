@@ -1,5 +1,4 @@
 from django.shortcuts import render, redirect, get_object_or_404
-
 from ristoranteramos.forms import *
 from django.shortcuts import render
 
@@ -17,6 +16,9 @@ def go_contacto(request):
 
 def go_login(request):
     return render(request, 'log-in.html')
+
+def go_acerca_de(request):
+    return render(request, 'acerca_de.html')
 
 def go_empleados(request):
     empleados = Usuario.objects.all()
