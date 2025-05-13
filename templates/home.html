@@ -2,245 +2,242 @@
 {% load static %}
 
 {% block content %}
-<!--Navbar-->
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark py-3" style="background-image: url('/static/images/fondo1.png'); background-size: cover;">
-  <div class="container-fluid">
-    <!-- Logo -->
-    <a class="navbar-brand" href="{% url 'home' %}">
-      <img src="{% static 'images/logo.png' %}" alt="Logo" width="150" height="150">
-    </a>
-
-    <!-- Menú colapsable -->
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-
-    <!-- Enlaces -->
-    <div class="collapse navbar-collapse justify-content-between" id="navbarNav">
-      <ul class="navbar-nav mx-auto">
-        <li class="nav-item">
-          <a class="nav-link text-white fs-5" href="{% url 'home' %}">INICIO</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link text-white fs-5" href="#">CARTA</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link text-white fs-5" href="{% url 'contacto' %}">CONTACTO</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link text-white fs-5" href="#">RESERVAR</a>
-        </li>
-      </ul>
-    </div>
-      <!-- Botones -->
-    <div class="d-flex">
-    <a href="#" class="btn btn-outline-light me-2 d-flex align-items-center">
-      <i class="bi bi-person-fill me-1" ></i> CLIENTE
-    </a>
-    <a href="#" class="btn btn-danger">HAZ TU PEDIDO</a>
-    </div>
-  </div>
-    <div class="presentacion">
-        <h1>Ristorante Ramos</h1>
-        <h2>Verdadera Cocina Italiana en el Centro de Sevilla</h2>
-        <p>Honramos la tradición culinaria mientras innovamos con cada plato. Elaboramos nuestras recetas de forma artesanal, con ingredientes frescos y técnicas clásicas, para ofrecer una experiencia auténtica e inigualable.</p>
-    </div>
-</nav>    
-<!--Parte 1-->
-<div class="parte1">
-    <div class="parte-roja-verde">
-        <div class="fondo-rojo"></div>
-        
-        <div class="contenedor_home">
-            <div class="contenedor_texto">
-                <h6>Nuestro Obrador</h6>
-                <h3>Pasta Fresca</h3>
-                <p>En nuestro restaurante en Sevilla, elaboramos pasta fresca cada día de forma artesanal, utilizando ingredientes de la más alta calidad. Respetamos las recetas tradicionales y los métodos auténticos para garantizar una textura perfecta y un sabor inigualable. Cada plato refleja nuestra pasión por la cocina, combinando tradición y creatividad para ofrecer una experiencia única a nuestros comensales.</p>
-                <p class="boton_inicio_home">Ver Carta</p>
+    <!--Navbar-->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark py-3" style="background-image: url('/static/images/fondo1.png'); background-size: cover;">
+        <div class="container-fluid">
+            <!-- Logo -->
+            <a class="navbar-brand" href="{% url 'home' %}">
+                <img src="{% static 'images/logo.png' %}" alt="Logo" width="150" height="150">
+            </a>
+    
+            <!-- Menú colapsable -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+    
+            <!-- Enlaces -->
+            <div class="collapse navbar-collapse justify-content-between" id="navbarNav">
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item">
+                        <a class="nav-link text-white fs-5" href="{% url 'home' %}">INICIO</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white fs-5" href="{% url 'carta' %}">CARTA</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white fs-5" href="{% url 'contacto' %}">CONTACTO</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white fs-5" href="#">RESERVAR</a>
+                    </li>
+                </ul>
             </div>
             
-            <div class="contenedor_fotos">
-                <img class="foto_pasta" src="{% static 'images/pasta_inicio.png' %}">
-                <img class="foto_manualidades" src="{% static 'images/manualidades.png' %}">
+            <!-- Botones -->
+            <div class="d-flex">
+                <a href="{% url 'login' %}" class="btn btn-outline-light me-2 d-flex align-items-center">
+                    <i class="bi bi-person-fill me-1" ></i> CLIENTE
+                </a>
+                <a href="{% url 'carta' %}" class="btn btn-danger">HAZ TU PEDIDO</a>
             </div>
         </div>
+        
+        <div class="presentacion">
+            <h1>Ristorante Ramos</h1>
+            <h2>Verdadera Cocina Italiana en el Centro de Sevilla</h2>
+            <p>Honramos la tradición culinaria mientras innovamos con cada plato. Elaboramos nuestras recetas de forma artesanal, con ingredientes frescos y técnicas clásicas, para ofrecer una experiencia auténtica e inigualable.</p>
+        </div>
+    </nav>    
+    <!--Parte 1-->
+    <div class="parte1">
+        <div class="parte-roja-verde">
+            <div class="fondo-rojo"></div>
             
+            <div class="contenedor_home">
+                <div class="contenedor_texto">
+                    <h6>Nuestro Obrador</h6>
+                    <h3>Pasta Fresca</h3>
+                    <p>En nuestro restaurante en Sevilla, elaboramos pasta fresca cada día de forma artesanal, utilizando ingredientes de la más alta calidad. Respetamos las recetas tradicionales y los métodos auténticos para garantizar una textura perfecta y un sabor inigualable. Cada plato refleja nuestra pasión por la cocina, combinando tradición y creatividad para ofrecer una experiencia única a nuestros comensales.</p>
+                    <p class="boton_inicio_home">Ver Carta</p>
+                </div>
+                
+                <div class="contenedor_fotos">
+                    <img class="foto_pasta" src="{% static 'images/pasta_inicio.png' %}">
+                    <img class="foto_manualidades" src="{% static 'images/manualidades.png' %}">
+                </div>
+            </div>
+        </div>
+    
+        <div class="parte-roja-verde">
+            <div class="contenedor_home2">
+                <div class="contenedor_fotos2">
+                    <img class="foto_pizza2" src="{% static 'images/pizza2_inicio.png' %}">
+                    <img class="foto_pizza1" src="{% static 'images/pizza1_inicio.png' %}">
+                </div>
+                
+                <div class="contenedor_texto2">
+                    <h6 style="color: rgba(192, 0, 0, 1)">Auténtica</h6>
+                    <h3>Pizza Napolitana</h3>
+                    <p>Siguiendo la tradición de la auténtica pizza napolitana, hemos perfeccionado nuestra receta para lograr una masa más ligera y digestiva, manteniendo su esencia artesanal. Utilizamos un proceso de fermentación lenta con masa madre y una hidratación óptima, logrando una textura esponjosa, un borde aireado y un equilibrio perfecto de sabores. ¡No te quedes sin probarla!</p>
+                    <p class="boton_inicio_home2">Ver Carta</p>
+                </div>
+            </div>
+            <div class="fondo-verde"></div>
+        </div>
     </div>
-
-    <div class="parte-roja-verde">
+    <!--Parte 2-->
+    <div class="container-fluid text-center">
+        <h1 class="title1-v1">Descubre nuestras</h1>
+        <h2 class="title2">Especialidades</h2>
+    </div>
+    
+    <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel" data-bs-pause="hover">
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <div class="d-flex flex-column flex-md-row justify-content-center align-items-center gap-4">
+                    <img src="{% static 'images/tiramisu.jpg' %}" class="img-carrusel" alt="Tiramisú">
+                    <div class="descripcion-carrusel shadow">
+                        <h3 class="contenedor_texto">Tiramisú</h3>
+                        <p class="texto-plato">Típico postre italiano a base de bizcochos de soletilla, cacao, mascarpone y café.</p>
+                    </div>
+                </div>
+            </div>
+    
+            <!-- Duplicar estructura para más platos -->
+            <div class="carousel-item">
+                <div class="d-flex flex-column flex-md-row justify-content-center align-items-center gap-4">
+                    <img src="{% static 'images/otro_plato.png' %}" class="img-carrusel" alt="Otro Plato">
+                    <div class="descripcion-carrusel shadow">
+                        <h3 class="contenedor_texto">Otro Plato</h3>
+                        <p class="texto-plato">Descripción elegante y breve del siguiente plato.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon custom-control-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Anterior</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="next">
+            <span class="carousel-control-next-icon custom-control-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Siguiente</span>
+        </button>
+    </div>
+    
+    <!--Parte 3-->
+    <div class="text-center mb-4">
+        <h1 class="subtitulo">Clientes</h1>
+        <h1 class="subtitulo2 display-5 fw-bold m-0" style="color: #412000; font-family: 'Lora', serif">Opiniones</h1>
+    </div>
+    
+    <!-- Carrousel con opiniones de los clientes -->
+    <div class="position-relative d-flex justify-content-center align-items-center" style="min-height: 400px;">
+        <!-- Imagen de fondo -->
+        <img src="{% static 'images/interior_restaurante.jpg' %}" alt="Interior del restaurante" class="img-fluid imagen-restaurante">
+    
+        <!-- Carrusel sobre la imagen -->
+        <div class="card-carrusel position-absolute start-0 translate-middle-y" style="top: 50%; z-index: 2;">
+            <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel" aria-label="Opiniones de clientes">
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <article class="card">
+                            <p>
+                                "Una experiencia auténtica y deliciosa. Desde el primer bocado, supe que este era el mejor restaurante italiano en el que he estado.
+                                La pasta casera estaba perfectamente cocida, y el tiramisú... ¡simplemente espectacular! El ambiente acogedor y el servicio atento hicieron
+                                que nuestra cena fuera inolvidable. Relación calidad‑precio excelente para estar a dos pasos de la Giralda. Sin duda, volveremos pronto. ¡Altamente recomendado!"
+                            </p>
+                            <div class="cliente text-end">
+                                <img src="{% static 'images/icons8-usuario-30.png' %}" class="img-fluid me-2" alt="icono_usuario">
+                                <i class="bi bi-person-fill me-2">Laura M.</i>
+                            </div>
+                        </article>
+                    </div>
+                    <!--Segundo slide-->
+                    <div class="carousel-item">
+                        <article class="card">
+                            <p class="d-block w-100 d-flex justify-content-center align-items-center min-vh-50 px-4">
+                                Auténtico sabor napolitano. Compartimos una pizza Diavola+burrata y la masa era fina en el centro y
+                                crujiente en los bordes, con ese toque ahumado del horno de leña. El provolone al horno con orégano llegó burbujeante
+                                y con pan casero para ‘rebañar’. Por poner un pero, el servicio fue algo lento porque el local estaba a tope,
+                                pero la espera mereció la pena. ¡Repetiremos seguro!
+                            </p>
+                            <div class="cliente text-end">
+                                <img src="{% static 'images/icons8-usuario-30.png' %}" class="img-fluid me-2" alt="icono_usuario">
+                                <i class="bi bi-person-fill me-2">Laura P.</i>
+                            </div>
+                        </article>
+                    </div>
+                    <!--Tercer slide-->
+                    <div class="carousel-item">
+                        <article class="card">
+                            <p class="d-block w-100 d-flex justify-content-center align-items-center min-vh-50 px-4">
+                                Ideal para una cena romántica. Iluminación tenue, música italiana de fondo y un risotto ai funghi que llegó al
+                                punto perfecto, mantecoso pero sin pasarse. Mi pareja probó los cannelloni de rabo de toro (fusión sevillana‑italiana)
+                                y estaban espectaculares. Pedimos un tiramisú para compartir y esta vez el equilibrio café‑mascarpone fue clavado.
+                                El chef salió a saludar a las mesas: detalle de diez.
+                            </p>
+                            <div class="cliente text-end">
+                                <img src="{% static 'images/icons8-usuario-30.png' %}" class="img-fluid me-2" alt="icono_usuario">
+                                <i class="bi bi-person-fill me-2">Juan M.</i>
+                            </div>
+                        </article>
+                    </div>
+                    <!--Cuarto slide-->
+                    <div class="carousel-item">
+                        <article class="card">
+                            <p class="d-block w-100 d-flex justify-content-center align-items-center min-vh-50 px-4">
+                                Buenísimo, aunque algo ruidoso. Fuimos en grupo y nos colocaron en la mesa larga del fondo. Las bruschette de tomate
+                                y albahaca volaron en segundos y los ravioli rellenos de ricotta y espinacas con salsa de mantequilla y salvia nos
+                                conquistaron. El único inconveniente fue el nivel de ruido porque el local es muy concurrido, pero la comida compensa con creces.
+                            </p>
+                            <div class="cliente text-end">
+                                <img src="{% static 'images/icons8-usuario-30.png' %}" class="img-fluid me-2" alt="icono_usuario">
+                                <i class="bi bi-person-fill me-2">Jose L.</i>
+                            </div>
+                        </article>
+                    </div>
+                    <!--Quinto slide-->
+                    <div class="carousel-item">
+                        <article class="card">
+                            <p class="d-block w-100 d-flex justify-content-center align-items-center min-vh-50 px-4">
+                                Domingo familiar perfecto. Reservamos para ocho personas con niños y nos prepararon sin problema tronas y menús pequeños.
+                                La lasaña clásica salió humeante, con capas generosas de ragú y bechamel casera. Mis hijos devoraron la pizza Margherita y
+                                nos invitaron a limoncello al final. Volveremos en la próxima visita a Sevilla.
+                            </p>
+                            <div class="cliente text-end">
+                                <img src="{% static 'images/icons8-usuario-30.png' %}" class="img-fluid me-2" alt="icono_usuario">
+                                <i class="bi bi-person-fill me-2">Carmen M.</i>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+        <br><br><br>
         
-        <div class="contenedor_home2">
-            <div class="contenedor_fotos2">
-                <img class="foto_pizza2" src="{% static 'images/pizza2_inicio.png' %}">
-                <img class="foto_pizza1" src="{% static 'images/pizza1_inicio.png' %}">
+    <!--Parte 4-->
+    <div class="parte4">
+        <div class="fondo_texto_pizza">
+            <h3>Certificaciones</h3>
+            <h1>Vera Pizza Artigianale<br> Sapore Autentico Italiano</h1>
+        </div>
+        
+        <div class="bloques_parte4">
+            <div class="bloque_parte4">
+                <img src="{% static 'images/logotipo1_parte4.png' %}">
+                <h3>Vera Pizza Artigianale</h3>
+                <p>En 2022 obtuvimos la certificación "Vera Pizza Artigianale", que reconoce nuestro compromiso con la elaboración artesanal de la pizza siguiendo técnicas tradicionales y el uso de ingredientes de alta calidad. Este distintivo avala nuestra dedicación a la auténtica pizza, desde la fermentación de la masa hasta su cocción en horno de piedra.</p>
             </div>
             
-            <div class="contenedor_texto2">
-                <h6 style="color: rgba(192, 0, 0, 1)">Auténtica</h6>
-                <h3>Pizza Napolitana</h3>
-                <p>Siguiendo la tradición de la auténtica pizza napolitana, hemos perfeccionado nuestra receta para lograr una masa más ligera y digestiva, manteniendo su esencia artesanal. Utilizamos un proceso de fermentación lenta con masa madre y una hidratación óptima, logrando una textura esponjosa, un borde aireado y un equilibrio perfecto de sabores. ¡No te quedes sin probarla!</p>
-                <p class="boton_inicio_home2">Ver Carta</p>
-            </div>
-        </div>
-        
-        <div class="fondo-verde"></div>
-        
-    </div>
-</div>
-<!--Parte 2-->
-<div class="container-fluid text-center">
-    <h1 class="title1-v1">Descubre nuestras</h1>
-    <h2 class="title2">Especialidades</h2>
-</div>
-
-<div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel" data-bs-pause="hover">
-  <div class="carousel-inner">
-
-    <div class="carousel-item active">
-      <div class="d-flex flex-column flex-md-row justify-content-center align-items-center gap-4">
-        <img src="{% static 'images/tiramisu.jpg' %}" class="img-carrusel" alt="Tiramisú">
-        <div class="descripcion-carrusel shadow">
-          <h3 class="contenedor_texto">Tiramisú</h3>
-          <p class="texto-plato">Típico postre italiano a base de bizcochos de soletilla, cacao, mascarpone y café.</p>
-        </div>
-      </div>
-    </div>
-
-    <!-- Duplicar estructura para más platos -->
-    <div class="carousel-item">
-      <div class="d-flex flex-column flex-md-row justify-content-center align-items-center gap-4">
-        <img src="{% static 'images/otro_plato.png' %}" class="img-carrusel" alt="Otro Plato">
-        <div class="descripcion-carrusel shadow">
-          <h3 class="contenedor_texto">Otro Plato</h3>
-          <p class="texto-plato">Descripción elegante y breve del siguiente plato.</p>
-        </div>
-      </div>
-    </div>
-
-  </div>
-
-  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
-    <span class="carousel-control-prev-icon custom-control-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Anterior</span>
-  </button>
-  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="next">
-    <span class="carousel-control-next-icon custom-control-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Siguiente</span>
-  </button>
-</div>
-<!--Parte 3-->
-<div class="text-center mb-4">
-    <h1 class="subtitulo">Clientes</h1>
-    <h1 class="titulo display-4 fw-bold m-0">Opiniones</h1>
-</div>
-
-
-<div class="position-relative d-flex justify-content-center align-items-center" style="min-height: 400px;">
-    <!-- Imagen de fondo -->
-    <img src="{% static 'images/interior_restaurante.jpg' %}" alt="Interior del restaurante" class="img-fluid imagen-restaurante">
-
-    <!-- Carrusel sobre la imagen -->
-    <div class="card-carrusel position-absolute start-0 translate-middle-y" style="top: 50%; z-index: 2;">
-        <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel" aria-label="Opiniones de clientes">
-            <div class="carousel-inner">
-                <div class="carousel-item active">
-                    <article class="card">
-                        <p>
-                            "Una experiencia auténtica y deliciosa. Desde el primer bocado, supe que este era el mejor restaurante italiano en el que he estado.
-                            La pasta casera estaba perfectamente cocida, y el tiramisú... ¡simplemente espectacular! El ambiente acogedor y el servicio atento hicieron
-                            que nuestra cena fuera inolvidable. Sin duda, volveremos pronto. ¡Altamente recomendado!"
-                        </p>
-                        <div class="cliente text-end">
-                            <img src="{% static 'images/icons8-usuario-30.png' %}" class="img-fluid me-2" alt="icono_usuario">
-                            <i class="bi bi-person-fill me-2">Laura M.</i>
-                        </div>
-                    </article>
-                </div>
-                <!--Segundo slide-->
-                <div class="carousel-item">
-                    <article class="card">
-                        <p class="d-block w-100 d-flex justify-content-center align-items-center min-vh-50 px-4">
-                            Auténtico sabor napolitano. Compartimos una pizza Diavola+burrata y la masa era fina en el centro y
-                            crujiente en los bordes, con ese toque ahumado del horno de leña. El provolone al horno con orégano llegó burbujeante
-                            y con pan casero para ‘rebañar’. Por poner un pero, el servicio fue algo lento porque el local estaba a tope,
-                            pero la espera mereció la pena. ¡Repetiremos seguro!
-                        </p>
-                        <div class="cliente text-end">
-                            <img src="{% static 'images/icons8-usuario-30.png' %}" class="img-fluid me-2" alt="icono_usuario">
-                            <i class="bi bi-person-fill me-2">Laura P.</i>
-                        </div>
-                    </article>
-                </div>
-                <!--Tercer slide-->
-                <div class="carousel-item">
-                    <article class="card">
-                        <p class="d-block w-100 d-flex justify-content-center align-items-center min-vh-50 px-4">
-                            Ideal para una cena romántica. Iluminación tenue, música italiana de fondo y un risotto ai funghi que llegó al
-                            punto perfecto, mantecoso pero sin pasarse. Mi pareja probó los cannelloni de rabo de toro (fusión sevillana‑italiana)
-                            y estaban espectaculares. Pedimos un tiramisú para compartir y esta vez el equilibrio café‑mascarpone fue clavado.
-                            El chef salió a saludar a las mesas: detalle de diez.
-                        </p>
-                        <div class="cliente text-end">
-                            <img src="{% static 'images/icons8-usuario-30.png' %}" class="img-fluid me-2" alt="icono_usuario">
-                            <i class="bi bi-person-fill me-2">Juan M.</i>
-                        </div>
-                    </article>
-                </div>
-                <!--Cuarto slide-->
-                <div class="carousel-item">
-                    <article class="card">
-                        <p class="d-block w-100 d-flex justify-content-center align-items-center min-vh-50 px-4">
-                            Buenísimo, aunque algo ruidoso. Fuimos en grupo y nos colocaron en la mesa larga del fondo. Las bruschette de tomate
-                            y albahaca volaron en segundos y los ravioli rellenos de ricotta y espinacas con salsa de mantequilla y salvia nos
-                            conquistaron. El único inconveniente fue el nivel de ruido porque el local es muy concurrido, pero la comida compensa con creces.
-                        </p>
-                        <div class="cliente text-end">
-                            <img src="{% static 'images/icons8-usuario-30.png' %}" class="img-fluid me-2" alt="icono_usuario">
-                            <i class="bi bi-person-fill me-2">Jose L.</i>
-                        </div>
-                    </article>
-                </div>
-                <!--Quinto slide-->
-                <div class="carousel-item">
-                    <article class="card">
-                        <p class="d-block w-100 d-flex justify-content-center align-items-center min-vh-50 px-4">
-                            Domingo familiar perfecto. Reservamos para ocho personas con niños y nos prepararon sin problema tronas y menús pequeños.
-                            La lasaña clásica salió humeante, con capas generosas de ragú y bechamel casera. Mis hijos devoraron la pizza Margherita y
-                            nos invitaron a limoncello al final. Relación calidad‑precio excelente para estar a dos pasos de la Giralda. Volveremos en
-                            la próxima visita a Sevilla.
-                        </p>
-                        <div class="cliente text-end">
-                            <img src="{% static 'images/icons8-usuario-30.png' %}" class="img-fluid me-2" alt="icono_usuario">
-                            <i class="bi bi-person-fill me-2">Carmen M.</i>
-                        </div>
-                    </article>
-                </div>
+            <div class="bloque_parte4">
+                <img src="{% static 'images/logotipo2_parte4.png' %}">
+                <h3>Sapore Autentico Italiano</h3>
+                <p>En 2020 fuimos galardonados con el reconocimiento "Sapore Autentico Italiano", otorgado a restaurantes que promueven la verdadera cocina italiana en el mundo. Este mérito certifica nuestra fidelidad a las recetas originales, la selección de ingredientes italianos y la transmisión de la tradición gastronómica con pasión y respeto.</p>
             </div>
         </div>
     </div>
-</div>
-    
-<!--Parte 4-->
-<div class="parte4">
-    <div class="fondo_texto_pizza">
-        <h3>Certificaciones</h3>
-        <h1>Vera Pizza Artigianale<br> Sapore Autentico Italiano</h1>
-    </div>
-    
-    <div class="bloques_parte4">
-        <div class="bloque_parte4">
-            <img src="{% static 'images/logotipo1_parte4.png' %}">
-            <h3>Vera Pizza Artigianale</h3>
-            <p>En 2022 obtuvimos la certificación "Vera Pizza Artigianale", que reconoce nuestro compromiso con la elaboración artesanal de la pizza siguiendo técnicas tradicionales y el uso de ingredientes de alta calidad. Este distintivo avala nuestra dedicación a la auténtica pizza, desde la fermentación de la masa hasta su cocción en horno de piedra.</p>
-        </div>
         
-        <div class="bloque_parte4">
-            <img src="{% static 'images/logotipo2_parte4.png' %}">
-            <h3>Sapore Autentico Italiano</h3>
-            <p>En 2020 fuimos galardonados con el reconocimiento "Sapore Autentico Italiano", otorgado a restaurantes que promueven la verdadera cocina italiana en el mundo. Este mérito certifica nuestra fidelidad a las recetas originales, la selección de ingredientes italianos y la transmisión de la tradición gastronómica con pasión y respeto.</p>
-        </div>
-    </div>
-</div>
-    
-{% include "footer.html" %}
+    {% include "footer.html" %}
 {% endblock %}

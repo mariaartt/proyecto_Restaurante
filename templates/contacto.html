@@ -1,9 +1,51 @@
 {% extends 'base.html' %}
 {% load static %}
-<link rel="stylesheet" href="{% static 'css/contacto.css' %}">
-
 {% block content %}
 
+    <!--Navbar-->
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark py-3 nav_mod" style="background-image: url('{% static 'images/fondo_contacto.jpg' %}'); background-size: cover;">
+        <div class="container-fluid">
+            <!-- Logo -->
+            <a class="navbar-brand" href="{% url 'home' %}">
+                <img src="{% static 'images/logo.png' %}" alt="Logo" width="150" height="150" style="border-radius: 20px">
+            </a>
+      
+            <!-- Botón hamburguesa -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+      
+            <!-- Menú colapsable -->
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav mx-auto text-center">
+                    <li class="nav-item">
+                        <a class="nav-link text-white fs-5" href="{% url 'home' %}">INICIO</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white fs-5" href="{% url 'carta' %}">CARTA</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white fs-5" href="#">RESERVAR</a>
+                    </li>
+                </ul>
+            </div>
+            
+            <!-- Botones -->
+            <div class="d-flex">
+                <a href="{% url 'login' %}" class="btn btn-outline-light me-2 d-flex align-items-center">
+                    <i class="bi bi-person-fill me-1" ></i> CLIENTE
+                </a>
+                <a href="{% url 'carta' %}" class="btn btn-danger">HAZ TU PEDIDO</a>
+            </div>
+        </div>
+      
+        <!-- Título -->
+        <div class="presentacion_mod">
+            <h1>CONTACTO</h1>
+        </div>
+    </nav>
+    <br><br><br>
+    
     <div class="main-content">
     <!--Información con el horario y el contacto del restaurante-->
         <section class="box-info">
@@ -57,6 +99,5 @@
             
         </section>
     </div>
-    
     {% include 'footer.html' %}
 {% endblock %}
