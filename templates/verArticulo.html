@@ -20,13 +20,13 @@
                 <div class="row">
 
                     <div class="ver_empleados_row">
-                        <div class="custom_row">
-                            <p class="ver_empleados_nombre">{{a.nombre}}</p>
-                            <p>{{a.ingredientes}}</p>
-                            <p>{{a.precio}}</p>
-                            <p>{{a.categoria}}</p>
-                            <p>{{a.receta}}</p>
-                            <p>{{a.tiempo_estimado}}</p>
+                        <div class="custom_row2">
+                            <p class="ver_empleados_nombre2">{{a.nombre}}</p>
+                            <p class="ver_empleados_nombre">{{a.ingredientes}}</p>
+                            <p class="ver_empleados_nombre">{{a.precio}}</p>
+                            <p class="ver_empleados_nombre">{{a.categoria}}</p>
+                            <p class="ver_empleados_nombre">{{a.receta}}</p>
+                            <p class="ver_empleados_nombre">{{a.tiempo_estimado}}</p>
                             
                             <a href="{% url 'new_articulo' id=a.id %}">
                                 <button class="editar_empleado_btn"><img src="{% static 'images/editar_Admin.png' %}"></button>

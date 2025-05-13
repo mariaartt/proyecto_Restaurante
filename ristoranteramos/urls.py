@@ -14,4 +14,5 @@ urlpatterns = [
     path('newArticulo/<int:id>', editar_articulo, name='new_articulo'),
     path('eliminarArticulo/<int:id>', eliminar_articulo, name='eliminar_articulo'),
     path('log-in/', log_in, name='log_in_page'),
+
 ]
