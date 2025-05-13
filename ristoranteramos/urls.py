@@ -13,5 +13,5 @@ urlpatterns = [
     path('verArticulos/', go_articulos, name='articulos'),
     path('newArticulo/<int:id>', editar_articulo, name='new_articulo'),
     path('eliminarArticulo/<int:id>', eliminar_articulo, name='eliminar_articulo'),
-    path('login/', go_login, name='login'),
+    path('log-in/', log_in, name='log_in_page'),
 ]

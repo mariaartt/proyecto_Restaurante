@@ -28,13 +28,13 @@
           <a class="nav-link text-white fs-5" href="{% url 'contacto' %}">CONTACTO</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-white fs-5" href="#">RESERVAR</a>
+          <a class="nav-link text-white fs-5" href="#">ACERCA DE</a>
         </li>
       </ul>
     </div>
       <!-- Botones -->
     <div class="d-flex">
-    <a href="#" class="btn btn-outline-light me-2 d-flex align-items-center">
+    <a href="{% url 'log_in_page' %}" class="btn btn-outline-light me-2 d-flex align-items-center">
       <i class="bi bi-person-fill me-1" ></i> CLIENTE
     </a>
     <a href="#" class="btn btn-danger">HAZ TU PEDIDO</a>
@@ -131,11 +131,11 @@
 <!--Parte 3-->
 <div class="text-center mb-4">
     <h1 class="subtitulo">Clientes</h1>
-    <h1 class="titulo display-4 fw-bold m-0">Opiniones</h1>
+    <h1 class="titulo2 display-4 fw-bold m-0">Opiniones</h1>
 </div>
 
 
-<div class="position-relative d-flex justify-content-center align-items-center" style="min-height: 400px; margin-bottom: 10%">
+<div class="position-relative d-flex justify-content-center align-items-center contendor-parte3" style="min-height: 400px;">
     <!-- Imagen de fondo -->
     <img src="{% static 'images/interior_restaurante.jpg' %}" alt="Interior del restaurante" class="img-fluid imagen-restaurante">
 
