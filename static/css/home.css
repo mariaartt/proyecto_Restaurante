@@ -906,7 +906,7 @@ body {
 .card-carrusel {
     width: 100%;
     max-width: 600px;
-    margin-left: 15rem;
+    margin-left: 20rem;
 }
 
 .card {
@@ -922,6 +922,68 @@ body {
     font-weight: 500;
     font-size: 1rem;
 }
+
+@media (max-width: 1180px) {
+    .card-carrusel{
+        margin-left: 5rem;
+    }
+}
+
+@media (max-width: 1030px) {
+    .card-carrusel{
+        max-width: 500px;
+        margin-left: 3rem;
+    }
+    .imagen-restaurante {
+        margin-left: 60rem;
+        max-width: 90%;
+        max-height: 250px;
+        margin-bottom: 1rem;
+    }
+}
+
+/* Para móviles y pantallas pequeñas (< 768px) */
+@media (max-width: 800px) {
+    .subtitulo {
+        font-size: 2.2rem;
+        text-align: center;
+    }
+
+    .subtitulo2 {
+        font-size: 1.8rem;
+        text-align: center;
+    }
+
+    .imagen-restaurante {
+        margin-left: 20rem;
+        max-width: 90%;
+        max-height: 250px;
+        margin-bottom: 1rem;
+    }
+
+    .card-carrusel {
+        width: 100%;
+        margin-left: 1rem;
+        max-width: 300px;
+    }
+
+    .carousel-item{
+        margin-left: 2rem;
+    }
+    .card {
+        padding: 1.2rem;
+        font-size: 0.95rem;
+    }
+
+    .card .cliente {
+        font-size: 0.9rem;
+    }
+
+    .position-relative {
+        flex-direction: column;
+    }
+}
+
 /*Parte 4*/
 .fondo_texto_pizza{
     background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('../images/pizza_fondo_home4.png');

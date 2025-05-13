@@ -135,3 +135,13 @@ def log_in(request):
 def logout_usuario(request):
     logout(request)
     return redirect('log_in_page')
+
+def go_carta(request):
+    return render(request, 'carta.html')
+
+def go_login(request):
+    return render(request, 'log-in.html')
+
+def go_reporte_ventas(request):
+    return render(request, 'reporteVentas.html')
+

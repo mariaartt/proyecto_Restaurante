@@ -1,6 +1,9 @@
 from os.path import pathsep
 
+from django.template.context_processors import static
 from django.urls import path
+
+from restaurante import settings
 from ristoranteramos.views import *
 
 urlpatterns = [
@@ -14,4 +17,7 @@ urlpatterns = [
     path('newArticulo/<int:id>', editar_articulo, name='new_articulo'),
     path('eliminarArticulo/<int:id>', eliminar_articulo, name='eliminar_articulo'),
     path('log-in/', log_in, name='log_in_page'),
+    path('carta/', go_carta, name='carta'),
+    path('login/', go_login, name='login'),
+    path('reporte/', go_reporte_ventas, name='reporte'),
 ]
