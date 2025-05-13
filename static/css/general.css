@@ -38,6 +38,7 @@
 .informacion p{
     font-size: 20px;
     margin: 4%;
+    width: 100%;
 }
 
 .imagenes_footer{

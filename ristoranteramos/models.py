@@ -1,9 +1,27 @@
-from django.contrib.auth.models import AbstractUser
+from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
 from django.db import models
 
 # ----------------------
 # MODELOS DE USUARIOS
 # ----------------------
+class UsuarioManager(BaseUserManager):
+    def create_user(self, email, nombre, rol, password=None):
+        if not email:
+            raise ValueError("El usuario debe tener un email")
+
+        email = self.normalize_email(email)
+        usuario = self.model(email=email, nombre=nombre, rol=rol)
+        usuario.set_password(password)
+        usuario.save(using=self._db)
+        return usuario
+
+    def create_superuser(self, email, nombre, rol='admin', password=None):
+        usuario = self.create_user(email, nombre, rol, password)
+
+        usuario.is_superuser = True
+        usuario.is_staff = True
+        usuario.save(using=self._db)
+        return usuario
 
 ROLES = (
     ('administrador', 'Administrador'),
@@ -12,14 +30,23 @@ ROLES = (
     ('cliente', 'Cliente'),
 )
 
-class Usuario(AbstractUser):
+class Usuario(AbstractBaseUser, PermissionsMixin):
+    nombre = models.CharField(max_length=100)
     email = models.EmailField(unique=True)
     rol = models.CharField(max_length=20, choices=ROLES, default='cliente')
+    is_active = models.BooleanField(default=True)
+    is_staff = models.BooleanField(default=False)
     foto = models.ImageField(upload_to='perfiles/', blank=True, null=True)
     telefono = models.CharField(max_length=15, blank=True)
     direccion = models.CharField(max_length=255, blank=True)
 
-    REQUIRED_FIELDS = ['email']
+    objects = UsuarioManager()
+
+    USERNAME_FIELD = 'email'
+    REQUIRED_FIELDS = ['nombre', 'rol']
+
+    def __str__(self):
+        return self.email
 
 class HistorialInicioSesion(models.Model):
     usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE)
@@ -30,20 +57,26 @@ class HistorialInicioSesion(models.Model):
 # MODELOS DEL RESTAURANTE
 # ----------------------
 
-class Categoria(models.Model):
-    nombre = models.CharField(max_length=50, unique=True)
-
-    def __str__(self):
-        return self.nombre
+CATEGORIAS = (
+    ('per_iniziare', 'Per Iniziare'),
+    ('pasta_fresca', 'Pasta Fresca'),
+    ('pizzas', 'Pizzas'),
+    ('bebidas', 'Bebidas'),
+    ('vinos', 'Vinos'),
+    ('cafe_postres', 'Café y Postres'),
+)
 
 class ArticuloCarta(models.Model):
     nombre = models.CharField(max_length=100)
-    ingredientes = models.TextField()
+    ingredientes = models.CharField(max_length=1000)
     precio = models.DecimalField(max_digits=6, decimal_places=2)
-    categoria = models.ForeignKey(Categoria, on_delete=models.CASCADE)
+    categoria = models.CharField(max_length=20, choices=CATEGORIAS)
     foto = models.ImageField(upload_to='carta/', null=True, blank=True)
     receta = models.TextField()
     tiempo_estimado = models.PositiveIntegerField(help_text="Tiempo en minutos")
+
+    def __str__(self):
+        return self.nombre
 
 class Mesa(models.Model):
     numero = models.PositiveIntegerField(unique=True)

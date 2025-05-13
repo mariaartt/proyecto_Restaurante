@@ -37,7 +37,7 @@ a.nav-link.text-white.fs-5:hover::after {
 }
 
 a.btn {
-    font-size: 25px;
+    font-size: 24px;
     border-radius: 50px;
     width: 45%;
     justify-content: center;
@@ -204,11 +204,12 @@ a.btn.btn-danger:hover {
     box-shadow: 1px 15px 20px rgba(0, 0, 0, 0.2);
     display: flex;
     background-color: rgba(254, 250, 224, 1);
+    width: 175%;
 }
 
 .contenedor_home{
-    margin-left: -18%;
-    margin-right: 18%;
+    margin-left: -22.5%;
+    margin-right: 22.5%;
 }
 
 .contenedor_home2{
@@ -330,7 +331,7 @@ a.btn.btn-danger:hover {
     }
 }
 
-@media (max-width: 1190px) {
+@media (max-width: 1230px) {
     .contenedor_home2 {
         margin-left: 19%;
         margin-right: -19%;
@@ -342,6 +343,10 @@ a.btn.btn-danger:hover {
 
     .boton_inicio_home2{
         margin-top: -8%;
+    }
+
+    .contenedor_home, .contenedor_home2 {
+        width: initial;
     }
 }
 
@@ -462,6 +467,10 @@ a.btn.btn-danger:hover {
         margin-top: -10%;
         font-size: 15px;
         width: 100px;
+    }
+
+    .contenedor_home, .contenedor_home2 {
+        width: initial;
     }
 }
 
@@ -738,6 +747,7 @@ h2.title2 {
     position: relative;
     top: 100px;
     margin-bottom: 20%;
+    margin-top: -6%;
 }
 
 button.carousel-control-next {
@@ -855,19 +865,30 @@ button.carousel-control-prev {
     }
 }
 /*Parte 3*/
+.contendor-parte3 {
+    margin-bottom: 10%;
+}
+
 body {
     background-color: rgb(254, 250, 224);
 }
 
 .subtitulo {
+    margin-top: .5rem;
     font-family: 'Italianno', cursive;
-    color: rgb(3, 67, 55);
-    font-size: 3rem;
+    font-size: 50px;
+    text-align: center;
+    color: #034337;
+    margin-bottom: 0 !important;
 }
 
-.titulo {
+.titulo2 {
     font-family: 'Lora', serif;
-    color: rgb(65, 32, 0);
+    font-weight: bold !important;
+    color: #412000;
+    font-size: 50px;
+    position: relative;
+    top: -25px;
 }
 
 /* Imagen de fondo */
