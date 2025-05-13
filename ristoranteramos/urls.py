@@ -21,3 +21,5 @@ urlpatterns = [
     path('login/', go_login, name='login'),
     path('reporte/', go_reporte_ventas, name='reporte'),
 ]
+
+
