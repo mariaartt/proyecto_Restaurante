@@ -10,6 +10,7 @@
   {% bootstrap_css %}
   {% bootstrap_javascript %}
 
+  <link rel="icon" href="{% static 'images/logo.ico' %}">
   <link href="https://fonts.googleapis.com/css2?family=Italianno&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Lora&display=swap" rel="stylesheet">
@@ -63,7 +64,7 @@
       <!-- Formulario de registro -->
       <div class="user_forms-signup">
         <h2 class="forms_title">Registro</h2>
-        <form method="post" class="forms_form">
+        <form method="post" class="forms_form-register">
           {% csrf_token %}
           <input type="hidden" name="action" value="register">
           <fieldset class="forms_fieldset">
@@ -74,10 +75,6 @@
             <div class="forms_field">
               {{ registro_form.email.errors }}
               {{ registro_form.email }}
-            </div>
-            <div class="forms_field">
-              {{ registro_form.rol.errors }}
-              {{ registro_form.rol }}
             </div>
             <div class="forms_field">
               {{ registro_form.password.errors }}

@@ -1,3 +1,5 @@
+from django.contrib.auth.decorators import user_passes_test
+from django.core.exceptions import PermissionDenied
 from django.shortcuts import render, redirect, get_object_or_404
 
 from ristoranteramos.forms import *
@@ -9,6 +11,11 @@ from .forms import RegistroFormulario, LoginFormulario
 from ristoranteramos.models import *
 
 # Create your views here.
+def es_admin(user):
+    if not user.is_authenticated or not user.rol == 'administrador':
+        raise PermissionDenied
+    return True
+
 def go_home(request):
     return render(request, 'home.html')
 
@@ -18,6 +25,7 @@ def go_contacto(request):
 def go_login(request):
     return render(request, 'log-in.html')
 
+@user_passes_test(es_admin)
 def go_empleados(request):
     empleados = Usuario.objects.all()
     return render(request, 'verEmpleados.html', {"empleados": empleados})
@@ -107,17 +115,16 @@ def log_in(request):
     login_form = LoginFormulario()
 
     if request.method == 'POST':
-        action = request.POST.get('action')
-
-        if action == 'register':
+        # Registro
+        if 'email' in request.POST and 'password' in request.POST and 'rol' in request.POST:
             registro_form = RegistroFormulario(request.POST)
             if registro_form.is_valid():
                 usuario = registro_form.save(commit=False)
                 usuario.set_password(registro_form.cleaned_data['password'])
                 usuario.save()
                 return redirect('log_in_page')
-
-        elif action == 'login':
+        else:
+            # Login
             login_form = LoginFormulario(request, data=request.POST)
             if login_form.is_valid():
                 email = login_form.cleaned_data.get('username')
@@ -125,7 +132,11 @@ def log_in(request):
                 usuario = authenticate(request, username=email, password=password)
                 if usuario is not None:
                     login(request, usuario)
-                    return redirect('inicio')
+                    # Verificamos si es administrador
+                    if usuario.rol == 'administrador':
+                        return redirect('empleados')  # ← Aquí redirige a verEmpleados.html
+                    else:
+                        return redirect('inicio')  # ← Otros roles van a 'inicio'
 
     return render(request, 'log-in.html', {
         'registro_form': registro_form,
