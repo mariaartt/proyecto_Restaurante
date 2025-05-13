@@ -1,10 +1,13 @@
 from random import choices
 
+from django.contrib.auth.base_user import BaseUserManager, AbstractBaseUser
+from django.contrib.auth.models import PermissionsMixin
 from django.db import models
 from django.forms import IntegerField
 
 
 class Rol(models.TextChoices):
+    CLIENTE = 'CLIENTE', 'Cliente'
     CAMARERO = 'CAMARERO', 'Camarero'
     COCINERO = 'COCINERO', 'Cocinero'
     ADMINISTRADOR = 'ADMINISTRADOR', 'Administrador'
@@ -28,6 +31,55 @@ class CategoriaProducto(models.TextChoices):
 
 
 # Create your models here.
+
+# MODELOS DE USUARIOS
+# ----------------------
+class UsuarioManager(BaseUserManager):
+    def create_user(self, email, nombre, rol, password=None):
+        if not email:
+            raise ValueError("El usuario debe tener un email")
+
+        email = self.normalize_email(email)
+        usuario = self.model(email=email, nombre=nombre, rol=rol)
+        usuario.set_password(password)
+        usuario.save(using=self._db)
+        return usuario
+
+    def create_superuser(self, email, nombre, rol='admin', password=None):
+        usuario = self.create_user(email, nombre, rol, password)
+
+        usuario.is_superuser = True
+        usuario.is_staff = True
+        usuario.save(using=self._db)
+        return usuario
+
+
+class Usuario(AbstractBaseUser, PermissionsMixin):
+    nombre = models.CharField(max_length=100)
+    email = models.EmailField(unique=True)
+    rol = models.CharField(max_length=20, choices=Rol, default='cliente')
+    is_active = models.BooleanField(default=True)
+    is_staff = models.BooleanField(default=False)
+    foto = models.ImageField(upload_to='perfiles/', blank=True, null=True)
+    telefono = models.CharField(max_length=15, blank=True)
+    direccion = models.CharField(max_length=255, blank=True)
+
+    objects = UsuarioManager()
+
+    USERNAME_FIELD = 'email'
+    REQUIRED_FIELDS = ['nombre', 'rol']
+
+    def __str__(self):
+        return self.email
+
+
+class HistorialInicioSesion(models.Model):
+    usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE)
+    fecha_hora = models.DateTimeField(auto_now_add=True)
+    ip = models.GenericIPAddressField()
+
+#MODELOS DEL RESTAURANTE
+
 class Articulo(models.Model):
     nombre = models.CharField(max_length=150)
     descripcion = models.TextField()
@@ -53,31 +105,8 @@ class Mesa(models.Model):
         return str(self.num_mesa)
 
 
-class Cliente(models.Model):
-    nombre = models.CharField(max_length=150)
-    apellido = models.CharField(max_length=150)
-    dni = models.CharField(max_length=15)
-    correo = models.EmailField()
-
-    def __str__(self):
-        return self.nombre
-
-
-class Empleado(models.Model):
-    nombre = models.CharField(max_length=150)
-    rol = models.CharField(
-        max_length=50,
-        choices = Rol.choices,
-        default = Rol.CAMARERO
-    )
-
-    def __str__(self):
-        return self.nombre
-
-
 # Pedido hecho por cliente o camarero
 class Pedido(models.Model):
-    id_pedido = models.AutoField(primary_key=True, null=True, blank=True)
     id_mesa = models.ForeignKey(Mesa, on_delete=models.DO_NOTHING, null=True, blank=True)
     fecha = models.DateTimeField(auto_now_add=True)
     articulo = models.ForeignKey(Articulo, on_delete=models.DO_NOTHING, null=True, blank=True)
