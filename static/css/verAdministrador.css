@@ -20,17 +20,31 @@
     padding: 1%;
 }
 
-.ver_empleados_titulo, .custom_row{
-    display: flex;
-    flex-wrap: nowrap;
-    justify-content: space-around;
+.ver_empleados_titulo,
+.ver_articulos_titulo,
+.custom_row{
+    display: grid;
+    grid-template-columns: repeat(8, minmax(100px, 1fr));
+    gap: 2rem;
+    padding: 1rem;
+}
+
+.custom_row p{
+    width: 100px;
 }
 
 .ver_empleados_titulo{
     margin-right: 33.5%;
+     grid-gap: 5%;
 }
 
-.ver_empleados_titulo h3{
+.ver_articulos_titulo{
+    margin-right: 20%;
+     grid-gap: 7%;
+}
+
+.ver_empleados_titulo h3,
+.ver_articulos_titulo h3{
     font-size: 40px;
     color: #D4A373;
     font-family: 'Italianno', cursive;
@@ -44,8 +58,8 @@
     background-color: #960000;
     border: none;
     border-radius: 50px;
-    height: 50px;
-    width: 75px;
+    height: 35px;
+    width: 50px;
     cursor: pointer;
 }
 

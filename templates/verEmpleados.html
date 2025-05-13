@@ -23,9 +23,15 @@
                             <p>{{e.email}}</p>
                             <p>{{e.telefono}}</p>
                             <p>{{e.rol}}</p>
-
-                            <button class="editar_empleado_btn"><img src="{% static 'images/editar_Admin.png' %}"></button>
-                            <button class="eliminar_empleado_btn"><img src="{% static 'images/borrar_Admin.png' %}"></button>
+                            
+                            <a href="{% url 'new_empleado' id=e.id %}">
+                                <button class="editar_empleado_btn"><img src="{% static 'images/editar_Admin.png' %}"></button>
+                            </a>
+                            
+                            <a href="{% url 'eliminar_empleado' id=e.id %}">
+                                <button class="eliminar_empleado_btn"><img src="{% static 'images/borrar_Admin.png' %}"></button>
+                            </a>
+                            
                         </div>
                     </div>
                          
@@ -34,7 +40,7 @@
             </div>
         </div>
     
-        <a href="{% url 'new_empleado' %}">
+        <a href="{% url 'new_empleado' id=0 %}">
             <button type="submit" class="crear_empleado_btn">Añadir Empleado</button>
         </a>
     

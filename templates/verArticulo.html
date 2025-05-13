@@ -8,25 +8,34 @@
         
         <div class="ver_empleados_tabla">
             <div class="col">
-                <div class="ver_empleados_titulo">
+                <div class="ver_articulos_titulo">
                     <h3>Artículo</h3>
                     <h3>Ingredientes</h3>
-                    <h3>Receta</h3>
-                    <h3>Categoría</h3>
                     <h3>Precio</h3>
+                    <h3>Categoría</h3>
+                    <h3>Receta</h3>
+                    <h3>Tiempo</h3>
                 </div>
-                {% for e in empleados %}
+                {% for a in articulos %}
                 <div class="row">
 
                     <div class="ver_empleados_row">
                         <div class="custom_row">
-                            <p class="ver_empleados_nombre">{{e.nombre}}</p>
-                            <p>{{e.email}}</p>
-                            <p>{{e.telefono}}</p>
-                            <p>{{e.rol}}</p>
-
-                            <button class="editar_empleado_btn"><img src="{% static 'images/editar_Admin.png' %}"></button>
-                            <button class="eliminar_empleado_btn"><img src="{% static 'images/borrar_Admin.png' %}"></button>
+                            <p class="ver_empleados_nombre">{{a.nombre}}</p>
+                            <p>{{a.ingredientes}}</p>
+                            <p>{{a.precio}}</p>
+                            <p>{{a.categoria}}</p>
+                            <p>{{a.receta}}</p>
+                            <p>{{a.tiempo_estimado}}</p>
+                            
+                            <a href="{% url 'new_articulo' id=a.id %}">
+                                <button class="editar_empleado_btn"><img src="{% static 'images/editar_Admin.png' %}"></button>
+                            </a>
+                                
+                            <a href="{% url 'eliminar_articulo' id=a.id %}">
+                                <button class="eliminar_empleado_btn"><img src="{% static 'images/borrar_Admin.png' %}"></button>
+                            </a>
+                            
                         </div>
                     </div>
                          
@@ -35,7 +44,7 @@
             </div>
         </div>
 
-        <a href="{% url 'new_articulo' %}">
+        <a href="{% url 'new_articulo' id=0 %}">
             <button class="crear_empleado_btn">Añadir Artículo</button>
         </a>
     

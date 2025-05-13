@@ -41,7 +41,7 @@ class FormularioArticulo(forms.ModelForm):
                 'min': '0'
             }),
             'categoria': forms.Select(attrs={
-                'class': 'form-control',
+                'class': 'form-select',
             }),
             'foto': forms.ClearableFileInput(attrs={
                 'class': 'form-control',
