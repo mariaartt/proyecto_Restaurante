@@ -1,4 +1,4 @@
-from django.contrib.auth.decorators import user_passes_test
+from django.contrib.auth.decorators import user_passes_test, login_required
 from django.core.exceptions import PermissionDenied
 from django.shortcuts import render, redirect, get_object_or_404
 
@@ -116,11 +116,16 @@ def log_in(request):
 
     if request.method == 'POST':
         # Registro
-        if 'email' in request.POST and 'password' in request.POST and 'rol' in request.POST:
+        if 'email' in request.POST and 'password' in request.POST:
             registro_form = RegistroFormulario(request.POST)
             if registro_form.is_valid():
                 usuario = registro_form.save(commit=False)
                 usuario.set_password(registro_form.cleaned_data['password'])
+
+                # Si no se envió rol, se pone por defecto "cliente"
+                if not usuario.rol:
+                    usuario.rol = 'cliente'
+
                 usuario.save()
                 return redirect('log_in_page')
         else:
@@ -146,3 +151,26 @@ def log_in(request):
 def logout_usuario(request):
     logout(request)
     return redirect('log_in_page')
+
+@login_required
+def actualizar_foto(request):
+    if request.method == 'POST' and 'foto' in request.FILES:
+        usuario = request.user
+        usuario.foto = request.FILES['foto']
+        usuario.save()
+        return redirect('inicio')  # Puedes redirigir donde quieras
+    return redirect('inicio')
+
+
+
+@login_required
+def editar_perfil(request):
+    if request.method == 'POST':
+        form = FormularioEditarPerfil(request.POST, instance=request.user)
+        if form.is_valid():
+            form.save()  # Guarda los cambios
+            return redirect('home')  # Redirige a la página de inicio (home) para ver los cambios
+    else:
+        form = FormularioEditarPerfil(instance=request.user)
+
+    return render(request, 'home.html', {'form': form})
