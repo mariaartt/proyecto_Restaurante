@@ -9,7 +9,7 @@ def go_contacto(request):
     return render(request, 'contacto.html')
 
 def cargar_listado_articulos(request):
-    lista_articulos = Articulo.objects.all()
+    lista_articulos = ArticuloCarta.objects.all()
     return render(request,'carta.html',{'articulos':lista_articulos})
 
 def go_login(request):
