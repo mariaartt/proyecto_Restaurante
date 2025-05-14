@@ -37,7 +37,7 @@
   }
 
   a.btn {
-    font-size: 25px;
+    font-size: 20px !important;
     border-radius: 50px;
     width: 250px;
     justify-content: center;
@@ -72,12 +72,6 @@
         display: flex!important;
         width: 50%;
         justify-content: center;
-    }
-}
-
-@media (max-width: 800px){
-    .nav_mod{
-        height: 100%;
     }
 }
 

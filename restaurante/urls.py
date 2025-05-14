@@ -21,6 +21,4 @@ from ristoranteramos.views import *
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('ristoranteramos.urls')),
-    path('home/', go_home, name='home'),
-    path('contacto/', go_contacto, name='contacto'),
 ]

@@ -1,3 +1,6 @@
+.idea/inspectionProfiles/Project_Default.xml
+/restaurante/__pycache__
+/ristoranteramos/__pycache__
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
@@ -172,3 +175,4 @@ cython_debug/
 
 # PyPI configuration file
 .pypirc
+.idea/dataSources.xml

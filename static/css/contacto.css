@@ -7,6 +7,7 @@
     display: flex;
     justify-content: center;
     gap: 20%;
+    padding-top: 5%;
 }
 .titulo{
     font-family: 'Italianno', cursive;
@@ -24,9 +25,13 @@
     margin-top: 5%;
 }
 
+.map iframe{
+    width: 80%;
+}
+
 /* Estilos formulario */
 .formulario{
-    margin: 5%;
+    padding: 5%;
     font-family: "Instrument Serif", serif;
     font-size: 20px;
 }
@@ -51,6 +56,7 @@
     margin: 10px;
     background: transparent;
     height: 25px !important;
+    color:black !important;
 }
 
 /* Evita que los labels se corten o se desplacen mal */
@@ -85,4 +91,70 @@
 .boton_enviar{
     display: flex;
     justify-content: center;
+}
+
+.theme-toggle {
+    width: 60px;
+    height: 30px;
+    background-color: #ddd;
+    border-radius: 30px;
+    position: relative;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+
+  .slider {
+    width: 26px;
+    height: 26px;
+    background-color: white;
+    border-radius: 50%;
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: left 0.3s;
+  }
+
+  .slider img {
+    width: 18px;
+    height: 18px;
+  }
+
+  /* Estado oscuro */
+.main-content.dark-mode {
+    background-color: #121212;
+    color: white;
+}
+
+.main-content.dark-mode .info p {
+    color: white !important;
+}
+
+.main-content.dark-mode .theme-toggle {
+    background-color: #444;
+}
+
+.main-content.dark-mode .slider {
+    left: 32px;
+}
+@media (max-width: 750px){
+    .titulo{
+        font-size: 40px;
+    }
+
+    .info p,  .titulo p{
+        font-size: 15px;
+    }
+}
+
+@media (max-width: 471px){
+    .titulo{
+        font-size: 30px;
+    }
+
+    .info p, .titulo p{
+        font-size: 10px;
+    }
 }

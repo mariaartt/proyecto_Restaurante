@@ -3,7 +3,7 @@
 {% block content %}
 
     <!--Navbar-->
-    <nav class="navbar navbar-expand-md navbar-dark bg-dark py-3 nav_mod" style="background-image: url('{% static 'images/fondo_contacto.jpg' %}'); background-size: cover;">
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark py-3 nav_mod" style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('{% static 'images/fondo_contacto.jpg' %}'); background-size: cover;">
         <div class="container-fluid">
             <!-- Logo -->
             <a class="navbar-brand" href="{% url 'home' %}">
@@ -22,13 +22,13 @@
                         <a class="nav-link text-white fs-5" href="{% url 'home' %}">INICIO</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-white fs-5" href="{% url 'contacto' %}">CONTACTO</a>
-                    </li>
-                    <li class="nav-item">
                         <a class="nav-link text-white fs-5" href="{% url 'carta' %}">CARTA</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-white fs-5" href="#">RESERVAR</a>
+                        <a class="nav-link text-white fs-5" href="{% url 'contacto' %}">CONTACTO</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white fs-5" href="{% url 'acerca_de' %}">ACERCA DE</a>
                     </li>
                 </ul>
             </div>
@@ -47,7 +47,6 @@
             <h1>CONTACTO</h1>
         </div>
     </nav>
-    <br><br><br>
     
     <div class="main-content">
     <!--Información con el horario y el contacto del restaurante-->
@@ -100,7 +99,49 @@
                 <button>Enviar</button>
             </div>
             
+            <div class="theme-toggle" id="toggle-theme">
+                <div class="slider">
+                    <img id="theme-icon" src="{% static 'images/sun.png' %}" alt="Ícono tema">
+                </div>
+            </div>
+            
         </section>
     </div>
+
+    </body>
+
     {% include 'footer.html' %}
+    
+        
+    <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                const toggle = document.getElementById("toggle-theme");
+                const icon = document.getElementById("theme-icon");
+                const container = document.querySelector(".main-content");
+            
+                function updateUI() {
+                    const isDark = container.classList.contains("dark-mode");
+                    icon.src = isDark 
+                        ? "{% static 'images/moon.png' %}" 
+                        : "{% static 'images/sun.png' %}";
+                }
+            
+                // Al cargar, aplica el modo oscuro si está guardado
+                if (localStorage.getItem("theme") === "dark") {
+                    container.classList.add("dark-mode");
+                }
+            
+                updateUI();
+            
+                // Al hacer clic, cambia el modo y guarda en localStorage
+                toggle.addEventListener("click", () => {
+                    container.classList.toggle("dark-mode");
+                    const isDark = container.classList.contains("dark-mode");
+                    localStorage.setItem("theme", isDark ? "dark" : "light");
+                    updateUI();
+                    });
+            });
+
+
+    </script>
 {% endblock %}
