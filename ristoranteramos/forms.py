@@ -11,14 +11,17 @@ class FormularioUsuario(forms.ModelForm):
         widgets = {
             'nombre': forms.TextInput(attrs={
                 'class': 'form-control',
-                'autofocus': True
+                'autofocus': True,
+                'required': 'required'
             }),
             'email': forms.EmailInput(attrs={
                 'class': 'form-control',
+                'required': 'required'
             }),
             'telefono': forms.TextInput(attrs={
                 'class': 'form-control',
                 'pattern': '[0-9]{9}',
+                'required': 'required'
             }),
 
             'rol': forms.Select(attrs={
@@ -31,34 +34,41 @@ class FormularioArticulo(forms.ModelForm):
         model = ArticuloCarta
         fields = [
             'nombre', 'descripcion', 'categoria', 'precio',
-            'foto', 'receta', 'tiempo_preparacion'
+            'imagen_url', 'receta', 'tiempo_preparacion'
         ]
         exclude = ['fecha_creacion', 'fecha_modificacion']
 
         widgets = {
             'nombre': forms.TextInput(attrs={
                 'class': 'form-control',
-                'autofocus': True
+                'autofocus': True,
+                'required': 'required'
             }),
             'descripcion': forms.Textarea(attrs={
                 'class': 'form-control',
+                'required': 'required'
             }),
             'precio': forms.NumberInput(attrs={
                 'class': 'form-control',
-                'min': '0'
+                'min': '0',
+                'step': '0.01',
+                'required': 'required'
             }),
             'categoria': forms.Select(attrs={
                 'class': 'form-select',
             }),
-            'foto': forms.ClearableFileInput(attrs={
+            'imagen_url': forms.TextInput(attrs={
                 'class': 'form-control',
+                'pattern': 'https?://.+',
+                'title': 'Introduce una URL que comience con http:// o https://'
             }),
             'receta': forms.Textarea(attrs={
                 'class': 'form-control',
+                'required': 'required',
             }),
             'tiempo_preparacion': forms.NumberInput(attrs={
                 'class': 'form-control',
-                'min': '1'
+                'required': 'required'
             }),
         }
 

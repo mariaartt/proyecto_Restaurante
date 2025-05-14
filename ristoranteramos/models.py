@@ -70,13 +70,13 @@ class CategoriaProducto(models.TextChoices):
 class ArticuloCarta(models.Model):
     nombre = models.CharField(max_length=150)
     descripcion = models.TextField()
-    precio = models.IntegerField(null=True)
+    precio = models.DecimalField(null=True, max_digits=8, decimal_places=2)
     categoria = models.CharField(
         max_length=150,
         choices=CategoriaProducto.choices,
     )
     receta = models.TextField(default='Sin receta')
-    imagen_url = models.TextField(default='Sin foto')
+    imagen_url = models.CharField(max_length=255, default='Sin foto')
     tiempo_preparacion = models.IntegerField(default=0, null=True)
     fecha_creacion = models.DateTimeField(auto_now_add=True, null=True, blank=True)
     fecha_modificacion = models.DateTimeField(auto_now=True, null=True, blank=True)

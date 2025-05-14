@@ -142,7 +142,7 @@ def go_carta(request):
     return render(request, 'carta.html')
 
 def cargar_listado_articulos(request):
-    lista_articulos = Articulo.objects.all()
+    lista_articulos = ArticuloCarta.objects.all()
     return render(request,'carta.html',{'articulos':lista_articulos})
 
 def go_reporte_ventas(request):

@@ -7,6 +7,7 @@
     display: flex;
     justify-content: center;
     gap: 20%;
+    padding-top: 5%;
 }
 .titulo{
     font-family: 'Italianno', cursive;

@@ -4,7 +4,7 @@
 {% block content %}
 
     <!--Navbar-->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark py-3" style="background-image: url('/static/images/fondo_carta.jpg'); background-size: cover;">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark py-3" style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('/static/images/fondo_carta.jpg'); background-size: cover; background-position: 50% 50%;">
         <div class="container-fluid">
             <!-- Logo -->
             <a class="navbar-brand" href="{% url 'home' %}">
@@ -29,7 +29,7 @@
                         <a class="nav-link text-white fs-5" href="{% url 'contacto' %}">CONTACTO</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-white fs-5" href="#">RESERVAR</a>
+                        <a class="nav-link text-white fs-5" href="{% url 'acerca_de' %}">ACERCA DE</a>
                     </li>
                 </ul>
             </div>
@@ -39,6 +39,7 @@
                 <a href="{% url 'login' %}" class="btn btn-outline-light me-2 d-flex align-items-center">
                     <i class="bi bi-person-fill me-1" ></i> CLIENTE
                 </a>
+                <a href="{% url 'carta' %}" class="btn btn-danger">HAZ TU PEDIDO</a>
             </div>
         </div>
         
