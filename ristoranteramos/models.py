@@ -80,7 +80,7 @@ class CategoriaProducto(models.TextChoices):
 
 #MODELOS DEL RESTAURANTE
 
-class Articulo(models.Model):
+class ArticuloCarta(models.Model):
     nombre = models.CharField(max_length=150)
     descripcion = models.TextField()
     precio = models.IntegerField(default=0, null=True)
