@@ -57,37 +57,134 @@
 
     <!--Botones Carta-->
     <div class="botones_carta">
-        <button class="btn_categorias">Entrantes</button>
-        <button class="btn_categorias">Comida</button>
-        <button class="btn_categorias">Bebidas</button>
-        <button class="btn_categorias">Postres</button>
+        <a href="#entrantes">
+            <button class="btn_categorias">Entrantes</button>
+        </a>
+        <a href="#comida">
+            <button class="btn_categorias">Comida</button>
+        </a>
+        <a href="#postres">
+            <button class="btn_categorias">Bebidas</button>
+        </a>
+        <a href="#bebidas">
+            <button class="btn_categorias">Postres</button>
+        </a>
     </div>
 
     <!--Carta con Artículos-->
-    <div class="titulos">
+
+    <!--ENTRANTES-->
+    <div class="titulos" id="entrantes">
         <h1>Per Iniziare</h1>
         <p>Prueba estos platos perfectos para compartir</p>
     </div>
 
-    {% for a in articulos %}
-        
-        <div class="row m-4">
-            <div class="col-5">
-                <div class="nombre_articulo">
-                    <h3>{{a.nombre}}</h3>
-                    <h6>12,00€</h6>
+    <!--Bucle para coger los articulos (entrantes) de la base de datos-->
+    <div class="main m-4">
+        {% for a in articulos %}
+            {% if a.categoria == 'ENTRANTES' %}
+                <div class="columnas m-4">
+                    <div class="nombre_articulo">
+                        <h3>{{ a.nombre}}</h3>
+                        <h6>{{ a.precio }}€</h6>
+                    </div>
+                    <p>{{ a.descripcion }}</p>
+                    <div class="boton-derecha">
+                        <button class="btn-anadir">
+                            <img src="{% static 'images/carrito_rojo.png' %}" alt="Carrito" class="icono-carrito">
+                            Añadir
+                        </button>
+                    </div>
                 </div>
-                <p>Lechuga, pollo frito, picatostes, escamas de partisano y nuestra salsa César</p>
-            </div>
-            <div class="col-5">
-                <div class="nombre_articulo">
-                    <h3>Insalata Capresse</h3>
-                    <h6>11,00€</h6>
+            {% endif %}
+        {% endfor %}
+    </div>
+
+    <br>
+
+    <!--COMIDA-->
+    <div class="titulos" id="comida">
+        <h1>Pasta Fresca y Pizzas</h1>
+        <p>Nuestras pastas son artesanales y elaboradas en el día y nuestras pizzas te encantarán.</p>
+    </div>
+
+    <!--Bucle para coger los articulos (comida) de la base de datos-->
+    <div class="main m-4">
+        {% for a in articulos %}
+            {% if a.categoria == 'COMIDA' %}
+                <div class="columnas m-4">
+                    <div class="nombre_articulo">
+                        <h3>{{ a.nombre}}</h3>
+                        <h6>{{ a.precio }}€</h6>
+                    </div>
+                    <p>{{ a.descripcion }}</p>
+                    <div class="boton-derecha">
+                        <button class="btn-anadir">
+                            <img src="{% static 'images/carrito_rojo.png' %}" alt="Carrito" class="icono-carrito">
+                            Añadir
+                        </button>
+                    </div>
                 </div>
-                <p>Rodajas de tomate, aceite de oliva virgen, flor de sal, albahaca y reducción de balsámico</p>
-            </div>
-        </div>
-    
-    {% endfor %}
+            {% endif %}
+        {% endfor %}
+    </div>
+
+    <br>
+
+    <!--POSTRES-->
+    <div class="titulos" id="postres">
+        <h1>Postres</h1>
+        <p>Nuestras pastas son artesanales y elaboradas en el día y nuestras pizzas te encantarán.</p>
+    </div>
+
+    <!--Bucle para coger los articulos (comida) de la base de datos-->
+    <div class="main m-4">
+        {% for a in articulos %}
+            {% if a.categoria == 'POSTRES' %}
+                <div class="columnas m-4">
+                    <div class="nombre_articulo">
+                        <h3>{{ a.nombre}}</h3>
+                        <h6>{{ a.precio }}€</h6>
+                    </div>
+                    <p>{{ a.descripcion }}</p>
+                    <div class="boton-derecha">
+                        <button class="btn-anadir">
+                            <img src="{% static 'images/carrito_rojo.png' %}" alt="Carrito" class="icono-carrito">
+                            Añadir
+                        </button>
+                    </div>
+                </div>
+            {% endif %}
+        {% endfor %}
+    </div>
+
+    <br>
+
+    <!--BEBIDAS-->
+    <div class="titulos" id="bebidas">
+        <h1>Bebidas</h1>
+        <p>Elige cualquiera de nuestras bebidas más refrescantes.</p>
+    </div>
+
+    <!--Bucle para coger los articulos (comida) de la base de datos-->
+    <div class="main m-4">
+        {% for a in articulos %}
+            {% if a.categoria == 'BEBIDA' %}
+                <div class="columnas m-4">
+                    <div class="nombre_articulo">
+                        <h3>{{ a.nombre}}</h3>
+                        <h6>{{ a.precio }}€</h6>
+                    </div>
+                    <p>{{ a.descripcion }}</p>
+                    <div class="boton-derecha">
+                        <button class="btn-anadir">
+                            <img src="{% static 'images/carrito_rojo.png' %}" alt="Carrito" class="icono-carrito">
+                            Añadir
+                        </button>
+                    </div>
+                </div>
+            {% endif %}
+        {% endfor %}
+    </div>
     
 {% endblock %}
