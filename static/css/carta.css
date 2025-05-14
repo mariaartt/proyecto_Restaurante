@@ -1,0 +1,68 @@
+.navbar_carrito{
+    background-color: rgb(192,0,0);
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 0.6rem;
+    color:white;
+    padding: 1rem;
+}
+.navbar_carrito p{
+    margin: 0;
+}
+.btn_categorias{
+    border:2px solid rgb(212, 163, 115, 1);
+    border-radius: 15px;
+    color: rgb(212, 163, 115, 1);
+    font-family: 'Instrument Serif', serif;
+    width: auto;
+    background-color: white;
+    font-size: 30px;
+}
+.botones_carta{
+    margin-top: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap:2rem;
+    margin-bottom: 5rem;
+}
+.titulos{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 1rem;
+    flex-direction: column;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid rgb(212, 163, 115, 1);
+}
+.titulos h1{
+    font-family: Italianno, cursive;
+    font-size: 80px;
+    color: rgb(212, 163, 115, 1);
+}
+.titulos p{
+    font-family: 'Instrument Serif', serif;
+    color: rgb(122, 121, 121);
+    font-size: 20px;
+}
+.nombre_articulo{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.nombre_articulo h3{
+    font-family: Italianno, cursive;
+    font-size: 50px;
+    color: rgb(212, 163, 115, 1);
+}
+.col-6 p{
+    font-family: 'Instrument Serif', serif;
+    color: rgb(122, 121, 121);
+    font-size: 20px;
+}
+.row{
+    gap:5rem;
+    display: flex;
+    justify-content: center;
+}

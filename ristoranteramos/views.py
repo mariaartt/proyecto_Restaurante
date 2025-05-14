@@ -141,8 +141,9 @@ def logout_usuario(request):
 def go_carta(request):
     return render(request, 'carta.html')
 
-def go_login(request):
-    return render(request, 'log-in.html')
+def cargar_listado_articulos(request):
+    lista_articulos = Articulo.objects.all()
+    return render(request,'carta.html',{'articulos':lista_articulos})
 
 def go_reporte_ventas(request):
     return render(request, 'reporteVentas.html')

@@ -23,6 +23,9 @@
                         <a class="nav-link text-white fs-5" href="{% url 'home' %}">INICIO</a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link text-white fs-5" href="{% url 'carta' %}">CARTA</a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link text-white fs-5" href="{% url 'contacto' %}">CONTACTO</a>
                     </li>
                     <li class="nav-item">
@@ -43,6 +46,47 @@
         <div class="presentacion_mod">
             <h1>CARTA</h1>
         </div>
-    </nav>    
+    </nav>
+
+    <!-- Barra carrito-->
+    <div class="navbar_carrito h-auto">
+        <img src="/static/images/icons8-carrito-de-compras-50.png" class="img-fluid">
+        <p>00.0€</p>
+    </div>
+
+    <!--Botones Carta-->
+    <div class="botones_carta">
+        <button class="btn_categorias">Entrantes</button>
+        <button class="btn_categorias">Comida</button>
+        <button class="btn_categorias">Bebidas</button>
+        <button class="btn_categorias">Postres</button>
+    </div>
+
+    <!--Carta con Artículos-->
+    <div class="titulos">
+        <h1>Per Iniziare</h1>
+        <p>Prueba estos platos perfectos para compartir</p>
+    </div>
+
+    {% for a in articulos %}
+        
+        <div class="row m-4">
+            <div class="col-5">
+                <div class="nombre_articulo">
+                    <h3>{{a.nombre}}</h3>
+                    <h6>12,00€</h6>
+                </div>
+                <p>Lechuga, pollo frito, picatostes, escamas de partisano y nuestra salsa César</p>
+            </div>
+            <div class="col-5">
+                <div class="nombre_articulo">
+                    <h3>Insalata Capresse</h3>
+                    <h6>11,00€</h6>
+                </div>
+                <p>Rodajas de tomate, aceite de oliva virgen, flor de sal, albahaca y reducción de balsámico</p>
+            </div>
+        </div>
+    
+    {% endfor %}
     
 {% endblock %}

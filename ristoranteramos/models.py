@@ -75,11 +75,11 @@ class ArticuloCarta(models.Model):
         max_length=150,
         choices=CategoriaProducto.choices,
     )
-    receta = models.TextField(max_length=1150)
-    foto = models.ImageField(upload_to='articulos/', null=True, blank=True)
-    tiempo_preparacion = models.IntegerField(null=True)
-    fecha_creacion = models.DateTimeField(auto_now_add=True, null=True)
-    fecha_modificacion = models.DateTimeField(auto_now=True, null=True)
+    receta = models.TextField(default='Sin receta')
+    imagen_url = models.TextField(default='Sin foto')
+    tiempo_preparacion = models.IntegerField(default=0, null=True)
+    fecha_creacion = models.DateTimeField(auto_now_add=True, null=True, blank=True)
+    fecha_modificacion = models.DateTimeField(auto_now=True, null=True, blank=True)
 
     def __str__(self):
         return self.nombre
