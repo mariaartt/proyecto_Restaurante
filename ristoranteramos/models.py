@@ -90,7 +90,7 @@ class Articulo(models.Model):
         default=CategoriaProducto.COMIDA
     )
     receta = models.TextField(default='Sin receta')
-    foto = models.ImageField(upload_to='articulos/', null=True, blank=True)
+    imagen_url = models.TextField(default='Sin foto')
     tiempo_preparacion = models.IntegerField(default=0, null=True)
     fecha_creacion = models.DateTimeField(auto_now_add=True, null=True, blank=True)
     fecha_modificacion = models.DateTimeField(auto_now=True, null=True, blank=True)
