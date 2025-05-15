@@ -143,7 +143,6 @@ def log_in(request):
                 usuario = authenticate(request, username=email, password=password)
                 if usuario is not None:
                     login(request, usuario)
-                    # Verificamos si es administrador
                     if usuario.rol == 'administrador':
                         return redirect('empleados')  # ← Aquí redirige a verEmpleados.html
                     else:

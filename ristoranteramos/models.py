@@ -37,6 +37,8 @@ class Usuario(AbstractBaseUser, PermissionsMixin):
     foto = models.ImageField(upload_to='perfiles/', blank=True, null=True)
     telefono = models.CharField(max_length=15, blank=True)
     direccion = models.CharField(max_length=255, blank=True)
+    fecha_creacion = models.DateTimeField(auto_now_add=True, null=True, blank=True)
+    fecha_modificacion = models.DateTimeField(auto_now=True, null=True, blank=True)
 
     objects = UsuarioManager()
 
@@ -50,6 +52,8 @@ class HistorialInicioSesion(models.Model):
     usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE)
     fecha_hora = models.DateTimeField(auto_now_add=True)
     ip = models.GenericIPAddressField()
+    fecha_creacion = models.DateTimeField(auto_now_add=True, null=True, blank=True)
+    fecha_modificacion = models.DateTimeField(auto_now=True, null=True, blank=True)
 
 # ----------------------
 # MODELOS DEL RESTAURANTE
@@ -99,6 +103,8 @@ ESTADO_PEDIDO = (
 class Mesa(models.Model):
     num_mesa = models.AutoField(primary_key=True)
     estado = models.CharField(max_length=100, choices=Estado_Mesa.choices, default=Estado_Mesa.LIBRE)
+    fecha_creacion = models.DateTimeField(auto_now_add=True, null=True, blank=True)
+    fecha_modificacion = models.DateTimeField(auto_now=True, null=True, blank=True)
 
     def __str__(self):
         return str(self.num_mesa)
@@ -109,12 +115,16 @@ class Pedido(models.Model):
     mesa = models.ForeignKey(Mesa, on_delete=models.SET_NULL, null=True, blank=True)
     estado = models.CharField(max_length=20, choices=ESTADO_PEDIDO, default='pendiente')
     fecha_hora = models.DateTimeField(auto_now_add=True)
+    fecha_creacion = models.DateTimeField(auto_now_add=True, null=True, blank=True)
+    fecha_modificacion = models.DateTimeField(auto_now=True, null=True, blank=True)
 
 class LineaPedido(models.Model):
     pedido = models.ForeignKey(Pedido, on_delete=models.CASCADE, related_name='lineas')
     articulo = models.ForeignKey(ArticuloCarta, on_delete=models.CASCADE)
     cantidad = models.PositiveIntegerField()
     estado = models.CharField(max_length=20, choices=[('pendiente', 'Pendiente'), ('preparado', 'Preparado')], default='pendiente')
+    fecha_creacion = models.DateTimeField(auto_now_add=True, null=True, blank=True)
+    fecha_modificacion = models.DateTimeField(auto_now=True, null=True, blank=True)
 
 # ----------------------
 # MODELOS DE FACTURACIÓN
@@ -124,3 +134,5 @@ class Factura(models.Model):
     pedido = models.OneToOneField(Pedido, on_delete=models.CASCADE)
     total = models.DecimalField(max_digits=8, decimal_places=2)
     fecha = models.DateTimeField(auto_now_add=True)
+    fecha_creacion = models.DateTimeField(auto_now_add=True, null=True, blank=True)
+    fecha_modificacion = models.DateTimeField(auto_now=True, null=True, blank=True)
