@@ -60,19 +60,11 @@ a {
     font-family: "Instrument Serif", serif;
 }
 
-/* Secciones */
-.historia section,
-.filosofia,
-.galeria,
-.equipo,
-.premios{
-    padding-top: 5%;
-}
-
 .section-title {
     text-align: center;
     font-size: 4rem;
-    margin-bottom: 50px;
+    margin-top: 5%;
+    margin-bottom: 5%;
     color: #D4A373;
     position: relative;
     font-family: 'Italianno', cursive;
@@ -94,6 +86,7 @@ a {
     gap: 40px;
     font-family: "Instrument Serif", serif;
     font-size: 1.15rem;
+    margin-bottom: 5%;
 }
 
 .historia-text {
@@ -118,49 +111,10 @@ a {
     transform: scale(1.05);
 }
 
-/*!* Filosofía *!*/
-/*.filosofia {*/
-/*    background-color: #1a1a1a;*/
-/*    color: #fff;*/
-/*}*/
-
-/*.filosofia .section-title {*/
-/*    color: #e8c07d;*/
-/*}*/
-
-/*.filosofia-grid {*/
-/*    display: grid;*/
-/*    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));*/
-/*    gap: 30px;*/
-/*}*/
-
-/*.filosofia-item {*/
-/*    background-color: #2a2a2a;*/
-/*    padding: 30px;*/
-/*    border-radius: 5px;*/
-/*    text-align: center;*/
-/*    transition: transform 0.3s;*/
-/*}*/
-
-/*.filosofia-item:hover {*/
-/*    transform: translateY(-10px);*/
-/*}*/
-
-/*.filosofia-item i {*/
-/*    font-size: 2.5rem;*/
-/*    color: #e8c07d;*/
-/*    margin-bottom: 20px;*/
-/*}*/
-
-/*.filosofia-item h3 {*/
-/*    font-size: 1.5rem;*/
-/*    margin-bottom: 15px;*/
-/*}*/
-
 .filosofia {
     background-color: #1a1a1a;
     color: #fff;
-    padding: 100px 0;
+    padding-bottom: 5%;
     position: relative;
     overflow: hidden;
 }
@@ -319,6 +273,9 @@ a {
 /* Equipo */
 .equipo{
     background-color: #1a1a1a;
+    margin-top: 5%;
+    padding-bottom: 5%;
+    padding-top: 2%;
 }
 
 .equipo-grid {
@@ -372,35 +329,80 @@ a {
 }
 
 /* Premios */
+.premios-section {
+    padding: 80px 0;
+    background-color: #f0e6d6;
+    position: relative;
+}
 
-.premios-list {
+.premios-timeline {
+    position: relative;
     max-width: 800px;
     margin: 0 auto;
+    padding-left: 100px;
+    z-index: 1;
+}
+
+.premios-timeline::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 70px;
+    height: 100%;
+    width: 2px;
+    background: #e8c07d;
 }
 
 .premio-item {
-    display: flex;
-    margin-bottom: 30px;
-    align-items: center;
+    position: relative;
+    margin-bottom: 40px;
+    padding: 25px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.premio-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
 }
 
 .premio-ano {
-    font-size: 2rem;
+    position: absolute;
+    left: -90px;
+    top: 20px;
+    width: 80px;
+    height: 80px;
+    background: #e8c07d;
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
     font-weight: 700;
+    box-shadow: 0 0 0 5px #f0e6d6;
+}
+
+.premio-content h3 {
+    font-size: 1.4rem;
+    margin-bottom: 10px;
+    color: #1a1a1a;
+}
+
+.premio-content p {
+    color: #666;
+    line-height: 1.7;
+}
+
+.premio-icon {
+    position: absolute;
+    right: 25px;
+    top: 25px;
     color: #e8c07d;
-    margin-right: 30px;
-    min-width: 80px;
+    font-size: 1.5rem;
 }
-
-.premio-desc {
-    flex: 1;
-}
-
-.premio-desc h3 {
-    font-size: 1.3rem;
-    margin-bottom: 5px;
-}
-
 /* Responsive */
 @media (max-width: 768px) {
     .historia-content {
@@ -418,7 +420,50 @@ a {
     .pilar {
         min-width: 100%;
     }
+
+    .premios-timeline {
+        padding-left: 70px;
+    }
+
+    .premio-ano {
+        left: -60px;
+        width: 60px;
+        height: 60px;
+        font-size: 1.2rem;
+    }
+
+    .section-title {
+        font-size: 2rem;
+    }
 }
+
+@media (max-width: 480px) {
+    .premios-timeline {
+        padding-left: 0;
+    }
+
+    .premios-timeline::before {
+        display: none;
+    }
+
+    .premio-ano {
+        position: static;
+        margin-bottom: 15px;
+        width: 60px;
+        height: 60px;
+    }
+
+    .premio-item {
+        text-align: center;
+    }
+
+    .premio-icon {
+        position: static;
+        margin-bottom: 10px;
+        display: block;
+    }
+}
+
 
 @media (max-width: 320px){
     .pilar-desc{

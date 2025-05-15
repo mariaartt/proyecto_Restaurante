@@ -15,7 +15,7 @@ import platform
 import cx_Oracle
 
 if platform.system() == "Windows":
-    cx_Oracle.init_oracle_client(lib_dir=r"C:\instantclient-basic-windows.x64-21.17.0.0.0dbru\instantclient_21_17")
+    cx_Oracle.init_oracle_client(lib_dir=r"C:\instantclient_21_17")
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -85,7 +85,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.oracle',
         'NAME': 'XE',
-        'USER': 'C##MARIA',
+        'USER': 'C##RAMOS',
         'PASSWORD': '1234',
         'HOST': 'localhost',
         'PORT': '1521',
