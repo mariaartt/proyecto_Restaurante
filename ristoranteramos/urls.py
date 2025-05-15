@@ -21,6 +21,7 @@ urlpatterns = [
     path('reporte/', go_reporte_ventas, name='reporte'),
     path('acerca_de/', go_acerca_de, name='acerca_de'),
     path('carta/', cargar_listado_articulos, name='carta'),
+    path('logout/', logout_usuario, name='logout'),
+    path('actualizar-foto/', actualizar_foto, name='actualizar_foto'),
+    path('editar_perfil/', editar_perfil, name='editar_perfil'),  # Ruta para editar el perfil
 ]
-
-

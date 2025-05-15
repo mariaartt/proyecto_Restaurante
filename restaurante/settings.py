@@ -13,9 +13,15 @@ from pathlib import Path
 import os
 import platform
 import cx_Oracle
+from .db_config import db_user, db_password
 
-if platform.system() == "Windows":
-    cx_Oracle.init_oracle_client(lib_dir=r"C:\instantclient_21_17")
+try:
+    if os.path.exists("C:\instantclient-basic-windows.x64-21.17.0.0.0dbru\instantclient_21_17"):
+        cx_Oracle.init_oracle_client(lib_dir="C:\instantclient-basic-windows.x64-21.17.0.0.0dbru\instantclient_21_17")
+    else:
+        cx_Oracle.init_oracle_client(lib_dir="C:\instantclient_21_17")
+except cx_Oracle.ProgrammingError as e:
+    print("El cliente Oracle ya fue inicializado o ocurrió otro error:", e)
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -80,7 +86,6 @@ WSGI_APPLICATION = 'restaurante.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.oracle',
@@ -136,3 +141,6 @@ STATICFILES_DIRS = [
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')

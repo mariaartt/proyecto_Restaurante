@@ -1,3 +1,5 @@
+from django.contrib.auth.decorators import user_passes_test, login_required
+from django.core.exceptions import PermissionDenied
 from django.shortcuts import render, redirect, get_object_or_404
 from ristoranteramos.forms import *
 from django.shortcuts import render
@@ -8,11 +10,20 @@ from .forms import RegistroFormulario, LoginFormulario
 from ristoranteramos.models import *
 
 # Create your views here.
+def es_admin(user):
+    if not user.is_authenticated or not user.rol == 'administrador':
+        raise PermissionDenied
+    return True
+
 def go_home(request):
     return render(request, 'home.html')
 
 def go_contacto(request):
     return render(request, 'contacto.html')
+
+def cargar_listado_articulos(request):
+    lista_articulos = ArticuloCarta.objects.all()
+    return render(request,'carta.html',{'articulos':lista_articulos})
 
 def go_login(request):
     return render(request, 'log-in.html')
@@ -20,6 +31,7 @@ def go_login(request):
 def go_acerca_de(request):
     return render(request, 'acerca_de.html')
 
+@user_passes_test(es_admin)
 def go_empleados(request):
     empleados = Usuario.objects.all()
     return render(request, 'verEmpleados.html', {"empleados": empleados})
@@ -109,17 +121,21 @@ def log_in(request):
     login_form = LoginFormulario()
 
     if request.method == 'POST':
-        action = request.POST.get('action')
-
-        if action == 'register':
+        # Registro
+        if 'email' in request.POST and 'password' in request.POST:
             registro_form = RegistroFormulario(request.POST)
             if registro_form.is_valid():
                 usuario = registro_form.save(commit=False)
                 usuario.set_password(registro_form.cleaned_data['password'])
+
+                # Si no se envió rol, se pone por defecto "cliente"
+                if not usuario.rol:
+                    usuario.rol = 'cliente'
+
                 usuario.save()
                 return redirect('log_in_page')
-
-        elif action == 'login':
+        else:
+            # Login
             login_form = LoginFormulario(request, data=request.POST)
             if login_form.is_valid():
                 email = login_form.cleaned_data.get('username')
@@ -127,7 +143,11 @@ def log_in(request):
                 usuario = authenticate(request, username=email, password=password)
                 if usuario is not None:
                     login(request, usuario)
-                    return redirect('inicio')
+                    # Verificamos si es administrador
+                    if usuario.rol == 'administrador':
+                        return redirect('empleados')  # ← Aquí redirige a verEmpleados.html
+                    else:
+                        return redirect('inicio')  # ← Otros roles van a 'inicio'
 
     return render(request, 'log-in.html', {
         'registro_form': registro_form,
@@ -136,7 +156,7 @@ def log_in(request):
 
 def logout_usuario(request):
     logout(request)
-    return redirect('log_in_page')
+    return redirect('inicio')
 
 def go_carta(request):
     return render(request, 'carta.html')
@@ -148,3 +168,25 @@ def cargar_listado_articulos(request):
 def go_reporte_ventas(request):
     return render(request, 'reporteVentas.html')
 
+@login_required
+def actualizar_foto(request):
+    if request.method == 'POST' and 'foto' in request.FILES:
+        usuario = request.user
+        usuario.foto = request.FILES['foto']
+        usuario.save()
+        return redirect('inicio')  # Puedes redirigir donde quieras
+    return redirect('inicio')
+
+
+
+@login_required
+def editar_perfil(request):
+    if request.method == 'POST':
+        form = FormularioEditarPerfil(request.POST, instance=request.user)
+        if form.is_valid():
+            form.save()  # Guarda los cambios
+            return redirect('home')  # Redirige a la página de inicio (home) para ver los cambios
+    else:
+        form = FormularioEditarPerfil(instance=request.user)
+
+    return render(request, 'home.html', {'form': form})

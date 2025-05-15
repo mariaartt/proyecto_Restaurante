@@ -56,13 +56,48 @@
     font-size: 50px;
     color: rgb(212, 163, 115, 1);
 }
-.col-6 p{
+.nombre_articulo h6{
+    font-weight: bold;
+    color:black;
+}
+.columnas{
     font-family: 'Instrument Serif', serif;
     color: rgb(122, 121, 121);
     font-size: 20px;
 }
-.row{
-    gap:5rem;
+.main {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+    gap: 40px;
+}
+.boton-derecha {
     display: flex;
-    justify-content: center;
+    justify-content: flex-end;
+    margin-top: 10px;
+}
+
+.btn-anadir {
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    gap: 8px;
+    padding: 8px 16px;
+    background-color: transparent;
+    border: 2px solid rgba(212, 163, 115, 1);
+    border-radius: 25px;
+    color: #333;
+    font-weight: bold;
+    font-family: 'Instrument Serif', serif;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.btn-anadir:hover {
+    background-color: rgba(212, 163, 115, 0.2);
+    color: black;
+}
+
+.icono-carrito {
+    width: 20px;
+    height: 20px;
 }
