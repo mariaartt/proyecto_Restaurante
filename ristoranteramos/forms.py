@@ -5,6 +5,14 @@ from django.contrib.auth.forms import AuthenticationForm
 
 
 class FormularioUsuario(forms.ModelForm):
+    password = forms.CharField(
+        widget=forms.PasswordInput(attrs={
+            'class': 'form-control',
+            'placeholder': 'Contraseña',
+            'required': 'required'
+        })
+    )
+
     class Meta:
         model = Usuario
         fields = ['nombre','email','telefono','rol']
