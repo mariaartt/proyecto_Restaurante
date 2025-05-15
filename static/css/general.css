@@ -119,3 +119,17 @@
         font-size: 15px;
     }
 }
+
+.modal-body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+img#preview-foto {
+    margin: 0 !important;
+}
+
+button.btn.p-0.border-0.bg-transparent {
+    margin-bottom: 20px;
+}

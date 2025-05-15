@@ -5,6 +5,14 @@ from django.contrib.auth.forms import AuthenticationForm
 
 
 class FormularioUsuario(forms.ModelForm):
+    password = forms.CharField(
+        widget=forms.PasswordInput(attrs={
+            'class': 'form-control',
+            'placeholder': 'Contraseña',
+            'required': 'required'
+        })
+    )
+
     class Meta:
         model = Usuario
         fields = ['nombre','email','telefono','rol']
@@ -80,6 +88,16 @@ class RegistroFormulario(forms.ModelForm):
             'required': 'required'
         })
     )
+
+    rol = forms.ChoiceField(
+        choices=Usuario._meta.get_field('rol').choices,
+        required=False,  # ← Esto hace que el rol no sea obligatorio
+        widget=forms.Select(attrs={
+            'class': 'forms_field-input',
+            'placeholder': 'Rol'
+        })
+    )
+
     class Meta:
         model = Usuario
         fields = ['email', 'nombre', 'rol', 'password']
@@ -93,12 +111,7 @@ class RegistroFormulario(forms.ModelForm):
                 'class': 'forms_field-input',
                 'placeholder': 'Nombre completo',
                 'required': 'required'
-            }),
-            'rol': forms.Select(attrs={
-                'class': 'forms_field-input',
-                'placeholder': 'Rol',
-                'required': 'required'
-            }),
+            })
         }
 
 class LoginFormulario(AuthenticationForm):
@@ -118,3 +131,21 @@ class LoginFormulario(AuthenticationForm):
             'required': 'required'
         })
     )
+
+class FormularioFoto(forms.ModelForm):
+    class Meta:
+        model = Usuario
+        fields = ['foto']
+        widgets = {
+            'foto': forms.ClearableFileInput(attrs={'class': 'form-control'}),
+        }
+
+class FormularioEditarPerfil(forms.ModelForm):
+    class Meta:
+        model = Usuario  # Enlazamos el formulario con el modelo 'Usuario'
+        fields = ['nombre', 'telefono', 'direccion']  # Los campos a editar
+        widgets = {
+            'nombre': forms.TextInput(attrs={'class': 'form-control'}),
+            'telefono': forms.TextInput(attrs={'class': 'form-control'}),
+            'direccion': forms.TextInput(attrs={'class': 'form-control'}),
+        }
