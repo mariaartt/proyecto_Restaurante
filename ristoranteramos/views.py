@@ -156,7 +156,7 @@ def log_in(request):
 
 def logout_usuario(request):
     logout(request)
-    return redirect('log_in_page')
+    return redirect('inicio')
 
 def go_carta(request):
     return render(request, 'carta.html')
