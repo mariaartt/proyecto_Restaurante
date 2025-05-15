@@ -105,7 +105,7 @@ class Mesa(models.Model):
 
 
 class Pedido(models.Model):
-    cliente = models.ForeignKey(Usuario, on_delete=models.SET_NULL, null=True, blank=True, limit_choices_to={'rol': 'cliente'})
+    cliente = models.ForeignKey(Usuario, on_delete=models.DO_NOTHING, related_name='pedidos', null=True, blank=True, limit_choices_to={'rol': 'cliente'})
     mesa = models.ForeignKey(Mesa, on_delete=models.SET_NULL, null=True, blank=True)
     estado = models.CharField(max_length=20, choices=ESTADO_PEDIDO, default='pendiente')
     fecha_hora = models.DateTimeField(auto_now_add=True)
