@@ -51,8 +51,8 @@
 
     <!-- Barra carrito-->
     <div class="navbar_carrito h-auto">
-        <img src="/static/images/icons8-carrito-de-compras-50.png" class="img-fluid">
-        <p>00.0€</p>
+        <a href="{% url 'carrito' %}"><img src="/static/images/icons8-carrito-de-compras-50.png" class="img-fluid"></a>
+        <p>{{ total }}€</p>
     </div>
 
     <!--Botones Carta-->
@@ -90,10 +90,12 @@
                     </div>
                     <p>{{ a.descripcion }}</p>
                     <div class="boton-derecha">
-                        <button class="btn-anadir">
-                            <img src="{% static 'images/carrito_rojo.png' %}" alt="Carrito" class="icono-carrito">
-                            Añadir
-                        </button>
+                        <a href="{% url 'anadir_carrito' a.id%}">
+                            <button class="btn-anadir">
+                                <img src="{% static 'images/carrito_rojo.png' %}" alt="Carrito" class="icono-carrito">
+                                Añadir
+                            </button>
+                        </a>
                     </div>
                 </div>
             {% endif %}
@@ -119,10 +121,12 @@
                     </div>
                     <p>{{ a.descripcion }}</p>
                     <div class="boton-derecha">
-                        <button class="btn-anadir">
-                            <img src="{% static 'images/carrito_rojo.png' %}" alt="Carrito" class="icono-carrito">
-                            Añadir
-                        </button>
+                        <a href="{% url 'anadir_carrito' a.id%}">
+                            <button class="btn-anadir">
+                                <img src="{% static 'images/carrito_rojo.png' %}" alt="Carrito" class="icono-carrito">
+                                Añadir
+                            </button>
+                        </a>
                     </div>
                 </div>
             {% endif %}
@@ -148,10 +152,12 @@
                     </div>
                     <p>{{ a.descripcion }}</p>
                     <div class="boton-derecha">
-                        <button class="btn-anadir">
-                            <img src="{% static 'images/carrito_rojo.png' %}" alt="Carrito" class="icono-carrito">
-                            Añadir
-                        </button>
+                        <a href="{% url 'anadir_carrito' a.id%}">
+                            <button class="btn-anadir">
+                                <img src="{% static 'images/carrito_rojo.png' %}" alt="Carrito" class="icono-carrito">
+                                Añadir
+                            </button>
+                        </a>
                     </div>
                 </div>
             {% endif %}
@@ -177,10 +183,12 @@
                     </div>
                     <p>{{ a.descripcion }}</p>
                     <div class="boton-derecha">
-                        <button class="btn-anadir">
-                            <img src="{% static 'images/carrito_rojo.png' %}" alt="Carrito" class="icono-carrito">
-                            Añadir
-                        </button>
+                        <a href="{% url 'anadir_carrito' a.id %}">
+                            <button class="btn-anadir">
+                                <img src="{% static 'images/carrito_rojo.png' %}" alt="Carrito" class="icono-carrito">
+                                Añadir
+                            </button>
+                        </a>
                     </div>
                 </div>
             {% endif %}

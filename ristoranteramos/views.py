@@ -1,6 +1,11 @@
+from datetime import datetime
+from decimal import Decimal
+
 from django.contrib.auth.decorators import user_passes_test, login_required
 from django.core.exceptions import PermissionDenied
 from django.shortcuts import render, redirect, get_object_or_404
+from unicodedata import decimal
+
 from ristoranteramos.forms import *
 from django.shortcuts import render
 
@@ -74,6 +79,7 @@ def eliminar_empleado(request, id):
         empleado_eliminar[0].delete()
         return redirect('empleados')
 
+@user_passes_test(es_admin)
 def go_articulos(request):
     articulos = ArticuloCarta.objects.all()
     return render(request, 'verArticulo.html', {"articulos": articulos})
@@ -189,3 +195,76 @@ def editar_perfil(request):
         form = FormularioEditarPerfil(instance=request.user)
 
     return render(request, 'home.html', {'form': form})
+
+def anadir_carrito(request, id):
+
+    carrito = request.session.get('carrito', {})
+    producto_en_carrito = carrito.get(str(id), 0)
+
+    if producto_en_carrito == 0:
+        carrito[str(id)] = 1
+    else:
+        carrito[str(id)] += 1
+
+    request.session['carrito'] = carrito
+
+    return redirect('carta')
+
+def ver_carrito(request):
+    carrito = {}
+    total = Decimal('0.0')
+
+    carrito_session = request.session.get('carrito', {})
+
+    for k, v in carrito_session.items():
+        producto = ArticuloCarta.objects.get(id=k)
+        cantidad = v
+        carrito[producto] = cantidad
+        total += producto.precio * Decimal(cantidad)
+
+    return render(request, 'carrito.html', {'carrito': carrito,'total': total})
+
+def sumar_producto(request, producto_id):
+    carrito = request.session.get('carrito', {})
+    carrito[str(producto_id)] = carrito.get(str(producto_id), 0) + 1
+    request.session['carrito'] = carrito
+    return redirect('carrito')
+
+def restar_producto(request, producto_id):
+    nuevo_pedido = Pedido()
+    nuevo_pedido.fecha_hora = datetime.now()
+    nuevo_pedido.cliente = request.user
+    nuevo_pedido.save()  # ✅ Guardamos primero para que tenga ID
+
+    carrito_session = request.session.get('carrito', {})
+    carrito = request.session.get('carrito', {})
+    if str(producto_id) in carrito:
+        if carrito[str(producto_id)] > 1:
+            carrito[str(producto_id)] -= 1
+        else:
+            carrito.pop(str(producto_id))
+        request.session['carrito'] = carrito
+    return redirect('carrito')
+
+def completar_compra(request):
+    nuevo_pedido = Pedido()
+    nuevo_pedido.fecha_hora = datetime.now()
+    nuevo_pedido.cliente = request.user
+    nuevo_pedido.save()
+
+    carrito_session = request.session.get('carrito', {})
+
+    for k, v in carrito_session.items():
+        producto = ArticuloCarta.objects.get(id=k)
+
+        linea_pedido = LineaPedido()
+        linea_pedido.articulo = producto
+        linea_pedido.cantidad = v
+        linea_pedido.pedido = nuevo_pedido
+        linea_pedido.save()
+
+    # Opcionalmente, podrías limpiar el carrito
+    del request.session['carrito']
+    request.session.modified = True
+
+    return redirect('home')

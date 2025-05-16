@@ -23,5 +23,10 @@ urlpatterns = [
     path('carta/', cargar_listado_articulos, name='carta'),
     path('logout/', logout_usuario, name='logout'),
     path('actualizar-foto/', actualizar_foto, name='actualizar_foto'),
-    path('editar_perfil/', editar_perfil, name='editar_perfil'),
+    path('editar_perfil/', editar_perfil, name='editar_perfil'), 
+    path('anadir_carrito/<int:id>', anadir_carrito, name='anadir_carrito'),
+    path('ver_carrito/', ver_carrito, name='carrito'),
+    path('carrito/sumar/<int:producto_id>/', sumar_producto, name='sumar_producto'),
+    path('carrito/restar/<int:producto_id>/', restar_producto, name='restar_producto'),
+    path('completar_compra/', completar_compra, name='completar_compra'),
 ]
