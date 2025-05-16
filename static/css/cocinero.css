@@ -1,0 +1,11 @@
+.ver_pedidos_titulo, .custom_row1 {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    display: grid;
+    padding: 1rem;
+}
+
+.ver_pedidos_titulo h3 {
+    font-size: 40px;
+    color: #D4A373;
+    font-family: 'Italianno', cursive;
+}
