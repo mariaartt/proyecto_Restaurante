@@ -3,45 +3,105 @@
 {% block content %}
     
 	<nav class="navbar navbar-expand-md navbar-dark bg-dark py-3 nav_mod" style="background-image: url('{% static 'images/fondoAdmin.png' %}'); background-size: cover;">
-    <div class="container-fluid">
-      
-      <!-- Logo -->
-      <a class="navbar-brand" href="{% url 'home' %}">
-        <img src="{% static 'images/logo.png' %}" alt="Logo" width="150" height="150" style="border-radius: 20px">
-      </a>
-  
-      <!-- Botón hamburguesa -->
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-  
-      <!-- Menú colapsable -->
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav mx-auto text-center">
-          <li class="nav-item">
-            <a class="nav-link text-white fs-5" href="{% url 'empleados' %}">EMPLEADOS</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link text-white fs-5" href="{% url 'articulos' %}">CARTA</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link text-white fs-5" href="{% url 'reporte' %}">REPORTES</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link text-white fs-5" href="#">HORARIOS</a>
-          </li>
-        </ul>
-      </div>
-        <!-- Botón administrador -->
-        <div class="d-flex justify-content-center mt-3 mt-lg-0">
-          <a href="{% url 'log_in_page' %}" class="btn btn-outline-light me-2 d-flex align-items-center">
-            <i class="bi bi-person-fill me-1"></i> ADMINISTRADOR
-          </a>
+        <div class="container-fluid">
+            <!-- Logo -->
+            <a class="navbar-brand" href="{% url 'home' %}">
+                <img src="{% static 'images/logo.png' %}" alt="Logo" width="150" height="150" style="border-radius: 20px">
+            </a>
+
+            <!-- Botón hamburguesa -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!-- Menú colapsable -->
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav mx-auto text-center">
+                    <li class="nav-item">
+                        <a class="nav-link text-white fs-5" href="{% url 'empleados' %}">EMPLEADOS</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white fs-5" href="{% url 'articulos' %}">CARTA</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white fs-5" href="{% url 'reporte' %}">REPORTES</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white fs-5" href="#">HORARIOS</a>
+                    </li>
+                </ul>
+            </div>
+
+            <!--Botones-->
+            <div class="d-flex">
+                {% if user.is_authenticated %}
+                    <a href="#" class="btn d-flex align-items-center text-light p-0 border-0 bg-transparent"
+                       data-bs-toggle="modal" data-bs-target="#perfilModal">
+                      {% if user.foto %}
+                        <img src="{{ user.foto.url }}" alt="Foto de perfil" class="rounded-circle me-2" style="width: 35px; height: 35px; object-fit: cover;">
+                      {% else %}
+                        <i class="bi bi-person-circle fs-4 me-2"></i>
+                      {% endif %}
+                      <span>{{ user.nombre }}</span>
+                    </a>
+                {% else %}
+                  <a href="{% url 'log_in_page' %}" class="btn btn-outline-light me-2 d-flex align-items-center">
+                    <i class="bi bi-person-fill me-1"></i> ADMINISTRADOR
+                  </a>
+                {% endif %}
+                <!-- Botón Top 5 artículos más vendidos -->
+                <form method="post" action="{% url 'procedure' %}" class="m-0">
+                    {% csrf_token %}
+                        <button type="submit" class="btn btn-danger">ARTICULO ESTRELLA</button>
+                </form>
+            </div>
         </div>
-      </div>
-    <!-- Título administrador -->
-    <div class="presentacion_mod">
-      <h1>ADMINISTRADOR</h1>
-    </div>
-  </nav>
+
+        <!-- Título administrador -->
+        <div class="presentacion_mod">
+          <h1>ADMINISTRADOR</h1>
+        </div>
+        
+         <!-- Modal Bootstrap -->
+        <div class="modal fade" id="topArticulosModal" tabindex="-1" aria-labelledby="topArticulosLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="topArticulosLabel">Top 5 artículos más vendidos</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                    </div>
+                    <div class="modal-body">
+                        {% if resultados %}
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Artículo</th>
+                                        <th>Cantidad vendida</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for articulo in resultados %}
+                                        <tr>
+                                            <td>{{ articulo.0 }}</td>
+                                            <td>{{ articulo.1 }}</td>
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        {% else %}
+                        <p>No hay datos disponibles.</p>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+    
+    {% if mostrar_modal %}
+    <script>
+        var modal = new bootstrap.Modal(document.getElementById('topArticulosModal'));
+        modal.show();
+    </script>
+    {% endif %}
+    
 {% endblock %}

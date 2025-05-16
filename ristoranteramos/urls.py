@@ -24,4 +24,5 @@ urlpatterns = [
     path('logout/', logout_usuario, name='logout'),
     path('actualizar-foto/', actualizar_foto, name='actualizar_foto'),
     path('editar_perfil/', editar_perfil, name='editar_perfil'),
+    path('procedure/', ejecutar_procedure, name='procedure'),
 ]

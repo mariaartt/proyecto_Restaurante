@@ -1,13 +1,15 @@
 from django.contrib.auth.decorators import user_passes_test, login_required
 from django.core.exceptions import PermissionDenied
+from django.db import connection
 from django.shortcuts import render, redirect, get_object_or_404
 from ristoranteramos.forms import *
 from django.shortcuts import render
-
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from .forms import RegistroFormulario, LoginFormulario
 from ristoranteramos.models import *
+
+
 
 # Create your views here.
 def es_admin(user):
@@ -74,9 +76,14 @@ def eliminar_empleado(request, id):
         empleado_eliminar[0].delete()
         return redirect('empleados')
 
+def cargar_listado_articulos(request):
+    lista_articulos = ArticuloCarta.objects.all()
+    return render(request,'carta.html',{'articulos':lista_articulos})
+
 def go_articulos(request):
     articulos = ArticuloCarta.objects.all()
     return render(request, 'verArticulo.html', {"articulos": articulos})
+
 
 def new_articulo(request, id):
     articulo = get_object_or_404(ArticuloCarta, id=id)
@@ -160,9 +167,7 @@ def logout_usuario(request):
 def go_carta(request):
     return render(request, 'carta.html')
 
-def cargar_listado_articulos(request):
-    lista_articulos = ArticuloCarta.objects.all()
-    return render(request,'carta.html',{'articulos':lista_articulos})
+
 
 def go_reporte_ventas(request):
     return render(request, 'reporteVentas.html')
@@ -189,3 +194,17 @@ def editar_perfil(request):
         form = FormularioEditarPerfil(instance=request.user)
 
     return render(request, 'home.html', {'form': form})
+
+
+#PROCEDURE BBDD
+def ejecutar_procedure(request):
+    resultados = []
+    if request.method == 'POST':
+        with connection.cursor() as cursor:
+            try:
+                cursor.callproc('top_5_articulos_mas_vendidos')
+                cursor.execute('SELECT * FROM TOP_ARTICULOS_RESULTADO')
+                resultados = cursor.fetchall()
+            except Exception as e:
+                print(f"Error ejecutando procedure: {e}")
+        return render(request, 'navbarAdministrador.html', {'resultados': resultados, 'mostrar_modal': True})
