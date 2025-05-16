@@ -1,0 +1,91 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    <!--Navbar-->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark py-3" style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('/static/images/fondoAdmin.png'); background-size: cover; background-position: 50% 50%;">
+        <div class="container-fluid">
+            <!-- Logo -->
+            <a class="navbar-brand" href="{% url 'home' %}">
+                <img src="{% static 'images/logo.png' %}" alt="Logo" width="150" height="150">
+            </a>
+    
+            <!-- Menú colapsable -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+    
+            <!-- Enlaces -->
+            <div class="collapse navbar-collapse justify-content-between" id="navbarNav">
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item">
+                        <a class="nav-link text-white fs-5" href="{% url 'home' %}">INICIO</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white fs-5" href="{% url 'carta' %}">CARTA</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white fs-5" href="{% url 'contacto' %}">CONTACTO</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white fs-5" href="{% url 'acerca_de' %}">ACERCA DE</a>
+                    </li>
+                </ul>
+            </div>
+            
+            <!-- Botón Cliente / Logout-->
+            <div class="d-flex">
+                <a href="{% url 'login' %}" class="btn btn-outline-light me-2 d-flex align-items-center">
+                    <i class="bi bi-person-fill me-1" ></i> CLIENTE
+                </a>
+                <a href="{% url 'carta' %}" class="btn btn-danger">HAZ TU PEDIDO</a>
+            </div>
+        </div>
+        
+        <!-- Título -->
+        <div class="presentacion_mod">
+            <h1>PEDIDO</h1>
+        </div>
+    </nav>
+    
+
+    <div class="pedido_content">
+        <h1>Resumen:</h1>
+    
+        {% for k,v in carrito.items %}
+            <div class="contenido_carrito">
+                <p style=" color: rgba(122, 121, 121, 1);">{{ k.nombre }}</p>
+                
+                <div class="cantidad_carrito">
+                    <a href="{% url 'restar_producto' k.id %}" class="cantidad_carrito_suma">-</a>
+                    <p style="text-align: center">{{ v }}</p>
+                    <a href="{% url 'sumar_producto' k.id %}" class="cantidad_carrito_suma">+</a>
+                </div>
+            </div>
+        {% endfor %}
+    
+        <div class="contenido_carrito_boton_volver">
+            <a href="{% url 'carta' %}"><button><img src="{% static 'images/flecha_seguir_comprando.png' %}">Seguir Comprando</button></a>
+        </div>
+    
+        <div class="contenido_carrito_boton_finalizar">
+            <div class="contenido_carrito_texto_finalizar">
+                <p>Total:</p>
+                <p>{{ total }}€</p>
+            </div>
+            
+            <button class="contenido_carrito_boton_enviar" onclick="document.getElementById('popout').style.display='flex'">ENVIAR</button>
+    
+                <div id="popout" class="carrito_popout">
+                    <div class="carrito_popout_content">
+                        <h1>¡Pago Realizado <br> con Éxito!</h1>
+                        <img src="{% static 'images/tick_carrito.png' %}">
+                        <a href="{% url 'completar_compra' %}"><button class="contenido_carrito_boton_enviar">Volver</button></a>
+                    </div>
+                </div>
+        </div>
+    
+    </div>
+    
+    {% include 'footer.html' %}
+{% endblock %}
