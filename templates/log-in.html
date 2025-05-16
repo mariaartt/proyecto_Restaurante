@@ -76,12 +76,10 @@
               {{ registro_form.email.errors }}
               {{ registro_form.email }}
             </div>
-            {% if user.rol == 'administrador' %}
             <div class="forms_field">
               {{ registro_form.rol.errors }}
               {{ registro_form.rol }}
             </div>
-            {% endif %}
             <div class="forms_field">
               {{ registro_form.password.errors }}
               {{ registro_form.password }}
