@@ -31,4 +31,6 @@ urlpatterns = [
     path('completar_compra/', completar_compra, name='completar_compra'),
     path('cocinero/', go_cocinero, name='cocinero'),
     path('cocinero/linea/<int:id>/estado/', actualizar_estado_linea, name='actualizar_estado_linea'),
+    path('editar_perfil/', editar_perfil, name='editar_perfil'),
+    path('procedure/', ejecutar_procedure, name='procedure'),
 ]

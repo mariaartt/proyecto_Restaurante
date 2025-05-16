@@ -3,6 +3,7 @@ from decimal import Decimal
 
 from django.contrib.auth.decorators import user_passes_test, login_required
 from django.core.exceptions import PermissionDenied
+from django.db import connection
 from django.shortcuts import render, redirect, get_object_or_404
 from unicodedata import decimal
 from django.views.decorators.http import require_POST
@@ -12,6 +13,8 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from .forms import RegistroFormulario, LoginFormulario
 from ristoranteramos.models import *
+
+
 
 # Create your views here.
 def es_admin(user):
@@ -79,9 +82,14 @@ def eliminar_empleado(request, id):
         return redirect('empleados')
 
 @user_passes_test(es_admin)
+def cargar_listado_articulos(request):
+    lista_articulos = ArticuloCarta.objects.all()
+    return render(request,'carta.html',{'articulos':lista_articulos})
+
 def go_articulos(request):
     articulos = ArticuloCarta.objects.all()
     return render(request, 'verArticulo.html', {"articulos": articulos})
+
 
 def new_articulo(request, id):
     articulo = get_object_or_404(ArticuloCarta, id=id)
@@ -149,9 +157,9 @@ def log_in(request):
                 if usuario is not None:
                     login(request, usuario)
                     if usuario.rol == 'administrador':
-                        return redirect('empleados')  # ← Aquí redirige a verEmpleados.html
+                        return redirect('empleados') 
                     else:
-                        return redirect('inicio')  # ← Otros roles van a 'inicio'
+                        return redirect('inicio') 
 
     return render(request, 'log-in.html', {
         'registro_form': registro_form,
@@ -165,9 +173,7 @@ def logout_usuario(request):
 def go_carta(request):
     return render(request, 'carta.html')
 
-def cargar_listado_articulos(request):
-    lista_articulos = ArticuloCarta.objects.all()
-    return render(request,'carta.html',{'articulos':lista_articulos})
+
 
 def go_reporte_ventas(request):
     return render(request, 'reporteVentas.html')
@@ -188,12 +194,13 @@ def editar_perfil(request):
     if request.method == 'POST':
         form = FormularioEditarPerfil(request.POST, instance=request.user)
         if form.is_valid():
-            form.save()  # Guarda los cambios
-            return redirect('home')  # Redirige a la página de inicio (home) para ver los cambios
+            form.save() 
+            return redirect('home')
     else:
         form = FormularioEditarPerfil(instance=request.user)
 
     return render(request, 'home.html', {'form': form})
+
 
 def anadir_carrito(request, id):
 
@@ -233,7 +240,7 @@ def restar_producto(request, producto_id):
     nuevo_pedido = Pedido()
     nuevo_pedido.fecha_hora = datetime.now()
     nuevo_pedido.cliente = request.user
-    nuevo_pedido.save()  # ✅ Guardamos primero para que tenga ID
+    nuevo_pedido.save() 
 
     carrito_session = request.session.get('carrito', {})
     carrito = request.session.get('carrito', {})
@@ -262,7 +269,6 @@ def completar_compra(request):
         linea_pedido.pedido = nuevo_pedido
         linea_pedido.save()
 
-    # Opcionalmente, podrías limpiar el carrito
     del request.session['carrito']
     request.session.modified = True
 
@@ -282,3 +288,18 @@ def actualizar_estado_linea(request, id):
         linea.estado = nuevo_estado
         linea.save()
     return redirect('cocinero')
+
+
+#PROCEDURE BBDD
+def ejecutar_procedure(request):
+    resultados = []
+    if request.method == 'POST':
+        with connection.cursor() as cursor:
+            try:
+                cursor.callproc('top_5_articulos_mas_vendidos')
+                cursor.execute('SELECT * FROM TOP_ARTICULOS_RESULTADO')
+                resultados = cursor.fetchall()
+            except Exception as e:
+                print(f"Error ejecutando procedure: {e}")
+        return render(request, 'navbarAdministrador.html', {'resultados': resultados, 'mostrar_modal': True})
+
