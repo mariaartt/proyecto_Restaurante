@@ -29,4 +29,6 @@ urlpatterns = [
     path('carrito/sumar/<int:producto_id>/', sumar_producto, name='sumar_producto'),
     path('carrito/restar/<int:producto_id>/', restar_producto, name='restar_producto'),
     path('completar_compra/', completar_compra, name='completar_compra'),
+    path('cocinero/', go_cocinero, name='cocinero'),
+    path('cocinero/linea/<int:id>/estado/', actualizar_estado_linea, name='actualizar_estado_linea'),
 ]

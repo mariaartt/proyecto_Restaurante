@@ -5,10 +5,9 @@ from django.contrib.auth.decorators import user_passes_test, login_required
 from django.core.exceptions import PermissionDenied
 from django.shortcuts import render, redirect, get_object_or_404
 from unicodedata import decimal
-
+from django.views.decorators.http import require_POST
 from ristoranteramos.forms import *
 from django.shortcuts import render
-
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from .forms import RegistroFormulario, LoginFormulario
@@ -179,7 +178,7 @@ def actualizar_foto(request):
         usuario = request.user
         usuario.foto = request.FILES['foto']
         usuario.save()
-        return redirect('inicio')  # Puedes redirigir donde quieras
+        return redirect('inicio')
     return redirect('inicio')
 
 
@@ -268,3 +267,18 @@ def completar_compra(request):
     request.session.modified = True
 
     return redirect('home')
+
+@login_required
+def go_cocinero(request):
+    pedidos = Pedido.objects.all().order_by('fecha_hora')
+    return render(request, 'cocinero.html', {'pedidos': pedidos})
+
+@require_POST
+@login_required
+def actualizar_estado_linea(request, id):
+    linea = get_object_or_404(LineaPedido, id=id)
+    nuevo_estado = request.POST.get('estado')
+    if nuevo_estado in dict(LineaPedido._meta.get_field('estado').choices):
+        linea.estado = nuevo_estado
+        linea.save()
+    return redirect('cocinero')
