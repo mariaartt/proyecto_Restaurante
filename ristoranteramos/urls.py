@@ -23,5 +23,5 @@ urlpatterns = [
     path('carta/', cargar_listado_articulos, name='carta'),
     path('logout/', logout_usuario, name='logout'),
     path('actualizar-foto/', actualizar_foto, name='actualizar_foto'),
-    path('editar_perfil/', editar_perfil, name='editar_perfil'),  # Ruta para editar el perfil
+    path('editar_perfil/', editar_perfil, name='editar_perfil'),
 ]
