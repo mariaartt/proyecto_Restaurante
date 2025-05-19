@@ -81,7 +81,6 @@ def eliminar_empleado(request, id):
         empleado_eliminar[0].delete()
         return redirect('empleados')
 
-@user_passes_test(es_admin)
 def cargar_listado_articulos(request):
     lista_articulos = ArticuloCarta.objects.all()
     return render(request,'carta.html',{'articulos':lista_articulos})
@@ -172,8 +171,6 @@ def logout_usuario(request):
 
 def go_carta(request):
     return render(request, 'carta.html')
-
-
 
 def go_reporte_ventas(request):
     return render(request, 'reporteVentas.html')
@@ -281,6 +278,16 @@ def go_cocinero(request):
 
 @require_POST
 @login_required
+def actualizar_estado_mesa(request, num_mesa):
+    mesa = get_object_or_404(Mesa, num_mesa=num_mesa)
+    nuevo_estado = request.POST.get('estado')
+    if nuevo_estado in dict(Mesa._meta.get_field('estado').choices):
+        mesa.estado = nuevo_estado
+        mesa.save()
+    return redirect('camarero')
+
+@require_POST
+@login_required
 def actualizar_estado_linea(request, id):
     linea = get_object_or_404(LineaPedido, id=id)
     nuevo_estado = request.POST.get('estado')
@@ -289,6 +296,11 @@ def actualizar_estado_linea(request, id):
         linea.save()
     return redirect('cocinero')
 
+
+def go_camarero(request):
+    pedidos = Pedido.objects.all().order_by('fecha_hora')
+    estados_mesa = Mesa._meta.get_field('estado').choices
+    return render(request, 'camarero.html', {'pedidos': pedidos, 'estados_mesa': estados_mesa})
 
 #PROCEDURE BBDD
 def ejecutar_procedure(request):
@@ -302,4 +314,5 @@ def ejecutar_procedure(request):
             except Exception as e:
                 print(f"Error ejecutando procedure: {e}")
         return render(request, 'navbarAdministrador.html', {'resultados': resultados, 'mostrar_modal': True})
+
 
