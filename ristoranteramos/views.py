@@ -1,5 +1,6 @@
 from datetime import datetime
 from decimal import Decimal
+from functools import wraps
 
 from django.contrib.auth.decorators import user_passes_test, login_required
 from django.core.exceptions import PermissionDenied
@@ -22,8 +23,30 @@ def es_admin(user):
         raise PermissionDenied
     return True
 
+def es_cocinero(user):
+    if not user.is_authenticated or not user.rol == 'cocinero':
+        raise PermissionDenied
+    return True
+
+def es_camarero(user):
+    if not user.is_authenticated or not user.rol == 'camarero':
+        raise PermissionDenied
+    return True
+
+def restringido_a_roles(*roles_permitidos):
+    def decorador(vista_func):
+        @wraps(vista_func)
+        def _wrapped_view(request, *args, **kwargs):
+            user = request.user
+            if not user.is_authenticated or user.rol not in roles_permitidos:
+                raise PermissionDenied
+            return vista_func(request, *args, **kwargs)
+        return _wrapped_view
+    return decorador
+
 def go_home(request):
-    return render(request, 'home.html')
+    articulos_destacados = ArticuloCarta.objects.filter(id__in=[3, 4, 6, 10])
+    return render(request, 'home.html', {'articulos': articulos_destacados})
 
 def go_contacto(request):
     return render(request, 'contacto.html')
@@ -43,6 +66,7 @@ def go_empleados(request):
     empleados = Usuario.objects.all()
     return render(request, 'verEmpleados.html', {"empleados": empleados})
 
+@user_passes_test(es_admin)
 def new_empleado(request, id):
     empleado = get_object_or_404(Usuario, id=id)
 
@@ -56,6 +80,7 @@ def new_empleado(request, id):
 
     return render(request, 'anadirEmpleado.html',{'form':form}, {'empleado':empleado})
 
+@user_passes_test(es_admin)
 def editar_empleado(request, id):
     if id != 0:
         usuario = get_object_or_404(Usuario, id=id)
@@ -74,6 +99,7 @@ def editar_empleado(request, id):
 
     return render(request, 'anadirEmpleado.html',{'form':form})
 
+@user_passes_test(es_admin)
 def eliminar_empleado(request, id):
     empleado_eliminar = Usuario.objects.filter(id=id)
 
@@ -89,7 +115,7 @@ def go_articulos(request):
     articulos = ArticuloCarta.objects.all()
     return render(request, 'verArticulo.html', {"articulos": articulos})
 
-
+@user_passes_test(es_admin)
 def new_articulo(request, id):
     articulo = get_object_or_404(ArticuloCarta, id=id)
 
@@ -103,6 +129,7 @@ def new_articulo(request, id):
 
     return render(request, 'anadirArticulo.html',{'form':form}, {'articulo':articulo})
 
+@user_passes_test(es_admin)
 def editar_articulo(request, id):
     if id != 0:
         articulo = get_object_or_404(ArticuloCarta, id=id)
@@ -121,6 +148,7 @@ def editar_articulo(request, id):
 
     return render(request, 'anadirArticulo.html',{'form':form})
 
+@user_passes_test(es_admin)
 def eliminar_articulo(request, id):
     articulo_eliminar = ArticuloCarta.objects.filter(id=id)
 
@@ -271,7 +299,7 @@ def completar_compra(request):
 
     return redirect('home')
 
-@login_required
+@restringido_a_roles('cocinero', 'administrador')
 def go_cocinero(request):
     pedidos = Pedido.objects.all().order_by('fecha_hora')
     return render(request, 'cocinero.html', {'pedidos': pedidos})
@@ -288,6 +316,7 @@ def actualizar_estado_mesa(request, num_mesa):
 
 @require_POST
 @login_required
+@restringido_a_roles('cocinero', 'administrador')
 def actualizar_estado_linea(request, id):
     linea = get_object_or_404(LineaPedido, id=id)
     nuevo_estado = request.POST.get('estado')

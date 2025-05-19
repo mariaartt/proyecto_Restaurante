@@ -35,7 +35,7 @@ a.nav-link.text-white.fs-5:hover::after {
     width: 100%;
 }
 
-a.btn {
+a.btn.navbar {
     font-size: 25px;
     border-radius: 50px;
     width: 45%;

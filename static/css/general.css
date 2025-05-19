@@ -33,6 +33,7 @@
 .encabezado{
     font-size: 40px;
     margin: 1%;
+    width: 100%;
 }
 
 .informacion p{
@@ -80,6 +81,19 @@
 .mapa iframe{
     width: 100%;
     height: 100%;
+}
+
+a.btn.pop-up {
+    background: cornflowerblue;
+    margin: 10px 0 10px 0 !important;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+a.btn.pop-up:hover {
+    background-color: #486dad;
+    transform: scale(1.05);
+    box-shadow: 0 0 10px rgb(0 86 192 / 40%);
+    color: #FFFFFF;
 }
 
 @media (max-width: 950px){
