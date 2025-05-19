@@ -50,11 +50,11 @@
           <span>{{ user.nombre }}</span>
         </a>
     {% else %}
-      <a href="{% url 'log_in_page' %}" class="btn btn-outline-light me-2 d-flex align-items-center">
+      <a href="{% url 'log_in_page' %}" class="btn btn-outline-light me-2 d-flex align-items-center navbar">
         <i class="bi bi-person-fill me-1"></i> CLIENTE
       </a>
     {% endif %}
-    <a href="#" class="btn btn-danger">HAZ TU PEDIDO</a>
+    <a href="#" class="btn btn-danger navbar">HAZ TU PEDIDO</a>
     </div>
   </div>
     <div class="presentacion">
@@ -123,36 +123,26 @@
         <h2 class="title2">Especialidades</h2>
     </div>
 
-    <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel" data-bs-pause="hover">
-        <div class="carousel-inner">
-
-            <div class="carousel-item active">
-                <div class="d-flex flex-column flex-md-row justify-content-center align-items-center gap-4">
-                    <img src="{% static 'images/tiramisu.jpg' %}" class="img-carrusel" alt="Tiramisú">
-                    <div class="descripcion-carrusel shadow">
-                        <h3 class="contenedor_texto">Tiramisú</h3>
-                        <p class="texto-plato">Típico postre italiano a base de bizcochos de soletilla, cacao, mascarpone y café.</p>
+        <div id="carouselArticulos" class="carousel slide" data-bs-ride="carousel" data-bs-pause="hover">
+            <div class="carousel-inner">
+                {% for a in articulos %}
+                    <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                        <div class="d-flex flex-column flex-md-row justify-content-center align-items-center gap-4">
+                            <img src="{{ a.imagen_url }}" class="img-carrusel" alt="{{ articulo.nombre }}">
+                            <div class="descripcion-carrusel shadow">
+                                <h3 class="contenedor_texto">{{ a.nombre }}</h3>
+                                <p class="texto-plato">{{ a.descripcion }}</p>
+                            </div>
+                        </div>
                     </div>
-                </div>
+                {% endfor %}
             </div>
 
-            <!-- Duplicar estructura para más platos -->
-            <div class="carousel-item">
-                <div class="d-flex flex-column flex-md-row justify-content-center align-items-center gap-4">
-                    <img src="{% static 'images/otro_plato.png' %}" class="img-carrusel" alt="Otro Plato">
-                    <div class="descripcion-carrusel shadow">
-                        <h3 class="contenedor_texto">Otro Plato</h3>
-                        <p class="texto-plato">Descripción elegante y breve del siguiente plato.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselArticulos" data-bs-slide="prev">
             <span class="carousel-control-prev-icon custom-control-icon" aria-hidden="true"></span>
             <span class="visually-hidden">Anterior</span>
         </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="next">
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselArticulos" data-bs-slide="next">
             <span class="carousel-control-next-icon custom-control-icon" aria-hidden="true"></span>
             <span class="visually-hidden">Siguiente</span>
         </button>
@@ -334,6 +324,7 @@
         <p><strong>Email:</strong> {{ user.email }}</p>
         <p><strong>Teléfono:</strong> {{ user.telefono }}</p>
         <p><strong>Dirección:</strong> {{ user.direccion }}</p>
+        <a href="{% url 'cocinero' %}" class="btn btn-outline-light me-2 d-flex align-items-center pop-up">Cocinero</a>
         <a href="{% url 'logout' %}" class="btn btn-danger">Cerrar sesión</a>
       </div>
       <div class="modal-footer">
