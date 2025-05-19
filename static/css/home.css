@@ -36,8 +36,8 @@ a.nav-link.text-white.fs-5:hover::after {
     width: 100%;
 }
 
-a.btn {
-    font-size: 24px;
+a.btn.navbar {
+    font-size: 24px !important;
     border-radius: 50px;
     width: 45%;
     justify-content: center;
@@ -136,7 +136,7 @@ a.btn.btn-danger:hover {
     width: 100%;
     }
 
-    a.btn {
+    a.btn.navbar {
     width: 40%;
     }
 
@@ -154,15 +154,15 @@ a.btn.btn-danger:hover {
 }
 
 @media (min-width: 1024px) and (max-width: 1439px) {
-    a.btn {
-        font-size: 18px;
+    a.btn.navbar {
+        font-size: 18px !important;
         width: 100%;
     }
 }
 
 @media (max-width: 400px) {
-    a.btn {
-        font-size: 19px;
+    a.btn.navbar {
+        font-size: 19px !important;
     }
 }
 
