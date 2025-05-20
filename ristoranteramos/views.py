@@ -238,6 +238,7 @@ def anadir_carrito(request, id):
 
     return redirect('carta')
 
+@login_required
 def ver_carrito(request):
     carrito = {}
     total = Decimal('0.0')

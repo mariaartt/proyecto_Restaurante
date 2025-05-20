@@ -20,8 +20,18 @@ section.pedido {
     margin-bottom: 5%;
 }
 
-.custom_row1.cocinero p.cocinero {
+a.cocinero {
     text-decoration: underline;
     cursor: pointer;
     color: gray;
+}
+
+h3.receta {
+    font-size: 40px;
+    color: #D4A373;
+    font-family: 'Italianno', cursive;
+}
+
+.modal.fade.receta.show {
+    overflow-y: hidden;
 }
