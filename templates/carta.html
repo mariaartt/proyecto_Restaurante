@@ -48,13 +48,28 @@
             <h1>CARTA</h1>
         </div>
     </nav>
-
-    <!-- Barra carrito-->
-    <div class="navbar_carrito h-auto">
-        <a href="{% url 'carrito' %}"><img src="/static/images/icons8-carrito-de-compras-50.png" class="img-fluid"></a>
-        <p>{{ total }}€</p>
+    
+    <div class="navbar_carrito dropdown">
+      <a class="d-flex align-items-center text-white text-decoration-none dropdown-toggle"
+         href="#" id="dropdownCarrito" data-bs-toggle="dropdown" aria-expanded="false" style="width: 20% !important;">
+        <img src="{% static 'images/icons8-carrito-de-compras-50.png' %}" alt="Carrito" width="40" height="40">
+        <span class="ms-2">{{ total }}€</span>
+      </a>
+    
+      <ul class="dropdown-menu dropdown-menu-end p-3" aria-labelledby="dropdownCarrito" style="margin-top: 20%">
+        {% if carrito_items %}
+          {% for item in carrito_items %}
+            <li>{{ item.nombre }} — {{ item.precio|floatformat:2 }}€ x {{ item.cantidad }}</li>
+          {% endfor %}
+          <li class="dropdown-divider"></li>
+          <li><b>Total: {{ total }}€</b></li>
+          <a href="{% url 'carrito' %}"><button class="contenido_carrito_boton_enviar" style="margin-top: 5%">VER CARRITO</button></a>
+        {% else %}
+          <li>Tu carrito está vacío</li>
+        {% endif %}
+      </ul>
     </div>
-
+    
     <!--Botones Carta-->
     <div class="botones_carta">
         <a href="#entrantes">
@@ -71,15 +86,12 @@
         </a>
     </div>
 
-    <!--Carta con Artículos-->
-
     <!--ENTRANTES-->
     <div class="titulos" id="entrantes">
         <h1>Per Iniziare</h1>
         <p>Prueba estos platos perfectos para compartir</p>
     </div>
-
-    <!--Bucle para coger los articulos (entrantes) de la base de datos-->
+    
     <div class="main m-4">
         {% for a in articulos %}
             {% if a.categoria == 'ENTRANTES' %}
@@ -101,16 +113,13 @@
             {% endif %}
         {% endfor %}
     </div>
-
     <br>
-
     <!--COMIDA-->
     <div class="titulos" id="comida">
         <h1>Pasta Fresca y Pizzas</h1>
         <p>Nuestras pastas son artesanales y elaboradas en el día y nuestras pizzas te encantarán.</p>
     </div>
-
-    <!--Bucle para coger los articulos (comida) de la base de datos-->
+    
     <div class="main m-4">
         {% for a in articulos %}
             {% if a.categoria == 'COMIDA' %}
@@ -132,16 +141,14 @@
             {% endif %}
         {% endfor %}
     </div>
-
     <br>
-
+    
     <!--POSTRES-->
     <div class="titulos" id="postres">
         <h1>Postres</h1>
         <p>Nuestras pastas son artesanales y elaboradas en el día y nuestras pizzas te encantarán.</p>
     </div>
 
-    <!--Bucle para coger los articulos (comida) de la base de datos-->
     <div class="main m-4">
         {% for a in articulos %}
             {% if a.categoria == 'POSTRES' %}
@@ -163,7 +170,6 @@
             {% endif %}
         {% endfor %}
     </div>
-
     <br>
 
     <!--BEBIDAS-->
@@ -171,8 +177,7 @@
         <h1>Bebidas</h1>
         <p>Elige cualquiera de nuestras bebidas más refrescantes.</p>
     </div>
-
-    <!--Bucle para coger los articulos (comida) de la base de datos-->
+    
     <div class="main m-4">
         {% for a in articulos %}
             {% if a.categoria == 'BEBIDA' %}
@@ -194,5 +199,4 @@
             {% endif %}
         {% endfor %}
     </div>
-    
 {% endblock %}
