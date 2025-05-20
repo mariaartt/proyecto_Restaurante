@@ -58,7 +58,7 @@ class HistorialInicioSesion(models.Model):
 # ----------------------
 # MODELOS DEL RESTAURANTE
 # ----------------------
-class Estado_Mesa(models.TextChoices):
+class EstadoMesa(models.TextChoices):
     LIBRE = 'LIBRE', 'Libre'
     OCUPADA = 'OCUPADA', 'Ocupada'
 
@@ -101,13 +101,12 @@ ESTADO_PEDIDO = (
 
 
 class Mesa(models.Model):
-    num_mesa = models.AutoField(primary_key=True)
-    estado = models.CharField(max_length=100, choices=Estado_Mesa.choices, default=Estado_Mesa.LIBRE)
+    estado = models.CharField(max_length=100, choices=EstadoMesa.choices, default=EstadoMesa.LIBRE)
     fecha_creacion = models.DateTimeField(auto_now_add=True, null=True, blank=True)
     fecha_modificacion = models.DateTimeField(auto_now=True, null=True, blank=True)
 
     def __str__(self):
-        return str(self.num_mesa)
+        return str(self.id)
 
 
 class Pedido(models.Model):
