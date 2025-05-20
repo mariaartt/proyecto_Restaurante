@@ -96,6 +96,15 @@ a.btn.pop-up:hover {
     color: #FFFFFF;
 }
 
+a.btn.cuenta {
+    width: 45%;
+}
+
+
+.btn.logout {
+    margin: 10px 0 10px 0 !important
+}
+
 @media (max-width: 950px){
     .cajas{
      width: 200px;

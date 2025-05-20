@@ -157,6 +157,7 @@ a.btn.btn-danger:hover {
     a.btn.navbar {
         font-size: 18px !important;
         width: 100%;
+        margin: 0 10%;
     }
 }
 

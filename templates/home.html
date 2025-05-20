@@ -40,7 +40,7 @@
       <!-- Botones -->
     <div class="d-flex">
     {% if user.is_authenticated %}
-        <a href="#" class="btn d-flex align-items-center text-light p-0 border-0 bg-transparent"
+        <a href="#" class="btn d-flex align-items-center text-light p-0 border-0 bg-transparent cuenta"
            data-bs-toggle="modal" data-bs-target="#perfilModal">
           {% if user.foto %}
             <img src="{{ user.foto.url }}" alt="Foto de perfil" class="rounded-circle me-2" style="width: 35px; height: 35px; object-fit: cover;">
@@ -327,7 +327,7 @@
         <a href="{% url 'empleados' %}" class="btn btn-outline-light me-2 d-flex align-items-center pop-up">Administrador</a>
         <a href="{% url 'cocinero' %}" class="btn btn-outline-light me-2 d-flex align-items-center pop-up">Cocinero</a>
         <a href="{% url 'cocinero' %}" class="btn btn-outline-light me-2 d-flex align-items-center pop-up">Camarero</a>
-        <a href="{% url 'logout' %}" class="btn btn-danger">Cerrar sesión</a>
+        <a href="{% url 'logout' %}" class="btn btn-danger logout">Cerrar sesión</a>
       </div>
       <div class="modal-footer">
         <!-- Botón para abrir el modal de editar y cerrar el modal actual -->
