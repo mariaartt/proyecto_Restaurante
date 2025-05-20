@@ -9,7 +9,6 @@ from django.shortcuts import render, redirect, get_object_or_404
 from unicodedata import decimal
 from django.views.decorators.http import require_POST
 from ristoranteramos.forms import *
-from django.shortcuts import render
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from .forms import RegistroFormulario, LoginFormulario
@@ -51,15 +50,17 @@ def go_home(request):
 def go_contacto(request):
     return render(request, 'contacto.html')
 
-def cargar_listado_articulos(request):
-    lista_articulos = ArticuloCarta.objects.all()
-    return render(request,'carta.html',{'articulos':lista_articulos})
-
 def go_login(request):
     return render(request, 'log-in.html')
 
 def go_acerca_de(request):
     return render(request, 'acerca_de.html')
+
+# def error_403_view(request, exception=None):
+#     return render(request, 'Error403.html', status=403)
+#
+# def error_404_view(request, exception=None):
+#     return render(request, 'Error404.html', status=404)
 
 @user_passes_test(es_admin)
 def go_empleados(request):
@@ -189,19 +190,28 @@ def log_in(request):
                     else:
                         return redirect('inicio') 
 
-    return render(request, 'log-in.html', {
-        'registro_form': registro_form,
-        'login_form': login_form
-    })
+    return render(request, 'log-in.html', {'registro_form': registro_form,'login_form': login_form})
 
 def logout_usuario(request):
     logout(request)
     return redirect('inicio')
 
-def go_carta(request):
-    return render(request, 'carta.html')
+def cargar_listado_articulos(request):
+    articulos = ArticuloCarta.objects.all()
+    carrito_session = request.session.get('carrito', {})
+    total = Decimal('0.0')
+    carrito_items = []
 
+    for producto_id, cantidad in carrito_session.items():
+        producto = ArticuloCarta.objects.get(id=int(producto_id))
+        total += producto.precio * Decimal(cantidad)
+        carrito_items.append({
+            'nombre': producto.nombre,
+            'precio': producto.precio,
+            'cantidad': cantidad,
+        })
 
+    return render(request, 'carta.html', {'articulos': articulos, 'total': total, 'carrito_items': carrito_items})
 
 def go_reporte_ventas(request):
     return render(request, 'reporteVentas.html')
@@ -231,7 +241,6 @@ def editar_perfil(request):
 
 
 def anadir_carrito(request, id):
-
     carrito = request.session.get('carrito', {})
     producto_en_carrito = carrito.get(str(id), 0)
 
@@ -268,9 +277,9 @@ def restar_producto(request, producto_id):
     nuevo_pedido = Pedido()
     nuevo_pedido.fecha_hora = datetime.now()
     nuevo_pedido.cliente = request.user
-    nuevo_pedido.save() 
+    nuevo_pedido.save()
 
-    carrito_session = request.session.get('carrito', {})
+
     carrito = request.session.get('carrito', {})
     if str(producto_id) in carrito:
         if carrito[str(producto_id)] > 1:
