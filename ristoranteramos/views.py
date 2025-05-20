@@ -278,10 +278,22 @@ def restar_producto(request, producto_id):
     return redirect('carrito')
 
 def completar_compra(request):
+    mesa_libre = Mesa.objects.filter(estado=EstadoMesa.LIBRE).first()
+
+    if not mesa_libre:
+        return render(request, 'carta.html', {'error': 'No hay mesas disponibles'})
+
     nuevo_pedido = Pedido()
     nuevo_pedido.fecha_hora = datetime.now()
     nuevo_pedido.cliente = request.user
+    nuevo_pedido.mesa = mesa_libre
     nuevo_pedido.save()
+
+    if mesa_libre:
+        mesa_libre.estado = EstadoMesa.OCUPADA
+        mesa_libre.save()
+    else:
+        print("No se puede cambiar")
 
     carrito_session = request.session.get('carrito', {})
 
@@ -297,7 +309,21 @@ def completar_compra(request):
     del request.session['carrito']
     request.session.modified = True
 
-    return redirect('home')
+    return render(request, 'carrito.html',{
+        'carrito': {},
+        'total': 0,
+        'mostrar_popout': True,
+    })
+
+@require_POST
+@login_required
+def actualizar_estado_pedido(request, id):
+    pedido = get_object_or_404(Pedido, id=id)
+    nuevo_estado_pedido = request.POST.get('estado')
+    if nuevo_estado_pedido in dict(Pedido._meta.get_field('estado').choices):
+        pedido.estado = nuevo_estado_pedido
+        pedido.save()
+    return redirect('camarero')
 
 @restringido_a_roles('cocinero', 'administrador')
 def go_cocinero(request):
@@ -306,8 +332,8 @@ def go_cocinero(request):
 
 @require_POST
 @login_required
-def actualizar_estado_mesa(request, num_mesa):
-    mesa = get_object_or_404(Mesa, num_mesa=num_mesa)
+def actualizar_estado_mesa(request, id):
+    mesa = get_object_or_404(Mesa, id=id)
     nuevo_estado = request.POST.get('estado')
     if nuevo_estado in dict(Mesa._meta.get_field('estado').choices):
         mesa.estado = nuevo_estado
@@ -327,9 +353,18 @@ def actualizar_estado_linea(request, id):
 
 
 def go_camarero(request):
-    pedidos = Pedido.objects.all().order_by('fecha_hora')
+    mesas = Mesa.objects.all().order_by('id')
+
+    mesas_y_pedidos = []
+    for mesa in mesas:
+        pedido = Pedido.objects.filter(mesa=mesa, estado__in=['pendiente', 'preparado']).first()
+        mesas_y_pedidos.append({
+            'mesa': mesa,
+            'pedido': pedido,
+        })
+
     estados_mesa = Mesa._meta.get_field('estado').choices
-    return render(request, 'camarero.html', {'pedidos': pedidos, 'estados_mesa': estados_mesa})
+    return render(request, 'camarero.html', {'mesas_y_pedidos': mesas_y_pedidos, 'estados_mesa': estados_mesa})
 
 #PROCEDURE BBDD
 def ejecutar_procedure(request):

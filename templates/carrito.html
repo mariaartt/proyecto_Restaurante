@@ -73,19 +73,31 @@
                 <p>Total:</p>
                 <p>{{ total }}€</p>
             </div>
+
+            <form method="post" action="{% url 'completar_compra'%}">
+                {% csrf_token %}
+                <button class="contenido_carrito_boton_enviar" onclick="document.getElementById('popout').style.display='flex'">ENVIAR</button>
+            </form>
             
-            <button class="contenido_carrito_boton_enviar" onclick="document.getElementById('popout').style.display='flex'">ENVIAR</button>
-    
-                <div id="popout" class="carrito_popout">
-                    <div class="carrito_popout_content">
-                        <h1>¡Pago Realizado <br> con Éxito!</h1>
-                        <img src="{% static 'images/tick_carrito.png' %}">
-                        <a href="{% url 'completar_compra' %}"><button class="contenido_carrito_boton_enviar">Volver</button></a>
-                    </div>
+            <div id="popout" class="carrito_popout">
+                <div class="carrito_popout_content">
+                    <h1>¡Pago Realizado <br> con Éxito!</h1>
+                    <img src="{% static 'images/tick_carrito.png' %}">
+                    <a href="{% url 'home' %}">
+                        <button class="contenido_carrito_boton_enviar">Volver</button>
+                    </a>
                 </div>
+            </div>
         </div>
-    
     </div>
+    
+    {% if mostrar_popout %}
+        <script>
+            window.onload = function() {
+                document.getElementById('popout').style.display = 'flex';
+            };
+        </script>
+    {% endif %}
     
     {% include 'footer.html' %}
 {% endblock %}

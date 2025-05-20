@@ -34,5 +34,6 @@ urlpatterns = [
     path('editar_perfil/', editar_perfil, name='editar_perfil'),
     path('procedure/', ejecutar_procedure, name='procedure'),
     path('camarero/', go_camarero, name='camarero'),
-    path('camarero/mesa/<int:num_mesa>/estado/', actualizar_estado_mesa, name='actualizar_estado_mesa'),
+    path('actualizar_estado_mesa/<int:id>/', actualizar_estado_mesa, name='actualizar_estado_mesa'),
+    path('actualizar_estado_pedido/<int:id>', actualizar_estado_pedido, name='actualizar_estado_pedido'),
 ]
