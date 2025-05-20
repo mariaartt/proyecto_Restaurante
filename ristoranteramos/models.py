@@ -118,6 +118,9 @@ class Pedido(models.Model):
     fecha_creacion = models.DateTimeField(auto_now_add=True, null=True, blank=True)
     fecha_modificacion = models.DateTimeField(auto_now=True, null=True, blank=True)
 
+    def total(self):
+        return sum(linea.cantidad * linea.articulo.precio for linea in self.lineas.all())
+
 class LineaPedido(models.Model):
     pedido = models.ForeignKey(Pedido, on_delete=models.CASCADE, related_name='lineas')
     articulo = models.ForeignKey(ArticuloCarta, on_delete=models.CASCADE)

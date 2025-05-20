@@ -56,11 +56,12 @@ def go_login(request):
 def go_acerca_de(request):
     return render(request, 'acerca_de.html')
 
-# def error_403_view(request, exception=None):
-#     return render(request, 'Error403.html', status=403)
-#
-# def error_404_view(request, exception=None):
-#     return render(request, 'Error404.html', status=404)
+def error_403(request, exception=None):
+    return render(request, '403.html', status=403)
+
+
+def error_404(request, exception=None):
+    return render(request, '404.html', status=404)
 
 @user_passes_test(es_admin)
 def go_empleados(request):
@@ -340,3 +341,9 @@ def ejecutar_procedure(request):
                 print(f"Error ejecutando procedure: {e}")
         return render(request, 'navbarAdministrador.html', {'resultados': resultados, 'mostrar_modal': True})
 
+def go_historial(request):
+    pedidos = Pedido.objects.all() \
+        .select_related('cliente', 'mesa') \
+        .prefetch_related('lineas__articulo')
+
+    return render(request, 'historial_pedidos.html', {'pedidos': pedidos})

@@ -33,4 +33,6 @@ urlpatterns = [
     path('cocinero/linea/<int:id>/estado/', actualizar_estado_linea, name='actualizar_estado_linea'),
     path('editar_perfil/', editar_perfil, name='editar_perfil'),
     path('procedure/', ejecutar_procedure, name='procedure'),
+    path('ver_historial', go_historial, name='historial'),
+    path("404/", error_404),
 ]

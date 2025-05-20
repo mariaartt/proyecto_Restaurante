@@ -16,10 +16,10 @@ import cx_Oracle
 from .db_config import db_user, db_password
 
 try:
-    if os.path.exists("C:\instantclient-basic-windows.x64-21.17.0.0.0dbru\instantclient_21_17"):
-        cx_Oracle.init_oracle_client(lib_dir="C:\instantclient-basic-windows.x64-21.17.0.0.0dbru\instantclient_21_17")
+    if os.path.exists(r"C:\instantclient-basic-windows.x64-21.17.0.0.0dbru\instantclient_21_17"):
+        cx_Oracle.init_oracle_client(lib_dir=r"C:\instantclient-basic-windows.x64-21.17.0.0.0dbru\instantclient_21_17")
     else:
-        cx_Oracle.init_oracle_client(lib_dir="C:\instantclient_21_17")
+        cx_Oracle.init_oracle_client(lib_dir=r"C:\instantclient_21_17")
 except cx_Oracle.ProgrammingError as e:
     print("El cliente Oracle ya fue inicializado o ocurrió otro error:", e)
 
@@ -34,9 +34,9 @@ AUTH_USER_MODEL = 'ristoranteramos.Usuario'
 SECRET_KEY = 'django-insecure-sr1-9k!+0(*9vsc@+lzobmf*69b4^6x15gl5!3!7n+p4*$mz*y'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -144,3 +144,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+handler403 = 'ristoranteramos.views.error_404'
+handler404 = 'ristoranteramos.views.error_404'
+
