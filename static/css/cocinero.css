@@ -19,3 +19,9 @@
 section.pedido {
     margin-bottom: 5%;
 }
+
+.custom_row1.cocinero p.cocinero {
+    text-decoration: underline;
+    cursor: pointer;
+    color: gray;
+}
