@@ -2,74 +2,106 @@
 {% load static %}
 
 {% block content %}
-    <nav class="navbar navbar-expand-md navbar-dark bg-dark py-3 nav_mod" style="background-image: url('{% static 'images/fondo_cocinero.png' %}'); background-size: 100% 100%;">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="{% url 'home' %}">
-                <img src="{% static 'images/logo.png' %}" alt="Logo" width="150" height="150" style="border-radius: 20px">
-            </a>
-            <div></div>
-            <div class="d-flex justify-content-center mt-3 mt-lg-0">
-                <a href="{% url 'log_in_page' %}" class="btn btn-outline-light me-2 d-flex align-items-center">
-                    <i class="bi bi-person-fill me-1"></i> COCINERO
-                </a>
-            </div>
-        </div>
-        <div class="presentacion_mod">
-            <h1>COCINERO</h1>
-        </div>
-    </nav>
-
-    <div class="ver_empleados">
-        <h1>Lista de pedidos</h1>
-    
-        {% for pedido in pedidos %}
-        <section class="pedido">
-            <h2>Pedido nº {{ pedido.id }}</h2>
-            <div class="ver_empleados_tabla">
-                <div class="col">
-                    <div class="ver_pedidos_titulo">
-                    <h3>Id</h3>
-                    <h3>Artículo</h3>
-                    <h3>Estado</h3>
-                    <h3>Cantidad</h3>
-                </div>
-    
-                {% for linea in pedido.lineas.all %}
-                <div class="row cocinero">
-                    <div class="ver_empleados_row">
-                        <div class="custom_row1 cocinero">
-                            <!-- ID del artículo -->
-                            <p>{{ linea.articulo.id }}</p>
-                            
-                            <!-- Nombre del artículo -->
-                            <p>{{ linea.articulo.nombre }}</p>
-            
-                            <!-- Select para cambiar estado -->
-                            <form method="post" action="{% url 'actualizar_estado_linea' linea.id %}" class="d-inline">
-                                {% csrf_token %}
-                                <select name="estado" class="form-select form-select-sm d-inline-block w-auto align-items-center">
-                                    <option value="pendiente" 
-                                            {% if linea.estado == 'pendiente' %}selected{% endif %}>Pendiente
-                                    </option>
-                                    <option value="preparado" 
-                                            {% if linea.estado == 'preparado' %}selected{% endif %}>Preparado
-                                    </option>
-                                </select>
-                                <button type="submit" class="btn btn-sm btn-primary">OK</button>
-                            </form>
-                        
-                            <!-- Cantidad -->
-                            <p>{{ linea.cantidad }}</p>
-                        </div>
-                    </div>
-                </div>
-                {% empty %}
-                    <p>No hay líneas para este pedido.</p>
-                {% endfor %}
-            </div></div>
-        </section>
-        {% empty %}
-            <p>No hay pedidos pendientes.</p>
-        {% endfor %}
+<nav class="navbar navbar-expand-md navbar-dark bg-dark py-3 nav_mod"
+     style="background-image: url('{% static 'images/fondo_cocinero.png' %}'); background-size: 100% 100%;">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="{% url 'home' %}">
+      <img src="{% static 'images/logo.png' %}" alt="Logo" width="150" height="150" style="border-radius: 20px">
+    </a>
+    <div></div>
+    <div class="d-flex justify-content-center mt-3 mt-lg-0">
+      <a href="{% url 'log_in_page' %}" class="btn btn-outline-light me-2 d-flex align-items-center">
+        <i class="bi bi-person-fill me-1"></i> COCINERO
+      </a>
     </div>
+  </div>
+  <div class="presentacion_mod">
+    <h1>COCINERO</h1>
+  </div>
+</nav>
+
+<div class="ver_empleados">
+  <h1>Lista de pedidos</h1>
+
+  {% for pedido in pedidos %}
+    <section class="pedido">
+      <h2>Pedido nº {{ pedido.id }}</h2>
+
+      <div class="ver_empleados_tabla">
+        <div class="col">
+          <div class="ver_pedidos_titulo">
+            <h3>Id</h3>
+            <h3>Artículo</h3>
+            <h3>Estado</h3>
+            <h3>Cantidad</h3>
+          </div>
+
+          {% for linea in pedido.lineas.all %}
+            <div class="row cocinero">
+              <div class="ver_empleados_row">
+                <div class="custom_row1 cocinero">
+                  <!-- ID del artículo -->
+                  <p>{{ linea.articulo.id }}</p>
+
+                  <!-- Nombre del artículo -->
+                   <a class="cocinero" data-bs-toggle="modal" data-bs-target="#perfilModal-{{ linea.id }}">
+                        {{ linea.articulo.nombre }}
+                    </a>
+                
+                  <!-- Select para cambiar estado -->
+                  <form method="post"
+                        action="{% url 'actualizar_estado_linea' linea.id %}"
+                        class="d-inline">
+                    {% csrf_token %}
+                    <select name="estado" class="form-select form-select-sm d-inline-block w-auto">
+                      <option value="pendiente"
+                          {% if linea.estado == 'pendiente' %}selected{% endif %}>
+                        Pendiente
+                      </option>
+                      <option value="preparado"
+                          {% if linea.estado == 'preparado' %}selected{% endif %}>
+                        Preparado
+                      </option>
+                    </select>
+                    <button type="submit" class="btn btn-sm btn-primary">OK</button>
+                  </form>
+
+                  <!-- Cantidad -->
+                  <p>{{ linea.cantidad }}</p>
+                </div>
+              </div>
+            </div>
+              
+            <!-- Modal con ID único -->
+            <div class="modal fade receta" id="perfilModal-{{ linea.id }}" tabindex="-1" aria-labelledby="perfilModalLabel-{{ linea.id }}" aria-hidden="true">
+              <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content text-dark">
+                  <div class="modal-body">
+                    <!-- FOTO ARTÍCULO -->
+                    <img src="{{ linea.articulo.imagen_url }}" alt="Foto de perfil" id="preview-foto"
+                         class="rounded-circle me-2" style="width: 250px; height: 250px; object-fit: cover;">
+                    <h3 class="receta">Receta {{ linea.articulo.nombre }}</h3>
+                    <strong>Tiempo estimado:</strong>
+                    <p>{{ linea.articulo.tiempo_preparacion }} min</p>
+                    <strong>Ingredientes:</strong>
+                    <p>{{ linea.articulo.descripcion }}</p>
+                    <strong>Instrucciones:</strong>
+                    <p style="max-height: 100px; overflow-y: auto;">{{ linea.articulo.receta }}</p>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          {% empty %}
+            <p>No hay líneas para este pedido.</p>
+          {% endfor %}
+        </div>
+      </div>
+    </section>
+  {% empty %}
+    <p>No hay pedidos pendientes.</p>
+  {% endfor %}
+</div>
 {% endblock %}
