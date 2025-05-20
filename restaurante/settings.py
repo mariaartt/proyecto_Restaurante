@@ -34,9 +34,9 @@ AUTH_USER_MODEL = 'ristoranteramos.Usuario'
 SECRET_KEY = 'django-insecure-sr1-9k!+0(*9vsc@+lzobmf*69b4^6x15gl5!3!7n+p4*$mz*y'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition

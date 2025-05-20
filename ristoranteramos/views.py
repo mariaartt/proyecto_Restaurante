@@ -300,7 +300,7 @@ def completar_compra(request):
 
 @restringido_a_roles('cocinero', 'administrador')
 def go_cocinero(request):
-    pedidos = Pedido.objects.all().order_by('fecha_hora')
+    pedidos = Pedido.objects.filter(lineas__estado='pendiente').distinct().order_by('id')
     return render(request, 'cocinero.html', {'pedidos': pedidos})
 
 @require_POST
@@ -308,7 +308,17 @@ def go_cocinero(request):
 def actualizar_estado_linea(request, id):
     linea = get_object_or_404(LineaPedido, id=id)
     nuevo_estado = request.POST.get('estado')
-    if nuevo_estado in dict(LineaPedido._meta.get_field('estado').choices):
+
+    if nuevo_estado in ['pendiente', 'preparado']:
         linea.estado = nuevo_estado
         linea.save()
+
+        # Verificamos si todas las líneas del pedido están en estado "preparado"
+        pedido = linea.pedido
+        todas_preparadas = pedido.lineas.filter(estado='pendiente').count() == 0
+
+        if todas_preparadas and pedido.estado == 'pendiente':
+            pedido.estado = 'preparado'
+            pedido.save()
+
     return redirect('cocinero')
