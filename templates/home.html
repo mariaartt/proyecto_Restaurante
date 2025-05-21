@@ -54,7 +54,7 @@
         <i class="bi bi-person-fill me-1"></i> CLIENTE
       </a>
     {% endif %}
-    <a href="{% url 'carta' %}" class="btn btn-danger">HAZ TU PEDIDO</a>
+    <a href="{% url 'carta' %}" class="btn btn-danger navbar">HAZ TU PEDIDO</a>
     </div>
   </div>
     <div class="presentacion">
@@ -314,7 +314,7 @@
             <img src="{{ user.foto.url }}" alt="Foto de perfil" id="preview-foto"
                  class="rounded-circle me-2" style="width: 250px; height: 250px; object-fit: cover;">
           {% else %}
-            <div class="rounded-circle bg-secondary d-flex justify-content-center align-items-center me-2"
+            <div class="rounded-circle bg-secondary d-flex justify-content-center align-items-center"
                  style="width: 250px; height: 250px;">
               <i class="bi bi-camera text-white"></i>
             </div>
@@ -324,9 +324,19 @@
         <p><strong>Email:</strong> {{ user.email }}</p>
         <p><strong>Teléfono:</strong> {{ user.telefono }}</p>
         <p><strong>Dirección:</strong> {{ user.direccion }}</p>
+      
+        {% if user.rol == 'administrador' %}
         <a href="{% url 'empleados' %}" class="btn btn-outline-light me-2 d-flex align-items-center pop-up">Administrador</a>
+        {% endif %}
+        
+        {% if user.rol == 'cocinero' or user.rol == 'administrador' %}
         <a href="{% url 'cocinero' %}" class="btn btn-outline-light me-2 d-flex align-items-center pop-up">Cocinero</a>
-        <a href="{% url 'cocinero' %}" class="btn btn-outline-light me-2 d-flex align-items-center pop-up">Camarero</a>
+        {% endif %}
+        
+        {% if user.rol == 'camarero' or user.rol == 'administrador' %}
+        <a href="{% url 'camarero' %}" class="btn btn-outline-light me-2 d-flex align-items-center pop-up">Camarero</a>
+        {% endif %}
+
         <a href="{% url 'logout' %}" class="btn btn-danger logout">Cerrar sesión</a>
       </div>
       <div class="modal-footer">

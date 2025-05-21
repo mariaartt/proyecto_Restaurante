@@ -36,7 +36,7 @@ a.nav-link.text-white.fs-5:hover::after {
     width: 90%;
 }
 
-a.btn, button.btn{
+a.btn.administrador, button.btn.administrador{
     font-size: 20px !important;
     border-radius: 50px;
     width: 45%;

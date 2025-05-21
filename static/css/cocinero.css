@@ -35,3 +35,11 @@ h3.receta {
 .modal.fade.receta.show {
     overflow-y: hidden;
 }
+
+a.btn {
+    font-size: 20px;
+    width: 250px;
+    border-radius: 50px;
+    justify-content: center;
+    padding: 5px;
+}

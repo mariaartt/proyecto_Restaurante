@@ -69,37 +69,36 @@ def go_empleados(request):
     return render(request, 'verEmpleados.html', {"empleados": empleados})
 
 @user_passes_test(es_admin)
-def new_empleado(request, id):
-    empleado = get_object_or_404(Usuario, id=id)
-
+def new_empleado(request):
     if request.method == 'POST':
         form = FormularioUsuario(request.POST)
         if form.is_valid():
-            form.save()
+            usuario = form.save(commit=False)
+            usuario.set_password(form.cleaned_data['password'])
+            usuario.save()
             return redirect('empleados')
     else:
-            form = FormularioUsuario()
+        form = FormularioUsuario()
 
-    return render(request, 'anadirEmpleado.html',{'form':form}, {'empleado':empleado})
+    return render(request, 'anadirEmpleado.html', {'form': form})
 
 @user_passes_test(es_admin)
 def editar_empleado(request, id):
-    if id != 0:
-        usuario = get_object_or_404(Usuario, id=id)
-    else:
-        usuario = None
+    usuario = get_object_or_404(Usuario, id=id)
 
     if request.method == 'POST':
         form = FormularioUsuario(request.POST, instance=usuario)
         if form.is_valid():
-            form.save()
+            usuario = form.save(commit=False)
+            if form.cleaned_data['password']:
+                usuario.set_password(form.cleaned_data['password'])
+            usuario.save()
             return redirect('empleados')
-        else:
-            return render(request, 'anadirEmpleado.html',{'form':form})
     else:
         form = FormularioUsuario(instance=usuario)
 
-    return render(request, 'anadirEmpleado.html',{'form':form})
+    return render(request, 'anadirEmpleado.html', {'form': form})
+
 
 @user_passes_test(es_admin)
 def eliminar_empleado(request, id):

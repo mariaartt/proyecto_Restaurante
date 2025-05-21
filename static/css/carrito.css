@@ -83,7 +83,6 @@
     border: none;
     border-radius: 20px;
     color: rgba(254, 250, 224, 1);
-    padding: 0.5% 3%;
     font-family: "Instrument Serif", serif;
     font-size: 20px;
 }
@@ -118,4 +117,8 @@
     width: 100px;
     height: 100px;
     margin-bottom: 5%;
+}
+
+.pedido_content form {
+    margin-bottom: 0;
 }

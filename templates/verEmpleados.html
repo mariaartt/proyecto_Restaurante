@@ -24,7 +24,7 @@
                             <p>{{e.telefono}}</p>
                             <p>{{e.rol}}</p>
                             
-                            <a href="{% url 'new_empleado' id=e.id %}">
+                            <a href="{% url 'edit_empleado' id=e.id %}">
                                 <button class="editar_empleado_btn"><img src="{% static 'images/editar_Admin.png' %}"></button>
                             </a>
                             
@@ -40,7 +40,7 @@
             </div>
         </div>
     
-        <a href="{% url 'new_empleado' id=0 %}">
+        <a href="{% url 'new_empleado' %}">
             <button type="submit" class="crear_empleado_btn">Añadir Empleado</button>
         </a>
     

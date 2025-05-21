@@ -8,16 +8,24 @@
     <div class="historial_pedidos">
         {% for p in pedidos %}
             <div class="historial_pedidos_content">
+                {% if p.cliente %}
                 <h4>{{ p.cliente.nombre }}</h4>
                 <h6>{{ p.cliente.email }}</h6>
+                {% endif %}
+            
                 <h6>{{ p.fecha_hora }}</h6>
+            
+                {% if p.mesa %}
                 <h6>Mesa {{ p.mesa.numero }}</h6>
+                {% endif %}
     
                 <h6>Articulos :</h6>
                 {% for l in p.lineas.all %}
-                    <div class="linea_pedido">
-                        <p>{{ l.articulo.nombre }} x {{ l.cantidad }}</p>
-                    </div>
+                    {% if l.articulo %}
+                        <div class="linea_pedido">
+                            <p>{{ l.articulo.nombre }} x {{ l.cantidad }}</p>
+                        </div>
+                    {% endif %}
                 {% endfor %}
                 <p><b>Total:{{ p.total }}€</b></p>
             </div>
