@@ -212,6 +212,7 @@ def cargar_listado_articulos(request):
 
     return render(request, 'carta.html', {'articulos': articulos, 'total': total, 'carrito_items': carrito_items})
 
+@user_passes_test(es_admin)
 def go_reporte_ventas(request):
     return render(request, 'reporteVentas.html')
 
@@ -373,6 +374,7 @@ def actualizar_estado_linea(request, id):
 
     return redirect('cocinero')
 
+@restringido_a_roles('camarero', 'administrador')
 def go_camarero(request):
     mesas = Mesa.objects.all().order_by('id')
 
@@ -388,6 +390,7 @@ def go_camarero(request):
     return render(request, 'camarero.html', {'mesas_y_pedidos': mesas_y_pedidos, 'estados_mesa': estados_mesa})
 
 #PROCEDURE BBDD
+@user_passes_test(es_admin)
 def ejecutar_procedure(request):
     resultados = []
     if request.method == 'POST':
@@ -400,6 +403,7 @@ def ejecutar_procedure(request):
                 print(f"Error ejecutando procedure: {e}")
         return render(request, 'navbarAdministrador.html', {'resultados': resultados, 'mostrar_modal': True})
 
+@user_passes_test(es_admin)
 def go_historial(request):
     pedidos = Pedido.objects.all() \
         .select_related('cliente', 'mesa') \
