@@ -795,6 +795,10 @@ button.carousel-control-prev {
     z-index: 2;
     top: 105px;
     }
+
+    .d-flex.flex-column.flex-md-row.justify-content-center.align-items-center.gap-4 {
+        margin-bottom: 25%;
+    }
 }
 
 /* Móviles grandes (hasta 768px) */
@@ -930,13 +934,13 @@ body {
     }
 }
 
-@media (max-width: 1030px) {
+@media (max-width: 1000px) {
     .card-carrusel{
         max-width: 500px;
         margin-left: 3rem;
     }
     .imagen-restaurante {
-        margin-left: 60rem;
+        margin-left: 180%;
         max-width: 90%;
         max-height: 250px;
         margin-bottom: 1rem;
@@ -968,9 +972,6 @@ body {
         max-width: 300px;
     }
 
-    .carousel-item{
-        margin-left: 2rem;
-    }
     .card {
         padding: 1.2rem;
         font-size: 0.95rem;
