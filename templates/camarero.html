@@ -80,8 +80,11 @@
 
                         <!-- Botón generar cobro -->
                         <div>
-                            {% if item.pedido.estado == 'servido' %}
-                                <button class="contenido_carrito_boton_enviar" onclick="document.getElementById('popout-{{ item.pedido.id }}').style.display='flex'">PAGAR</button>
+                            {% if item.pedido and item.pedido.estado == 'servido' %}
+                                <form method="post" action="{% url 'pagar_pedido' item.pedido.id %}">
+                                    {% csrf_token %}
+                                    <button class="contenido_carrito_boton_enviar" onclick="document.getElementById('popout-{{ item.pedido.id }}').style.display='flex'">PAGAR</button>
+                                </form>
                             {% else %}
                                 -
                             {% endif %}

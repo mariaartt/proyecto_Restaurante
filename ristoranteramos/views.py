@@ -336,6 +336,16 @@ def actualizar_estado_pedido(request, id):
     if nuevo_estado_pedido in dict(Pedido._meta.get_field('estado').choices):
         pedido.estado = nuevo_estado_pedido
         pedido.save()
+
+        if nuevo_estado_pedido == 'pagado':
+            pedido.mesa=None,
+            if pedido.mesa:
+                mesa=pedido.mesa
+                mesa.estado = 'LIBRE'
+                mesa.save()
+
+        pedido.save()
+
     return redirect('camarero')
 
 @restringido_a_roles('cocinero', 'administrador')
@@ -351,6 +361,13 @@ def actualizar_estado_mesa(request, id):
     if nuevo_estado in dict(Mesa._meta.get_field('estado').choices):
         mesa.estado = nuevo_estado
         mesa.save()
+
+        if nuevo_estado == 'LIBRE':
+            Pedido.objects.filter(mesa=mesa).update(
+                mesa=None,
+                estado=None,
+            )
+
     return redirect('camarero')
 
 @require_POST
@@ -380,7 +397,12 @@ def go_camarero(request):
 
     mesas_y_pedidos = []
     for mesa in mesas:
-        pedido = Pedido.objects.filter(mesa=mesa, estado__in=['pendiente', 'preparado']).first()
+        pedido = Pedido.objects.filter(
+            mesa=mesa
+        ).exclude(
+            estado = 'pagado'
+        ).first()
+
         mesas_y_pedidos.append({
             'mesa': mesa,
             'pedido': pedido,
@@ -388,6 +410,24 @@ def go_camarero(request):
 
     estados_mesa = Mesa._meta.get_field('estado').choices
     return render(request, 'camarero.html', {'mesas_y_pedidos': mesas_y_pedidos, 'estados_mesa': estados_mesa})
+
+
+def pagar_pedido(request, pedido_id):
+    pedido = get_object_or_404(Pedido, id=pedido_id)
+
+    if pedido.estado == 'servido':
+        pedido.estado = 'pagado'
+
+    if pedido.mesa:
+        mesa = pedido.mesa
+        mesa.estado = 'LIBRE'
+        mesa.save()
+        pedido.mesa = None
+
+    pedido.save()
+
+    return redirect('camarero')
+
 
 #PROCEDURE BBDD
 @user_passes_test(es_admin)
