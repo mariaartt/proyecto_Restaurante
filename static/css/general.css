@@ -105,6 +105,11 @@ a.btn.cuenta {
     margin: 10px 0 10px 0 !important
 }
 
+.alert.alert-warning.alert-dismissible.fade.show {
+    margin-bottom: 0;
+    border-radius: 0;
+}
+
 @media (max-width: 950px){
     .cajas{
      width: 200px;

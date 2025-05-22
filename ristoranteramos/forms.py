@@ -91,7 +91,7 @@ class RegistroFormulario(forms.ModelForm):
 
     rol = forms.ChoiceField(
         choices=Usuario._meta.get_field('rol').choices,
-        required=False,  # ← Esto hace que el rol no sea obligatorio
+        required=False,
         widget=forms.Select(attrs={
             'class': 'forms_field-input',
             'placeholder': 'Rol'

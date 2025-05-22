@@ -2,6 +2,7 @@ from datetime import datetime
 from decimal import Decimal
 from functools import wraps
 
+from django.contrib import messages
 from django.contrib.auth.decorators import user_passes_test, login_required
 from django.core.exceptions import PermissionDenied
 from django.db import connection
@@ -253,8 +254,11 @@ def anadir_carrito(request, id):
 
     return redirect('carta')
 
-@login_required
 def ver_carrito(request):
+    if not request.user.is_authenticated:
+        messages.warning(request, "Debes registrarte e iniciar sesión para ver el carrito.")
+        return redirect('log_in_page')
+
     carrito = {}
     total = Decimal('0.0')
 
