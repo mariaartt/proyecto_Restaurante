@@ -13,7 +13,7 @@
             
                 <h6>{{ p.fecha_hora }}</h6>
             
-                <h6>Mesa {{ p.mesa.numero }}</h6>
+                <h6>Mesa {{ p.mesa.id }}</h6>
     
                 <h6>Articulos :</h6>
                 {% for l in p.lineas.all %}
@@ -21,7 +21,7 @@
                             <p>{{ l.articulo.nombre }} x {{ l.cantidad }}</p>
                         </div>
                 {% endfor %}
-                <p><b>Total:{{ p.total }}€</b></p>
+                <p><b>Total: {{ p.total }}€</b></p>
             </div>
         {% endfor %}
     </div>

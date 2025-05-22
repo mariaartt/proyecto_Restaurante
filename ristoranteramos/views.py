@@ -112,6 +112,7 @@ def cargar_listado_articulos(request):
     lista_articulos = ArticuloCarta.objects.all()
     return render(request,'carta.html',{'articulos':lista_articulos})
 
+@user_passes_test(es_admin)
 def go_articulos(request):
     articulos = ArticuloCarta.objects.all()
     return render(request, 'verArticulo.html', {"articulos": articulos})
