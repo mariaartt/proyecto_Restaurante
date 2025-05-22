@@ -13,7 +13,12 @@
             
                 <h6>{{ p.fecha_hora }}</h6>
             
-                <h6>Mesa {{ p.mesa.numero }}</h6>
+                {% if p.mesa.id %}
+                <h6>Mesa {{ p.mesa.id }}</h6>
+                <h6 style="display: flex">Estado:&nbsp;<p style="text-transform: capitalize; color: gold"> {{ p.estado }}</p></h6>
+                {% else %}
+                    <h6 style="display: flex">Estado:&nbsp;<p style="text-transform: capitalize; color: green"> {{ p.estado }}</p></h6>
+                {% endif %}
     
                 <h6>Articulos :</h6>
                 {% for l in p.lineas.all %}
