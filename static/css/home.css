@@ -928,6 +928,7 @@ body {
     font-size: 1rem;
 }
 
+/* Media queries para diseño responsive */
 @media (max-width: 1180px) {
     .card-carrusel{
         margin-left: 5rem;
@@ -983,6 +984,44 @@ body {
 
     .position-relative {
         flex-direction: column;
+    }
+}
+
+@media (max-width: 620px) {
+    .contendor-parte3 {
+        flex-direction: column !important;
+        padding-top: 2rem !important;
+    }
+
+    .card-carrusel {
+        position: static !important;
+        transform: none !important;
+        order: -1 !important;
+        margin-bottom: 2rem !important;
+        max-width: 100% !important;
+    }
+
+    .imagen-restaurante {
+        max-width: 100% !important;
+        max-height: 300px !important;
+        margin-top: 1rem !important;
+        margin-left: 0 !important;
+    }
+}
+
+/* Para móviles y pantallas pequeñas (< 480px) */
+@media (max-width: 480px) {
+    .subtitulo {
+        font-size: 2.2rem;
+    }
+
+    .card {
+        padding: 1.2rem;
+        font-size: 0.95rem;
+    }
+
+    .card .cliente {
+        font-size: 0.9rem;
     }
 }
 

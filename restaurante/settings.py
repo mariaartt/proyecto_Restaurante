@@ -145,6 +145,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-handler403 = 'ristoranteramos.views.error_404'
+handler403 = 'ristoranteramos.views.error_403'
 handler404 = 'ristoranteramos.views.error_404'
 
