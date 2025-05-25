@@ -280,12 +280,6 @@ def sumar_producto(request, producto_id):
     return redirect('carrito')
 
 def restar_producto(request, producto_id):
-    nuevo_pedido = Pedido()
-    nuevo_pedido.fecha_hora = datetime.now()
-    nuevo_pedido.cliente = request.user
-    nuevo_pedido.save()
-
-
     carrito = request.session.get('carrito', {})
     if str(producto_id) in carrito:
         if carrito[str(producto_id)] > 1:
