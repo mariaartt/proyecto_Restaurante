@@ -341,12 +341,20 @@ def actualizar_estado_pedido(request, id):
         pedido.estado = nuevo_estado_pedido
         pedido.save()
 
+        if nuevo_estado_pedido == 'preparado':
+            pedido.lineas.all().update(estado='preparado')
+
+        if nuevo_estado_pedido == 'servido':
+            pedido.lineas.all().update(estado='preparado')
+
         if nuevo_estado_pedido == 'pagado':
-            pedido.mesa=None,
             if pedido.mesa:
                 mesa=pedido.mesa
                 mesa.estado = 'LIBRE'
                 mesa.save()
+                pedido.mesa = None
+
+                pedido.lineas.all().update(estado='preparado')
 
         pedido.save()
 
@@ -369,7 +377,6 @@ def actualizar_estado_mesa(request, id):
         if nuevo_estado == 'LIBRE':
             Pedido.objects.filter(mesa=mesa).update(
                 mesa=None,
-                estado=None,
             )
 
     return redirect('camarero')
