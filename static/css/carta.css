@@ -39,6 +39,7 @@
 .botones_carta{
     margin-top: 2rem;
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
     justify-content: center;
     gap:2rem;
@@ -76,6 +77,7 @@
 .nombre_articulo h6{
     font-weight: bold;
     color:black;
+    padding-left: 15%;
 }
 .columnas{
     font-family: 'Instrument Serif', serif;
@@ -117,4 +119,26 @@
 .icono-carrito {
     width: 20px;
     height: 20px;
+}
+
+@media (max-width: 525px){
+    .nombre_articulo h3{
+        font-size: 40px;
+    }
+
+    .main{
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    }
+
+    .titulos h1{
+        font-size: 60px;
+    }
+
+    .btn_categorias{
+        font-size: 20px;
+    }
+
+    .botones_carta{
+        gap: 0.5rem;
+    }
 }

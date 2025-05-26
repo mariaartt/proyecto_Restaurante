@@ -20,6 +20,14 @@
 </head>
 
 {% block content %}
+{% if messages %}
+  {% for message in messages %}
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+      {{ message }}
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Cerrar"></button>
+    </div>
+  {% endfor %}
+{% endif %}
 <section class="user" style="background-image: url('/static/images/fondo_log_in.png'); background-size: 100% 100%; background-repeat: no-repeat;">
   <a href="{% url 'home' %}"><h1>Ristorante Ramos</h1></a>
   <div class="user_options-container">
@@ -95,6 +103,7 @@
     </div>
   </div>
 </section>
+
 {% endblock %}
 
 <script src="{% static 'js/log-in.js' %}"></script>

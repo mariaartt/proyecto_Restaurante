@@ -117,8 +117,6 @@ class Pedido(models.Model):
     fecha_creacion = models.DateTimeField(auto_now_add=True, null=True, blank=True)
     fecha_modificacion = models.DateTimeField(auto_now=True, null=True, blank=True)
 
-    #Según ChatGPT, historial de pedidos da el error server 500 porque hace falta poner @property mañana lo probamos
-    @property
     def total(self):
         return sum(linea.cantidad * linea.articulo.precio for linea in self.lineas.all())
 

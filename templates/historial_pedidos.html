@@ -8,26 +8,27 @@
     <div class="historial_pedidos">
         {% for p in pedidos %}
             <div class="historial_pedidos_content">
-                {% if p.cliente %}
                 <h4>{{ p.cliente.nombre }}</h4>
                 <h6>{{ p.cliente.email }}</h6>
-                {% endif %}
             
                 <h6>{{ p.fecha_hora }}</h6>
             
-                {% if p.mesa %}
-                <h6>Mesa {{ p.mesa.numero }}</h6>
+
+                {% if p.mesa.id %}
+                <h6>Mesa {{ p.mesa.id }}</h6>
+                <h6 style="display: flex">Estado:&nbsp;<p style="text-transform: capitalize; color: gold"> {{ p.estado }}</p></h6>
+                {% else %}
+                    <h6 style="display: flex">Estado:&nbsp;<p style="text-transform: capitalize; color: green"> {{ p.estado }}</p></h6>
                 {% endif %}
-    
+
+                <h6>Mesa {{ p.mesa.id }}</h6>
                 <h6>Articulos :</h6>
                 {% for l in p.lineas.all %}
-                    {% if l.articulo %}
                         <div class="linea_pedido">
                             <p>{{ l.articulo.nombre }} x {{ l.cantidad }}</p>
                         </div>
-                    {% endif %}
                 {% endfor %}
-                <p><b>Total:{{ p.total }}€</b></p>
+                <p><b>Total: {{ p.total }}€</b></p>
             </div>
         {% endfor %}
     </div>

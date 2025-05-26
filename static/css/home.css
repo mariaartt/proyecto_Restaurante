@@ -795,6 +795,10 @@ button.carousel-control-prev {
     z-index: 2;
     top: 105px;
     }
+
+    .d-flex.flex-column.flex-md-row.justify-content-center.align-items-center.gap-4 {
+        margin-bottom: 25%;
+    }
 }
 
 /* Móviles grandes (hasta 768px) */
@@ -924,19 +928,20 @@ body {
     font-size: 1rem;
 }
 
+/* Media queries para diseño responsive */
 @media (max-width: 1180px) {
     .card-carrusel{
         margin-left: 5rem;
     }
 }
 
-@media (max-width: 1030px) {
+@media (max-width: 1000px) {
     .card-carrusel{
         max-width: 500px;
         margin-left: 3rem;
     }
     .imagen-restaurante {
-        margin-left: 60rem;
+        margin-left: 180%;
         max-width: 90%;
         max-height: 250px;
         margin-bottom: 1rem;
@@ -968,9 +973,6 @@ body {
         max-width: 300px;
     }
 
-    .carousel-item{
-        margin-left: 2rem;
-    }
     .card {
         padding: 1.2rem;
         font-size: 0.95rem;
@@ -982,6 +984,44 @@ body {
 
     .position-relative {
         flex-direction: column;
+    }
+}
+
+@media (max-width: 620px) {
+    .contendor-parte3 {
+        flex-direction: column !important;
+        padding-top: 2rem !important;
+    }
+
+    .card-carrusel {
+        position: static !important;
+        transform: none !important;
+        order: -1 !important;
+        margin-bottom: 2rem !important;
+        max-width: 100% !important;
+    }
+
+    .imagen-restaurante {
+        max-width: 100% !important;
+        max-height: 300px !important;
+        margin-top: 1rem !important;
+        margin-left: 0 !important;
+    }
+}
+
+/* Para móviles y pantallas pequeñas (< 480px) */
+@media (max-width: 480px) {
+    .subtitulo {
+        font-size: 2.2rem;
+    }
+
+    .card {
+        padding: 1.2rem;
+        font-size: 0.95rem;
+    }
+
+    .card .cliente {
+        font-size: 0.9rem;
     }
 }
 

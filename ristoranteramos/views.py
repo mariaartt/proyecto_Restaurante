@@ -2,6 +2,7 @@ from datetime import datetime
 from decimal import Decimal
 from functools import wraps
 
+from django.contrib import messages
 from django.contrib.auth.decorators import user_passes_test, login_required
 from django.core.exceptions import PermissionDenied
 from django.db import connection
@@ -112,6 +113,7 @@ def cargar_listado_articulos(request):
     lista_articulos = ArticuloCarta.objects.all()
     return render(request,'carta.html',{'articulos':lista_articulos})
 
+@user_passes_test(es_admin)
 def go_articulos(request):
     articulos = ArticuloCarta.objects.all()
     return render(request, 'verArticulo.html', {"articulos": articulos})
@@ -253,8 +255,11 @@ def anadir_carrito(request, id):
 
     return redirect('carta')
 
-@login_required
 def ver_carrito(request):
+    if not request.user.is_authenticated:
+        messages.warning(request, "Debes registrarte e iniciar sesión para ver el carrito.")
+        return redirect('log_in_page')
+
     carrito = {}
     total = Decimal('0.0')
 
@@ -275,12 +280,6 @@ def sumar_producto(request, producto_id):
     return redirect('carrito')
 
 def restar_producto(request, producto_id):
-    nuevo_pedido = Pedido()
-    nuevo_pedido.fecha_hora = datetime.now()
-    nuevo_pedido.cliente = request.user
-    nuevo_pedido.save()
-
-
     carrito = request.session.get('carrito', {})
     if str(producto_id) in carrito:
         if carrito[str(producto_id)] > 1:
@@ -337,12 +336,20 @@ def actualizar_estado_pedido(request, id):
         pedido.estado = nuevo_estado_pedido
         pedido.save()
 
+        if nuevo_estado_pedido == 'preparado':
+            pedido.lineas.all().update(estado='preparado')
+
+        if nuevo_estado_pedido == 'servido':
+            pedido.lineas.all().update(estado='preparado')
+
         if nuevo_estado_pedido == 'pagado':
-            pedido.mesa=None,
             if pedido.mesa:
                 mesa=pedido.mesa
                 mesa.estado = 'LIBRE'
                 mesa.save()
+                pedido.mesa = None
+
+                pedido.lineas.all().update(estado='preparado')
 
         pedido.save()
 
@@ -365,7 +372,6 @@ def actualizar_estado_mesa(request, id):
         if nuevo_estado == 'LIBRE':
             Pedido.objects.filter(mesa=mesa).update(
                 mesa=None,
-                estado=None,
             )
 
     return redirect('camarero')
