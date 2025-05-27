@@ -17,3 +17,7 @@ Este proyecto fue desarrollado por los siguientes integrantes:
 - [Maria Arteaga Ramos](https://github.com/mariaartt)
 - [Iván Ramos Villegas](https://github.com/ivanramoss-safa)
 - [Iván Ponti Rubio](https://github.com/Ivanpr06)
+
+ ## Mockup
+
+ https://www.figma.com/design/G54LIUELgbIhtY44jbYcoC/ProyectoRestaurante?node-id=0-1&t=32FAD7utovwNr0hZ-1
